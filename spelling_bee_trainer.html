@@ -377,14 +377,44 @@ pickVoice();
 if(synth.onvoiceschanged!==undefined)synth.onvoiceschanged=pickVoice;
 function unlock(){try{const u=new SpeechSynthesisUtterance(" ");u.volume=0;synth.speak(u);}catch(e){}pickVoice();}
 
-function say(text,my){
+
+/* ---------- ตัวจัดการเสียง แก้อาการเสียงหยุดกลางคัน ---------- */
+let _keep=null;
+function keepAlive(on){
+  if(on){ if(_keep) return;
+    _keep=setInterval(()=>{ try{ if(synth.speaking) synth.resume(); }catch(e){} },7000);
+  }else{ clearInterval(_keep); _keep=null; }
+}
+document.addEventListener("touchstart",()=>{ try{ synth.resume(); }catch(e){} },{passive:true});
+document.addEventListener("click",   ()=>{ try{ synth.resume(); }catch(e){} });
+function _utter(text,lang,voice){
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=lang; if(voice) u.voice=voice; u.rate=rate; u.pitch=1; u.volume=1;
+  return u;
+}
+function say(text,  my){
   return new Promise(res=>{
-    if(my!==token||!text)return res();
-    let done=false;const fin=()=>{if(!done){done=true;res();}};
-    const u=new SpeechSynthesisUtterance(text);
-    u.lang="en-US"; if(enVoice)u.voice=enVoice; u.rate=rate;
-    u.onend=fin;u.onerror=fin;synth.speak(u);
-    setTimeout(fin,1800+text.length*95/rate);
+    if(my!==token||!text) return res();
+    let done=false, started=false, tries=0;
+    const fin=()=>{ if(!done){ done=true; res(); } };
+    const go=()=>{
+      if(done||my!==token) return;
+      tries++;
+      try{ synth.cancel(); }catch(e){}
+      setTimeout(()=>{
+        if(done||my!==token) return;
+        const u=_utter(text, "en-US", enVoice);
+        u.onstart=()=>{ started=true; };
+        u.onend=fin;
+        u.onerror=()=>{ if(!started&&tries<3) go(); else fin(); };
+        try{ synth.speak(u); }catch(e){ fin(); }
+        // ถ้า 450ms แล้วยังไม่เริ่มพูด แปลว่าคิวค้าง ให้ลองใหม่
+        setTimeout(()=>{ if(!started&&!done&&tries<3) go(); },450);
+      },60);
+    };
+    keepAlive(true);
+    go();
+    setTimeout(fin, 3000 + text.length*110/rate);
   });
 }
 const wait=ms=>new Promise(r=>setTimeout(r,ms));

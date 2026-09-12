@@ -255,20 +255,44 @@ document.addEventListener("visibilitychange", () => {
 });
 
 /* ---------- speech ---------- */
+
+/* ---------- ตัวจัดการเสียง แก้อาการเสียงหยุดกลางคัน ---------- */
+let _keep=null;
+function keepAlive(on){
+  if(on){ if(_keep) return;
+    _keep=setInterval(()=>{ try{ if(synth.speaking) synth.resume(); }catch(e){} },7000);
+  }else{ clearInterval(_keep); _keep=null; }
+}
+document.addEventListener("touchstart",()=>{ try{ synth.resume(); }catch(e){} },{passive:true});
+document.addEventListener("click",   ()=>{ try{ synth.resume(); }catch(e){} });
+function _utter(text,lang,voice){
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=lang; if(voice) u.voice=voice; u.rate=rate; u.pitch=1; u.volume=1;
+  return u;
+}
 function speak(text, lang, my){
-  return new Promise(res => {
-    if(my !== token || !text) return res();
-    let done = false;
-    const finish = () => { if(!done){ done = true; res(); } };
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = lang;
-    const v = lang === "th-TH" ? thVoice : enVoice;
-    if(v) u.voice = v;
-    u.rate = rate;
-    u.onend = finish; u.onerror = finish;
-    synth.speak(u);
-    // กันกรณี onend ไม่ยิง (พบบ่อยบน iOS) ตั้งเวลาสำรองตามความยาวข้อความ
-    setTimeout(finish, 1800 + (text.length * 95) / rate);
+  return new Promise(res=>{
+    if(my!==token||!text) return res();
+    let done=false, started=false, tries=0;
+    const fin=()=>{ if(!done){ done=true; res(); } };
+    const go=()=>{
+      if(done||my!==token) return;
+      tries++;
+      try{ synth.cancel(); }catch(e){}
+      setTimeout(()=>{
+        if(done||my!==token) return;
+        const u=_utter(text, lang, (lang==="th-TH"?thVoice:enVoice));
+        u.onstart=()=>{ started=true; };
+        u.onend=fin;
+        u.onerror=()=>{ if(!started&&tries<3) go(); else fin(); };
+        try{ synth.speak(u); }catch(e){ fin(); }
+        // ถ้า 450ms แล้วยังไม่เริ่มพูด แปลว่าคิวค้าง ให้ลองใหม่
+        setTimeout(()=>{ if(!started&&!done&&tries<3) go(); },450);
+      },60);
+    };
+    keepAlive(true);
+    go();
+    setTimeout(fin, 3000 + text.length*110/rate);
   });
 }
 const en = (t, my) => speak(t, "en-US", my);
