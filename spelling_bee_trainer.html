@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#12233D">
+<title>ฝึก Spelling Bee — ป.4 (Level 2)</title>
+<style>
+  :root{
+    --bg:#12233D; --panel:#1B3352; --panel2:#234170; --edge:#2E5080;
+    --ink:#EFF4FA; --dim:#8FA9C8; --hi:#FFC845; --ok:#57D6A0; --bad:#FF7B6B;
+    --pad:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%}
+  body{background:var(--bg);color:var(--ink);min-height:100%;
+    font-family:'Sarabun','Noto Sans Thai','Segoe UI','Helvetica Neue',sans-serif}
+  .app{max-width:620px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+  button{font-family:inherit;border:none;cursor:pointer}
+  .hidden{display:none!important}
+
+  /* ---- setup ---- */
+  .setup{padding:22px 18px calc(30px + var(--pad));flex:1}
+  h1{font-size:25px;margin:2px 0 6px;font-weight:800;line-height:1.25}
+  .lead{color:var(--dim);font-size:14.5px;line-height:1.65;margin:0 0 6px}
+  .note{background:rgba(255,200,69,.10);border-left:4px solid var(--hi);
+    padding:12px 14px;border-radius:0 9px 9px 0;font-size:13px;line-height:1.65;margin:16px 0 4px;color:#D8E4F2}
+  .lbl{font-size:13px;color:var(--dim);margin:22px 0 9px;font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{padding:12px 15px;border-radius:11px;font-size:14.5px;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .chip.on{background:var(--hi);color:#12233D;border-color:var(--hi);font-weight:700}
+  .chip.wide{width:100%;text-align:left}
+  .chip.wide small{display:block;font-size:12.5px;opacity:.72;margin-top:3px;font-weight:400}
+  .go{width:100%;margin-top:26px;padding:19px;font-size:19px;font-weight:800;
+    background:var(--hi);color:#12233D;border-radius:14px}
+  details{margin-top:22px;font-size:14px;color:var(--dim)}
+  details summary{padding:12px 0;font-weight:600;color:var(--ink)}
+  details p{line-height:1.7;margin:4px 0 12px}
+
+  /* ---- stage ---- */
+  .stage{flex:1;display:flex;flex-direction:column;padding:14px 16px 0}
+  .top{display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--dim)}
+  .track{flex:1;height:5px;background:#0B1A2E;border-radius:4px;overflow:hidden}
+  .track i{display:block;height:100%;width:0%;background:var(--dim)}
+  .card{flex:1;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:12px 4px}
+  .num{font-size:54px;font-weight:800;color:var(--hi);line-height:1;font-variant-numeric:tabular-nums}
+  .numlbl{font-size:13px;color:var(--dim)}
+  .speaker{font-size:64px;margin:6px 0 2px;line-height:1}
+  .phase{font-size:15px;color:var(--dim);margin-top:8px;min-height:1.4em}
+  .hint{font-size:16px;color:#C8D8EC;margin-top:16px;line-height:1.6;
+    max-width:520px;padding:0 8px}
+  .hint b{color:var(--hi)}
+  .reveal{font-size:44px;font-weight:800;letter-spacing:2px;margin-top:8px;word-break:break-word}
+  .spellout{font-size:20px;letter-spacing:8px;color:var(--hi);font-weight:700;margin-top:8px}
+  .verdict{font-size:22px;font-weight:800;margin-top:14px}
+  .verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)}
+
+  input[type=text]{width:min(420px,90vw);padding:15px;border-radius:12px;font-size:24px;
+    text-align:center;letter-spacing:2px;background:#0B1A2E;color:var(--ink);
+    border:2px solid var(--edge);margin-top:18px;font-family:inherit}
+  input[type=text]:focus{outline:none;border-color:var(--hi)}
+
+  /* ---- ask bar ---- */
+  .ask{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px 14px 0}
+  .ask button{padding:13px 4px;border-radius:11px;font-size:13.5px;font-weight:600;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .ask button:active{background:var(--panel2)}
+  .bar{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px;
+    padding:10px 14px calc(16px + var(--pad));background:var(--bg)}
+  .bar button{padding:16px 4px;border-radius:12px;font-size:15px;font-weight:700;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .bar button.main{background:var(--hi);color:#12233D;font-weight:800}
+
+  /* ---- result ---- */
+  .result{padding:24px 18px calc(30px + var(--pad));flex:1}
+  .score{font-size:56px;font-weight:800;color:var(--hi);line-height:1}
+  .wrongbox{margin-top:22px;background:var(--panel);border:1.5px solid var(--edge);
+    border-radius:12px;padding:14px 16px}
+  .wrongbox h3{font-size:15px;margin:0 0 10px;color:var(--bad)}
+  .wrongbox ul{margin:0;padding-left:20px;line-height:2;font-size:16px}
+  .wrongbox .you{color:var(--dim);font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ================= SETUP ================= -->
+<div class="setup" id="setup">
+  <h1>ฝึก Spelling Bee</h1>
+  <p class="lead">ระดับ ป.3–ป.4 (Level 2) · ฝึกแบบเดียวกับสนามจริง
+     ฟังคำ ขอฟังซ้ำ ขอความหมาย ขอประโยค แล้วจึงสะกด</p>
+
+  <div class="note">
+    <b>ชุดคำในแอปนี้เป็นชุดฝึกซ้อม</b> ผมรวบรวมให้ตรงระดับ CEFR Starters และ Movers
+    ตามที่การแข่งขันใช้เป็นฐาน แต่ <b>ไม่ใช่รายการคำอย่างเป็นทางการ</b>
+    ควรขอไฟล์รายการคำจากผู้จัดมาซ้อมควบคู่กันด้วย
+  </div>
+
+  <div class="lbl">ชุดคำศัพท์</div>
+  <div class="chips" id="setChips"></div>
+
+  <div class="lbl">โหมดการฝึก</div>
+  <div class="chips" id="modeChips">
+    <button class="chip wide on" data-mode="type">พิมพ์คำตอบ — ตรวจให้อัตโนมัติ
+      <small>เหมาะกับซ้อมเอง รู้ผลทันทีทุกคำ</small></button>
+    <button class="chip wide" data-mode="paper">เขียนลงกระดาษ — กดดูเฉลย
+      <small>เหมือนสนามจริงมากกว่า ฝึกเขียนด้วยมือ</small></button>
+  </div>
+
+  <div class="lbl">ความเร็วเสียง</div>
+  <div class="chips" id="rateChips">
+    <button class="chip" data-rate="0.6">ช้ามาก</button>
+    <button class="chip on" data-rate="0.75">ช้า</button>
+    <button class="chip" data-rate="0.9">ปานกลาง</button>
+    <button class="chip" data-rate="1">ปกติ</button>
+  </div>
+
+  <div class="lbl">จำนวนคำต่อรอบ</div>
+  <div class="chips" id="cntChips">
+    <button class="chip" data-cnt="10">10 คำ</button>
+    <button class="chip on" data-cnt="20">20 คำ</button>
+    <button class="chip" data-cnt="30">30 คำ</button>
+    <button class="chip" data-cnt="0">ทั้งชุด</button>
+  </div>
+
+  <div class="lbl">สลับลำดับคำ</div>
+  <div class="chips" id="shufChips">
+    <button class="chip on" data-shuf="1">สุ่มลำดับ</button>
+    <button class="chip" data-shuf="0">เรียงตามชุด</button>
+  </div>
+
+  <button class="go" id="start">เริ่มฝึก</button>
+  <div class="note" id="warn" style="display:none"></div>
+
+  <details>
+    <summary>กติกาสนามจริง และวิธีใช้แอปนี้</summary>
+    <p><b>ในสนามจริง</b> ผู้อ่านจะอ่านคำให้ฟัง นักเรียนมีสิทธิ์ขอให้อ่านซ้ำ
+       ขอความหมาย ขอประโยคตัวอย่าง และขอชนิดของคำได้ก่อนตอบ
+       การขอไม่ถือว่าเสียคะแนน แอปนี้จึงทำปุ่มสามปุ่มนั้นไว้ให้ฝึกใช้จนติดเป็นนิสัย</p>
+    <p><b>สิ่งที่เด็กมักพลาด</b> คือรีบสะกดทันทีที่ได้ยิน ทั้งที่ยังไม่แน่ใจว่าเป็นคำไหน
+       เช่น their กับ there ถ้าขอประโยคก่อนจะรู้ทันที ฝึกให้ขอทุกครั้งแม้จะมั่นใจ</p>
+    <p><b>ไม่มีเสียงภาษาอังกฤษ</b> เปิดด้วย Chrome หรือ Edge
+       iPhone ต้องปลดสวิตช์เงียบข้างเครื่องก่อน</p>
+  </details>
+</div>
+
+<!-- ================= PLAY ================= -->
+<div class="stage hidden" id="play">
+  <div class="top">
+    <span id="tick"></span>
+    <span class="track"><i id="track"></i></span>
+    <span id="sc"></span>
+  </div>
+  <div class="card">
+    <div class="numlbl" id="numlbl">คำที่</div>
+    <div class="num" id="num"></div>
+    <div class="speaker" id="spk">🔊</div>
+    <div class="phase" id="phase"></div>
+    <div class="hint hidden" id="hint"></div>
+    <input type="text" id="ans" autocomplete="off" autocapitalize="off"
+           autocorrect="off" spellcheck="false" placeholder="สะกดคำที่ได้ยิน">
+    <div class="reveal hidden" id="reveal"></div>
+    <div class="spellout hidden" id="spellout"></div>
+    <div class="verdict hidden" id="verdict"></div>
+  </div>
+</div>
+<div class="ask hidden" id="ask">
+  <button id="bRepeat">🔁 ฟังอีกครั้ง</button>
+  <button id="bDef">📖 ความหมาย</button>
+  <button id="bSent">📝 ประโยค</button>
+</div>
+<div class="bar hidden" id="bar">
+  <button class="main" id="bSubmit">ตอบ</button>
+  <button id="bSkip">ข้าม</button>
+  <button id="bQuit">ออก</button>
+</div>
+
+<!-- ================= RESULT ================= -->
+<div class="result hidden" id="result">
+  <div class="numlbl">คะแนน</div>
+  <div class="score" id="final"></div>
+  <div class="lead" id="pct" style="margin-top:8px"></div>
+  <div class="wrongbox hidden" id="wrongbox">
+    <h3>คำที่ต้องกลับไปทบทวน</h3>
+    <ul id="wronglist"></ul>
+  </div>
+  <button class="go" id="again">ฝึกอีกรอบ</button>
+  <button class="go" id="home" style="background:var(--panel);color:var(--ink);margin-top:10px">กลับหน้าแรก</button>
+</div>
+
+</div>
+
+<script>
+/* ============ ชุดคำศัพท์ ============ */
+const BANKS = {
+ starters: { name:"Starters (Pre-A1) พื้นฐาน", words:[
+  ["apple","a round fruit that is red or green","I eat an apple every day."],
+  ["ball","a round thing you play with","He kicked the ball."],
+  ["bird","an animal with wings that can fly","A bird is singing in the tree."],
+  ["book","pages with words that you read","She is reading a book."],
+  ["chair","a seat for one person","Please sit on the chair."],
+  ["clock","a thing that shows the time","The clock says eight o'clock."],
+  ["cloud","white or grey water in the sky","There is one cloud in the sky."],
+  ["door","you open it to go into a room","Please close the door."],
+  ["duck","a bird that swims on water","The duck is in the pond."],
+  ["flower","the coloured part of a plant","She picked a yellow flower."],
+  ["garden","a place outside where plants grow","We play in the garden."],
+  ["house","a building where people live","My house is near the school."],
+  ["kite","a toy that flies on a string","We fly a kite in the park."],
+  ["lemon","a sour yellow fruit","Add some lemon to the water."],
+  ["monkey","an animal that climbs trees","The monkey ate a banana."],
+  ["mouse","a small animal with a long tail","A mouse ran under the table."],
+  ["pencil","you write with it","Write with a pencil, not a pen."],
+  ["rabbit","a small animal with long ears","The rabbit is eating a carrot."],
+  ["school","a place where children learn","We go to school by bus."],
+  ["table","furniture with a flat top and legs","Put the books on the table."],
+  ["window","a glass opening in a wall","Please open the window."],
+  ["yellow","the colour of a lemon","Her dress is yellow."]
+ ]},
+
+ movers: { name:"Movers (A1) ระดับแข่งขัน", words:[
+  ["airport","a place where planes arrive and leave","We met her at the airport."],
+  ["balcony","a small area outside an upstairs window","She waved from the balcony."],
+  ["basket","a container you carry things in","Put the fruit in the basket."],
+  ["blanket","a warm cover for a bed","He pulled the blanket over him."],
+  ["bottle","a tall container for drinks","I filled my bottle with water."],
+  ["bridge","it goes over a river or road","We walked across the bridge."],
+  ["camera","you take photos with it","She bought a new camera."],
+  ["castle","a big old strong building","The castle is on a hill."],
+  ["circus","a show with clowns and animals","We went to the circus."],
+  ["clever","able to learn things quickly","My sister is very clever."],
+  ["coconut","a big brown nut from a palm tree","We drank coconut water."],
+  ["cousin","the child of your aunt or uncle","My cousin lives in Chiang Mai."],
+  ["curtain","cloth that covers a window","Please close the curtain."],
+  ["dangerous","it can hurt you","Fire is dangerous."],
+  ["dictionary","a book of words and meanings","Look it up in the dictionary."],
+  ["dinosaur","a very big animal from long ago","This dinosaur is in the museum."],
+  ["envelope","you put a letter inside it","Write the address on the envelope."],
+  ["forest","a place with many trees","Many animals live in the forest."],
+  ["fridge","it keeps food cold","The milk is in the fridge."],
+  ["glove","you wear it on your hand","He lost one glove."],
+  ["helicopter","an aircraft with spinning blades on top","The helicopter landed on the roof."],
+  ["hospital","a place where sick people go","My mother works in a hospital."],
+  ["island","land with water all around it","Phuket is an island."],
+  ["jungle","a thick tropical forest","Tigers live in the jungle."],
+  ["kitchen","the room where you cook","Dad is cooking in the kitchen."],
+  ["library","a place with many books to borrow","I borrowed two books from the library."],
+  ["message","words you send to someone","I sent her a message."],
+  ["mountain","a very high hill","They climbed the mountain."],
+  ["necklace","jewellery you wear around your neck","She is wearing a gold necklace."],
+  ["restaurant","a place where you buy and eat meals","We had dinner at a restaurant."],
+  ["sandwich","food between two pieces of bread","I made a cheese sandwich."],
+  ["scissors","a tool with two blades for cutting","Cut the paper with scissors."],
+  ["straight","not bent or curved","Light travels in a straight line."],
+  ["sweater","warm clothing for your top half","Wear a sweater, it is cold."],
+  ["telephone","you use it to talk to someone far away","The telephone is ringing."],
+  ["umbrella","it keeps the rain off you","Take an umbrella, it may rain."],
+  ["waterfall","water falling from a high place","We swam near the waterfall."],
+  ["breakfast","the first meal of the day","I have rice for breakfast."],
+  ["chocolate","a sweet brown food","She loves dark chocolate."],
+  ["birthday","the day you were born","My birthday is in June."]
+ ]},
+
+ topics: { name:"หมวดเฉพาะ อาชีพ ประเทศ ครอบครัว สัตว์", words:[
+  ["doctor","a person who helps sick people","The doctor gave me medicine."],
+  ["dentist","a doctor for your teeth","I see the dentist twice a year."],
+  ["engineer","a person who designs machines or buildings","My father is an engineer."],
+  ["journalist","a person who writes the news","The journalist asked many questions."],
+  ["mechanic","a person who repairs machines and cars","The mechanic fixed our car."],
+  ["scientist","a person who studies science","The scientist did an experiment."],
+  ["firefighter","a person who puts out fires","The firefighter climbed the ladder."],
+  ["pilot","a person who flies a plane","The pilot landed safely."],
+  ["nurse","a person who looks after sick people","The nurse checked my temperature."],
+  ["waiter","a person who serves food in a restaurant","The waiter brought our drinks."],
+  ["Australia","a country and continent in the south","Kangaroos live in Australia."],
+  ["Brazil","the largest country in South America","Brazil is famous for football."],
+  ["Canada","a large country north of the USA","It snows a lot in Canada."],
+  ["Egypt","a country in Africa with pyramids","The pyramids are in Egypt."],
+  ["Germany","a country in Europe","Germany makes many cars."],
+  ["Japan","an island country in East Asia","Japan is famous for sushi."],
+  ["Malaysia","a country next to Thailand in the south","Malaysia is south of Thailand."],
+  ["Singapore","a small island country in Southeast Asia","Singapore is very clean."],
+  ["grandmother","the mother of your mother or father","My grandmother tells me stories."],
+  ["grandfather","the father of your mother or father","My grandfather grows vegetables."],
+  ["daughter","someone's female child","Their daughter is eight years old."],
+  ["nephew","the son of your brother or sister","My nephew is only two."],
+  ["niece","the daughter of your brother or sister","I bought a doll for my niece."],
+  ["husband","the man a woman is married to","Her husband is a teacher."],
+  ["butterfly","an insect with big colourful wings","A butterfly landed on the flower."],
+  ["crocodile","a big reptile with strong jaws","The crocodile lives in the river."],
+  ["dolphin","a clever sea animal","We saw a dolphin from the boat."],
+  ["elephant","the biggest land animal","The elephant is Thailand's symbol."],
+  ["giraffe","an animal with a very long neck","The giraffe eats leaves from tall trees."],
+  ["kangaroo","an Australian animal that jumps","The kangaroo jumped over the fence."],
+  ["octopus","a sea animal with eight arms","An octopus has eight arms."],
+  ["penguin","a black and white bird that swims","The penguin cannot fly."],
+  ["squirrel","a small animal with a bushy tail","A squirrel ran up the tree."],
+  ["tortoise","a slow animal with a hard shell","The tortoise walks very slowly."]
+ ]},
+
+ tricky: { name:"คำที่สะกดพลาดบ่อย ชิงชนะเลิศ", words:[
+  ["beautiful","very pretty to look at","The sunset is beautiful."],
+  ["because","for the reason that","I stayed home because it rained."],
+  ["believe","to think something is true","I believe you."],
+  ["business","the work of buying and selling","My father runs a small business."],
+  ["calendar","it shows the days and months","Mark the date on the calendar."],
+  ["comfortable","nice and soft to use","This chair is comfortable."],
+  ["delicious","tasting very good","The mango is delicious."],
+  ["different","not the same","These two shirts are different."],
+  ["exercise","moving your body to stay healthy","I do exercise every morning."],
+  ["favourite","the one you like best","Blue is my favourite colour."],
+  ["February","the second month of the year","My birthday is in February."],
+  ["Wednesday","the day after Tuesday","We have music on Wednesday."],
+  ["foreign","from another country","She is learning a foreign language."],
+  ["friend","a person you like and know well","She is my best friend."],
+  ["guitar","a musical instrument with strings","He plays the guitar."],
+  ["interesting","it makes you want to know more","This book is interesting."],
+  ["knowledge","the things a person knows","Reading gives you knowledge."],
+  ["language","the words people use to speak","Thai is my first language."],
+  ["necessary","needed, you must have it","Water is necessary for life."],
+  ["neighbour","a person who lives next to you","Our neighbour has a dog."],
+  ["question","something you ask","May I ask a question?"],
+  ["receive","to get something","I receive a letter every week."],
+  ["rhythm","a regular pattern of beats","Clap to the rhythm."],
+  ["separate","to divide into parts","A prism can separate white light."],
+  ["temperature","how hot or cold something is","The temperature is 30 degrees."],
+  ["together","with each other","We walk to school together."],
+  ["weather","if it is hot, cold, sunny or rainy","The weather is sunny today."],
+  ["through","from one side to the other","Light passes through glass."],
+  ["straight","not bent","Draw a straight line."],
+  ["island","land with water all around","Samui is an island."]
+ ]}
+};
+
+/* ============ state ============ */
+const $ = id => document.getElementById(id);
+const synth = window.speechSynthesis;
+let bank="movers", mode="type", rate=.75, cnt=20, shuf=1;
+let list=[], idx=0, score=0, wrong=[], answered=false, enVoice=null, token=0;
+
+/* ---- chips ---- */
+(function(){
+  const c=$("setChips");
+  const mk=(k,label,n)=>{const b=document.createElement("button");
+    b.className="chip wide"+(k==="movers"?" on":"");b.dataset.b=k;
+    b.innerHTML=label+"<small>"+n+" คำ</small>";c.appendChild(b);};
+  Object.keys(BANKS).forEach(k=>mk(k,BANKS[k].name,BANKS[k].words.length));
+  const all=document.createElement("button");
+  all.className="chip wide";all.dataset.b="all";
+  const tot=Object.values(BANKS).reduce((s,x)=>s+x.words.length,0);
+  all.innerHTML="ทั้งหมดรวมกัน<small>"+tot+" คำ</small>";c.appendChild(all);
+})();
+function single(box,attr,fn){
+  $(box).addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
+    [...$(box).children].forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");fn(b.dataset[attr]);});
+}
+single("setChips","b", v=>bank=v);
+single("modeChips","mode",v=>mode=v);
+single("rateChips","rate",v=>rate=parseFloat(v));
+single("cntChips","cnt", v=>cnt=parseInt(v));
+single("shufChips","shuf",v=>shuf=parseInt(v));
+
+/* ---- voices ---- */
+function pickVoice(){
+  const vs=synth.getVoices()||[];
+  if(!vs.length)return;
+  const en=vs.filter(v=>/^en/i.test(v.lang));
+  enVoice=en.find(v=>/samantha|google us|natural|zira|aria/i.test(v.name))||en[0]||null;
+  if(!en.length){$("warn").style.display="block";
+    $("warn").textContent="เครื่องนี้ไม่มีเสียงภาษาอังกฤษ เสียงที่ได้ยินจะเพี้ยนจนสะกดตามไม่ได้ ให้เปิดด้วย Chrome หรือ Edge";}
+}
+pickVoice();
+if(synth.onvoiceschanged!==undefined)synth.onvoiceschanged=pickVoice;
+function unlock(){try{const u=new SpeechSynthesisUtterance(" ");u.volume=0;synth.speak(u);}catch(e){}pickVoice();}
+
+function say(text,my){
+  return new Promise(res=>{
+    if(my!==token||!text)return res();
+    let done=false;const fin=()=>{if(!done){done=true;res();}};
+    const u=new SpeechSynthesisUtterance(text);
+    u.lang="en-US"; if(enVoice)u.voice=enVoice; u.rate=rate;
+    u.onend=fin;u.onerror=fin;synth.speak(u);
+    setTimeout(fin,1800+text.length*95/rate);
+  });
+}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ---- flow ---- */
+function build(){
+  let pool=[];
+  if(bank==="all") Object.values(BANKS).forEach(b=>pool=pool.concat(b.words));
+  else pool=BANKS[bank].words.slice();
+  // ตัดคำซ้ำ
+  const seen=new Set();
+  pool=pool.filter(w=>{const k=w[0].toLowerCase();if(seen.has(k))return false;seen.add(k);return true;});
+  if(shuf) for(let i=pool.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[pool[i],pool[j]]=[pool[j],pool[i]];}
+  list = cnt>0 ? pool.slice(0,cnt) : pool;
+}
+
+async function ask(){
+  const my=++token;
+  answered=false;
+  const it=list[idx];
+  $("num").textContent=idx+1;
+  $("tick").textContent=(idx+1)+"/"+list.length;
+  $("track").style.width=((idx+1)/list.length*100)+"%";
+  $("sc").textContent="ถูก "+score;
+  $("hint").classList.add("hidden");$("hint").innerHTML="";
+  $("reveal").classList.add("hidden");$("spellout").classList.add("hidden");
+  $("verdict").classList.add("hidden");
+  $("bSubmit").textContent = mode==="type" ? "ตอบ" : "ดูเฉลย";
+  if(mode==="type"){$("ans").classList.remove("hidden");$("ans").value="";$("ans").focus();}
+  else $("ans").classList.add("hidden");
+  $("phase").textContent="ฟังให้ดี";
+  await say(it[0],my); await wait(500);
+  if(my!==token)return;
+  $("phase").textContent="สะกดคำที่ได้ยิน  (ขอฟังซ้ำ ความหมาย หรือประโยคได้)";
+}
+
+function submit(){
+  if(answered)return;
+  answered=true;
+  const it=list[idx];
+  $("reveal").textContent=it[0];
+  $("spellout").textContent=it[0].toUpperCase().split("").join(" ");
+  $("reveal").classList.remove("hidden");
+  $("spellout").classList.remove("hidden");
+
+  if(mode==="type"){
+    const given=$("ans").value.trim();
+    const ok = given.toLowerCase()===it[0].toLowerCase();
+    if(ok){score++;$("verdict").textContent="✓ ถูกต้อง";$("verdict").className="verdict ok";}
+    else{wrong.push([it[0],given||"(ไม่ได้ตอบ)"]);
+         $("verdict").textContent="✗ ยังไม่ถูก";$("verdict").className="verdict bad";}
+    $("verdict").classList.remove("hidden");
+    $("ans").classList.add("hidden");
+  }else{
+    $("phase").textContent="ตรวจกับที่เขียนไว้ แล้วกดถูกหรือผิด";
+    $("verdict").innerHTML='<button class="chip" id="mOk" style="margin-right:8px">✓ เขียนถูก</button>'
+                          +'<button class="chip" id="mBad">✗ เขียนผิด</button>';
+    $("verdict").className="verdict";$("verdict").classList.remove("hidden");
+    $("mOk").onclick=()=>{score++;next();};
+    $("mBad").onclick=()=>{wrong.push([it[0],"(เขียนผิด)"]);next();};
+    return;
+  }
+  $("sc").textContent="ถูก "+score;
+  $("bSubmit").textContent="คำต่อไป";
+  $("bSubmit").onclick=next;
+}
+
+function next(){
+  idx++;
+  $("bSubmit").onclick=submit;
+  if(idx>=list.length)return finish();
+  ask();
+}
+
+function finish(){
+  token++;synth.cancel();
+  $("play").classList.add("hidden");$("ask").classList.add("hidden");$("bar").classList.add("hidden");
+  $("result").classList.remove("hidden");
+  $("final").textContent=score+" / "+list.length;
+  const p=Math.round(score/list.length*100);
+  let msg;
+  if(p===100)msg="เต็ม ไม่พลาดสักคำ พร้อมลงสนามแล้ว";
+  else if(p>=80)msg="แม่นมาก เหลือแค่เก็บคำที่พลาดอีกนิดเดียว";
+  else if(p>=60)msg="ใช้ได้ ลองซ้อมชุดเดิมซ้ำอีกรอบให้ขึ้นเกิน 80";
+  else msg="ยังต้องซ้อมอีก ลองลดเหลือ 10 คำต่อรอบ แล้วเน้นคำที่ผิด";
+  $("pct").textContent=p+"%  ·  "+msg;
+  if(wrong.length){
+    $("wrongbox").classList.remove("hidden");
+    $("wronglist").innerHTML=wrong.map(w=>
+      "<li><b>"+w[0]+"</b> <span class='you'>— ที่ตอบ: "+w[1]+"</span></li>").join("");
+  }else $("wrongbox").classList.add("hidden");
+}
+
+/* ---- buttons ---- */
+$("start").onclick=()=>{
+  unlock();build();
+  idx=0;score=0;wrong=[];
+  $("setup").classList.add("hidden");
+  $("play").classList.remove("hidden");$("ask").classList.remove("hidden");$("bar").classList.remove("hidden");
+  $("result").classList.add("hidden");
+  $("bSubmit").onclick=submit;
+  ask();
+};
+$("bRepeat").onclick=async()=>{const my=token;await say(list[idx][0],my);};
+$("bDef").onclick=async()=>{
+  const it=list[idx];
+  $("hint").classList.remove("hidden");
+  $("hint").innerHTML="<b>ความหมาย</b> "+it[1];
+  const my=token;await say("Definition. "+it[1],my);
+};
+$("bSent").onclick=async()=>{
+  const it=list[idx];
+  // ปิดคำในประโยคไม่ให้เห็นตัวสะกด
+  const hidden=it[2].replace(new RegExp(it[0],"ig"),"_____");
+  $("hint").classList.remove("hidden");
+  $("hint").innerHTML="<b>ประโยค</b> "+(answered?it[2]:hidden);
+  const my=token;await say(it[2],my);
+};
+$("bSkip").onclick=()=>{
+  if(!answered){wrong.push([list[idx][0],"(ข้าม)"]);}
+  next();
+};
+$("bQuit").onclick=finish;
+$("again").onclick=()=>{$("result").classList.add("hidden");$("start").click();};
+$("home").onclick=()=>{
+  token++;synth.cancel();
+  $("result").classList.add("hidden");$("setup").classList.remove("hidden");
+};
+$("ans").addEventListener("keydown",e=>{if(e.key==="Enter")submit();});
+window.addEventListener("pagehide",()=>synth.cancel());
+</script>
+</body>
+</html>
