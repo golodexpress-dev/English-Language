@@ -185,6 +185,478 @@ const GROUPS = [{"title":"1. แสงคืออะไร / พลังงา
 const $ = id => document.getElementById(id);
 const synth = window.speechSynthesis;
 
+/* ============ ตัวเล่นไฟล์เสียง mp3 (เติมเข้ามาใหม่) ============
+   เล่นไฟล์จากโฟลเดอร์ audio/sci/ ถ้าไม่พบไฟล์จะถอยไปใช้เสียงในเครื่องแบบเดิม */
+const AUDIO_BASE = "audio/sci/";
+const SILENT_SND = "data:audio/wav;base64,UklGRqQHAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YYAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+const AUDIO_MAP = {
+"en|light": "0001_light.mp3",
+"en|Light is energy that we can see.": "0002_light_is_energy_that_we_can_see.mp3",
+"en|L, I, G, H, T": "0003_l_i_g_h_t.mp3",
+"th|แสง": "0004_th.mp3",
+"en|energy": "0005_energy.mp3",
+"en|Light is a form of energy.": "0006_light_is_a_form_of_energy.mp3",
+"en|E, N, E, R, G, Y": "0007_e_n_e_r_g_y.mp3",
+"th|พลังงาน": "0008_th.mp3",
+"en|source": "0009_source.mp3",
+"en|The Sun is a source of light.": "0010_the_sun_is_a_source_of_light.mp3",
+"en|S, O, U, R, C, E": "0011_s_o_u_r_c_e.mp3",
+"th|แหล่งกำเนิด": "0012_th.mp3",
+"en|give out": "0013_give_out.mp3",
+"en|Fireflies can give out light.": "0014_fireflies_can_give_out_light.mp3",
+"en|G, I, V, E,  , O, U, T": "0015_g_i_v_e_o_u_t.mp3",
+"th|ปล่อยออกมา, เปล่งออกมา": "0016_th.mp3",
+"en|produce": "0017_produce.mp3",
+"en|The moon does not produce its own light.": "0018_the_moon_does_not_produce_its_own_light.mp3",
+"en|P, R, O, D, U, C, E": "0019_p_r_o_d_u_c_e.mp3",
+"th|ผลิต, สร้าง": "0020_th.mp3",
+"en|form": "0021_form.mp3",
+"en|Energy can change from one form to another.": "0022_energy_can_change_from_one_form_to_anoth.mp3",
+"en|F, O, R, M": "0023_f_o_r_m.mp3",
+"th|รูปแบบ": "0024_th.mp3",
+"en|change": "0025_change.mp3",
+"en|Energy can change into light.": "0026_energy_can_change_into_light.mp3",
+"en|C, H, A, N, G, E": "0027_c_h_a_n_g_e.mp3",
+"th|เปลี่ยน": "0028_th.mp3",
+"en|sunlight": "0029_sunlight.mp3",
+"en|Sunlight bounces off the Moon.": "0030_sunlight_bounces_off_the_moon.mp3",
+"en|S, U, N, L, I, G, H, T": "0031_s_u_n_l_i_g_h_t.mp3",
+"th|แสงอาทิตย์": "0032_th.mp3",
+"en|magnifying glass": "0033_magnifying_glass.mp3",
+"en|Use a magnifying glass to focus the sunlight.": "0034_use_a_magnifying_glass_to_focus_the_sunl.mp3",
+"en|M, A, G, N, I, F, Y, I, N, G,  , G, L, A, S, S": "0035_m_a_g_n_i_f_y_i_n_g_g_l_a_s_s.mp3",
+"th|แว่นขยาย": "0036_th.mp3",
+"en|focus": "0037_focus.mp3",
+"en|Focus a dot of sunlight on the drop.": "0038_focus_a_dot_of_sunlight_on_the_drop.mp3",
+"en|F, O, C, U, S": "0039_f_o_c_u_s.mp3",
+"th|รวมแสง, โฟกัส": "0040_th.mp3",
+"en|boil": "0041_boil.mp3",
+"en|Use light energy to boil a water drop.": "0042_use_light_energy_to_boil_a_water_drop.mp3",
+"en|B, O, I, L": "0043_b_o_i_l.mp3",
+"th|ต้ม, เดือด": "0044_th.mp3",
+"en|classroom": "0045_classroom.mp3",
+"en|What sources of light do you use in your classroom?": "0046_what_sources_of_light_do_you_use_in_your.mp3",
+"en|C, L, A, S, S, R, O, O, M": "0047_c_l_a_s_s_r_o_o_m.mp3",
+"th|ห้องเรียน": "0048_th.mp3",
+"en|natural light": "0049_natural_light.mp3",
+"en|Light that comes from nature is called natural light.": "0050_light_that_comes_from_nature_is_called_n.mp3",
+"en|N, A, T, U, R, A, L,  , L, I, G, H, T": "0051_n_a_t_u_r_a_l_l_i_g_h_t.mp3",
+"th|แสงธรรมชาติ": "0052_th.mp3",
+"en|the Sun": "0053_the_sun.mp3",
+"en|The Sun is the main source of natural light.": "0054_the_sun_is_the_main_source_of_natural_li.mp3",
+"en|T, H, E,  , S, U, N": "0055_t_h_e_s_u_n.mp3",
+"th|ดวงอาทิตย์": "0056_th.mp3",
+"en|star": "0057_star.mp3",
+"en|Stars are sources of natural light.": "0058_stars_are_sources_of_natural_light.mp3",
+"en|S, T, A, R": "0059_s_t_a_r.mp3",
+"th|ดาวฤกษ์": "0060_th.mp3",
+"en|moon": "0061_moon.mp3",
+"en|The moon helps us to see at night.": "0062_the_moon_helps_us_to_see_at_night.mp3",
+"en|M, O, O, N": "0063_m_o_o_n.mp3",
+"th|ดวงจันทร์": "0064_th.mp3",
+"en|moonlight": "0065_moonlight.mp3",
+"en|Moonlight is sunlight that bounces off the Moon.": "0066_moonlight_is_sunlight_that_bounces_off_t.mp3",
+"en|M, O, O, N, L, I, G, H, T": "0067_m_o_o_n_l_i_g_h_t.mp3",
+"th|แสงจันทร์": "0068_th.mp3",
+"en|lightning": "0069_lightning.mp3",
+"en|Lightning is a source of natural light.": "0070_lightning_is_a_source_of_natural_light.mp3",
+"en|L, I, G, H, T, N, I, N, G": "0071_l_i_g_h_t_n_i_n_g.mp3",
+"th|ฟ้าแลบ, ฟ้าผ่า": "0072_th.mp3",
+"en|volcano": "0073_volcano.mp3",
+"en|A volcano gives out light.": "0074_a_volcano_gives_out_light.mp3",
+"en|V, O, L, C, A, N, O": "0075_v_o_l_c_a_n_o.mp3",
+"th|ภูเขาไฟ": "0076_th.mp3",
+"en|meteor": "0077_meteor.mp3",
+"en|Falling meteors make light in the sky.": "0078_falling_meteors_make_light_in_the_sky.mp3",
+"en|M, E, T, E, O, R": "0079_m_e_t_e_o_r.mp3",
+"th|ดาวตก": "0080_th.mp3",
+"en|forest fire": "0081_forest_fire.mp3",
+"en|A forest fire is a natural source of light.": "0082_a_forest_fire_is_a_natural_source_of_lig.mp3",
+"en|F, O, R, E, S, T,  , F, I, R, E": "0083_f_o_r_e_s_t_f_i_r_e.mp3",
+"th|ไฟป่า": "0084_th.mp3",
+"en|northern lights": "0085_northern_lights.mp3",
+"en|The northern lights are very beautiful.": "0086_the_northern_lights_are_very_beautiful.mp3",
+"en|N, O, R, T, H, E, R, N,  , L, I, G, H, T, S": "0087_n_o_r_t_h_e_r_n_l_i_g_h_t_s.mp3",
+"th|แสงเหนือ": "0088_th.mp3",
+"en|firefly": "0089_firefly.mp3",
+"en|Fireflies are insects that can give out light.": "0090_fireflies_are_insects_that_can_give_out.mp3",
+"en|F, I, R, E, F, L, Y": "0091_f_i_r_e_f_l_y.mp3",
+"th|หิ่งห้อย": "0092_th.mp3",
+"en|mushroom": "0093_mushroom.mp3",
+"en|These mushrooms can produce natural light.": "0094_these_mushrooms_can_produce_natural_ligh.mp3",
+"en|M, U, S, H, R, O, O, M": "0095_m_u_s_h_r_o_o_m.mp3",
+"th|เห็ด": "0096_th.mp3",
+"en|artificial light": "0097_artificial_light.mp3",
+"en|Any light that humans make is called artificial light.": "0098_any_light_that_humans_make_is_called_art.mp3",
+"en|A, R, T, I, F, I, C, I, A, L,  , L, I, G, H, T": "0099_a_r_t_i_f_i_c_i_a_l_l_i_g_h_t.mp3",
+"th|แสงประดิษฐ์": "0100_th.mp3",
+"en|electricity": "0101_electricity.mp3",
+"en|Most artificial light is made from electricity.": "0102_most_artificial_light_is_made_from_elect.mp3",
+"en|E, L, E, C, T, R, I, C, I, T, Y": "0103_e_l_e_c_t_r_i_c_i_t_y.mp3",
+"th|ไฟฟ้า": "0104_th.mp3",
+"en|light bulb": "0105_light_bulb.mp3",
+"en|We can turn a light bulb on and off.": "0106_we_can_turn_a_light_bulb_on_and_off.mp3",
+"en|L, I, G, H, T,  , B, U, L, B": "0107_l_i_g_h_t_b_u_l_b.mp3",
+"th|หลอดไฟ": "0108_th.mp3",
+"en|candle": "0109_candle.mp3",
+"en|A candle is a source of artificial light.": "0110_a_candle_is_a_source_of_artificial_light.mp3",
+"en|C, A, N, D, L, E": "0111_c_a_n_d_l_e.mp3",
+"th|เทียน": "0112_th.mp3",
+"en|oil lamp": "0113_oil_lamp.mp3",
+"en|People used oil lamps long ago.": "0114_people_used_oil_lamps_long_ago.mp3",
+"en|O, I, L,  , L, A, M, P": "0115_o_i_l_l_a_m_p.mp3",
+"th|ตะเกียงน้ำมัน": "0116_th.mp3",
+"en|flashlight": "0117_flashlight.mp3",
+"en|Put a flashlight 10 cm from the first card.": "0118_put_a_flashlight_10_cm_from_the_first_ca.mp3",
+"en|F, L, A, S, H, L, I, G, H, T": "0119_f_l_a_s_h_l_i_g_h_t.mp3",
+"th|ไฟฉาย": "0120_th.mp3",
+"en|streetlight": "0121_streetlight.mp3",
+"en|Streetlights help us see at night.": "0122_streetlights_help_us_see_at_night.mp3",
+"en|S, T, R, E, E, T, L, I, G, H, T": "0123_s_t_r_e_e_t_l_i_g_h_t.mp3",
+"th|ไฟถนน": "0124_th.mp3",
+"en|fireworks": "0125_fireworks.mp3",
+"en|We can see fireworks in the night sky.": "0126_we_can_see_fireworks_in_the_night_sky.mp3",
+"en|F, I, R, E, W, O, R, K, S": "0127_f_i_r_e_w_o_r_k_s.mp3",
+"th|ดอกไม้ไฟ, พลุ": "0128_th.mp3",
+"en|ceiling light": "0129_ceiling_light.mp3",
+"en|Ceiling lights give out light in the room.": "0130_ceiling_lights_give_out_light_in_the_roo.mp3",
+"en|C, E, I, L, I, N, G,  , L, I, G, H, T": "0131_c_e_i_l_i_n_g_l_i_g_h_t.mp3",
+"th|ไฟเพดาน": "0132_th.mp3",
+"en|control": "0133_control.mp3",
+"en|Humans can control artificial light.": "0134_humans_can_control_artificial_light.mp3",
+"en|C, O, N, T, R, O, L": "0135_c_o_n_t_r_o_l.mp3",
+"th|ควบคุม": "0136_th.mp3",
+"en|switch off": "0137_switch_off.mp3",
+"en|Switch off the lights in your room.": "0138_switch_off_the_lights_in_your_room.mp3",
+"en|S, W, I, T, C, H,  , O, F, F": "0139_s_w_i_t_c_h_o_f_f.mp3",
+"th|ปิด (ไฟ)": "0140_th.mp3",
+"en|conserve": "0141_conserve.mp3",
+"en|Shut off lights to conserve energy.": "0142_shut_off_lights_to_conserve_energy.mp3",
+"en|C, O, N, S, E, R, V, E": "0143_c_o_n_s_e_r_v_e.mp3",
+"th|ประหยัด, อนุรักษ์": "0144_th.mp3",
+"en|travel": "0145_travel.mp3",
+"en|Light travels in a straight line.": "0146_light_travels_in_a_straight_line.mp3",
+"en|T, R, A, V, E, L": "0147_t_r_a_v_e_l.mp3",
+"th|เดินทาง": "0148_th.mp3",
+"en|straight line": "0149_straight_line.mp3",
+"en|Light only travels in a straight line.": "0150_light_only_travels_in_a_straight_line.mp3",
+"en|S, T, R, A, I, G, H, T,  , L, I, N, E": "0151_s_t_r_a_i_g_h_t_l_i_n_e.mp3",
+"th|เส้นตรง": "0152_th.mp3",
+"en|light beam": "0153_light_beam.mp3",
+"en|A light beam is made up of many light rays.": "0154_a_light_beam_is_made_up_of_many_light_ra.mp3",
+"en|L, I, G, H, T,  , B, E, A, M": "0155_l_i_g_h_t_b_e_a_m.mp3",
+"th|ลำแสง": "0156_th.mp3",
+"en|light ray": "0157_light_ray.mp3",
+"en|A thin line of light energy is called a light ray.": "0158_a_thin_line_of_light_energy_is_called_a.mp3",
+"en|L, I, G, H, T,  , R, A, Y": "0159_l_i_g_h_t_r_a_y.mp3",
+"th|รังสีของแสง": "0160_th.mp3",
+"en|reflect": "0161_reflect.mp3",
+"en|Materials can reflect light.": "0162_materials_can_reflect_light.mp3",
+"en|R, E, F, L, E, C, T": "0163_r_e_f_l_e_c_t.mp3",
+"th|สะท้อน": "0164_th.mp3",
+"en|bounce": "0165_bounce.mp3",
+"en|Light bounces off the road sign.": "0166_light_bounces_off_the_road_sign.mp3",
+"en|B, O, U, N, C, E": "0167_b_o_u_n_c_e.mp3",
+"th|สะท้อนกลับ, กระเด้ง": "0168_th.mp3",
+"en|absorb": "0169_absorb.mp3",
+"en|Materials can absorb light.": "0170_materials_can_absorb_light.mp3",
+"en|A, B, S, O, R, B": "0171_a_b_s_o_r_b.mp3",
+"th|ดูดกลืน": "0172_th.mp3",
+"en|transmit": "0173_transmit.mp3",
+"en|Materials can transmit light.": "0174_materials_can_transmit_light.mp3",
+"en|T, R, A, N, S, M, I, T": "0175_t_r_a_n_s_m_i_t.mp3",
+"th|ยอมให้ผ่าน, ส่งผ่าน": "0176_th.mp3",
+"en|transparent": "0177_transparent.mp3",
+"en|Glass is transparent.": "0178_glass_is_transparent.mp3",
+"en|T, R, A, N, S, P, A, R, E, N, T": "0179_t_r_a_n_s_p_a_r_e_n_t.mp3",
+"th|โปร่งใส": "0180_th.mp3",
+"en|translucent": "0181_translucent.mp3",
+"en|Frosted glass is translucent.": "0182_frosted_glass_is_translucent.mp3",
+"en|T, R, A, N, S, L, U, C, E, N, T": "0183_t_r_a_n_s_l_u_c_e_n_t.mp3",
+"th|โปร่งแสง": "0184_th.mp3",
+"en|opaque": "0185_opaque.mp3",
+"en|A wall is opaque.": "0186_a_wall_is_opaque.mp3",
+"en|O, P, A, Q, U, E": "0187_o_p_a_q_u_e.mp3",
+"th|ทึบแสง": "0188_th.mp3",
+"en|refract": "0189_refract.mp3",
+"en|Light can be refracted.": "0190_light_can_be_refracted.mp3",
+"en|R, E, F, R, A, C, T": "0191_r_e_f_r_a_c_t.mp3",
+"th|หักเห": "0192_th.mp3",
+"en|shadow": "0193_shadow.mp3",
+"en|Shadows are formed when an object blocks a light beam.": "0194_shadows_are_formed_when_an_object_blocks.mp3",
+"en|S, H, A, D, O, W": "0195_s_h_a_d_o_w.mp3",
+"th|เงา": "0196_th.mp3",
+"en|block": "0197_block.mp3",
+"en|An object blocks the light.": "0198_an_object_blocks_the_light.mp3",
+"en|B, L, O, C, K": "0199_b_l_o_c_k.mp3",
+"th|ขวาง, กั้น": "0200_th.mp3",
+"en|object": "0201_object.mp3",
+"en|Pick up an object and hold it above the paper.": "0202_pick_up_an_object_and_hold_it_above_the.mp3",
+"en|O, B, J, E, C, T": "0203_o_b_j_e_c_t.mp3",
+"th|วัตถุ, สิ่งของ": "0204_th.mp3",
+"en|shape": "0205_shape.mp3",
+"en|Is an object's shadow always the same shape?": "0206_is_an_objects_shadow_always_the_same_sha.mp3",
+"en|S, H, A, P, E": "0207_s_h_a_p_e.mp3",
+"th|รูปร่าง": "0208_th.mp3",
+"en|outline": "0209_outline.mp3",
+"en|Draw the outline of the shadow.": "0210_draw_the_outline_of_the_shadow.mp3",
+"en|O, U, T, L, I, N, E": "0211_o_u_t_l_i_n_e.mp3",
+"th|เส้นรอบรูป": "0212_th.mp3",
+"en|sundial": "0213_sundial.mp3",
+"en|People used a sundial to tell the time.": "0214_people_used_a_sundial_to_tell_the_time.mp3",
+"en|S, U, N, D, I, A, L": "0215_s_u_n_d_i_a_l.mp3",
+"th|นาฬิกาแดด": "0216_th.mp3",
+"en|experiment": "0217_experiment.mp3",
+"en|These students are carrying out a simple experiment.": "0218_these_students_are_carrying_out_a_simple.mp3",
+"en|E, X, P, E, R, I, M, E, N, T": "0219_e_x_p_e_r_i_m_e_n_t.mp3",
+"th|การทดลอง": "0220_th.mp3",
+"en|observe": "0221_observe.mp3",
+"en|Observe how light travels.": "0222_observe_how_light_travels.mp3",
+"en|O, B, S, E, R, V, E": "0223_o_b_s_e_r_v_e.mp3",
+"th|สังเกต": "0224_th.mp3",
+"en|prove": "0225_prove.mp3",
+"en|The experiment proves that light travels in a straight line.": "0226_the_experiment_proves_that_light_travels.mp3",
+"en|P, R, O, V, E": "0227_p_r_o_v_e.mp3",
+"th|พิสูจน์": "0228_th.mp3",
+"en|curved": "0229_curved.mp3",
+"en|With the hose curved, he cannot see the light.": "0230_with_the_hose_curved_he_cannot_see_the_l.mp3",
+"en|C, U, R, V, E, D": "0231_c_u_r_v_e_d.mp3",
+"th|โค้ง": "0232_th.mp3",
+"en|darken": "0233_darken.mp3",
+"en|Ask your teacher to darken the classroom.": "0234_ask_your_teacher_to_darken_the_classroom.mp3",
+"en|D, A, R, K, E, N": "0235_d_a_r_k_e_n.mp3",
+"th|ทำให้มืด": "0236_th.mp3",
+"en|spin": "0237_spin.mp3",
+"en|As Earth spins, the Sun appears to move.": "0238_as_earth_spins_the_sun_appears_to_move.mp3",
+"en|S, P, I, N": "0239_s_p_i_n.mp3",
+"th|หมุน": "0240_th.mp3",
+"en|material": "0241_material.mp3",
+"en|Materials can transmit, reflect, or absorb light.": "0242_materials_can_transmit_reflect_or_absorb.mp3",
+"en|M, A, T, E, R, I, A, L": "0243_m_a_t_e_r_i_a_l.mp3",
+"th|วัสดุ": "0244_th.mp3",
+"en|behave": "0245_behave.mp3",
+"en|Light behaves in different ways in different materials.": "0246_light_behaves_in_different_ways_in_diffe.mp3",
+"en|B, E, H, A, V, E": "0247_b_e_h_a_v_e.mp3",
+"th|มีพฤติกรรม, แสดงออก": "0248_th.mp3",
+"en|pass through": "0249_pass_through.mp3",
+"en|Some materials let light pass right through.": "0250_some_materials_let_light_pass_right_thro.mp3",
+"en|P, A, S, S,  , T, H, R, O, U, G, H": "0251_p_a_s_s_t_h_r_o_u_g_h.mp3",
+"th|ผ่านทะลุ": "0252_th.mp3",
+"en|clearly": "0253_clearly.mp3",
+"en|You can see clearly through transparent materials.": "0254_you_can_see_clearly_through_transparent.mp3",
+"en|C, L, E, A, R, L, Y": "0255_c_l_e_a_r_l_y.mp3",
+"th|อย่างชัดเจน": "0256_th.mp3",
+"en|air": "0257_air.mp3",
+"en|Water and air are transparent.": "0258_water_and_air_are_transparent.mp3",
+"en|A, I, R": "0259_a_i_r.mp3",
+"th|อากาศ": "0260_th.mp3",
+"en|glass": "0261_glass.mp3",
+"en|A glass of water is translucent.": "0262_a_glass_of_water_is_translucent.mp3",
+"en|G, L, A, S, S": "0263_g_l_a_s_s.mp3",
+"th|แก้ว, กระจก": "0264_th.mp3",
+"en|frosted glass": "0265_frosted_glass.mp3",
+"en|F, R, O, S, T, E, D,  , G, L, A, S, S": "0266_f_r_o_s_t_e_d_g_l_a_s_s.mp3",
+"th|กระจกฝ้า": "0267_th.mp3",
+"en|tracing paper": "0268_tracing_paper.mp3",
+"en|Tracing paper is translucent.": "0269_tracing_paper_is_translucent.mp3",
+"en|T, R, A, C, I, N, G,  , P, A, P, E, R": "0270_t_r_a_c_i_n_g_p_a_p_e_r.mp3",
+"th|กระดาษลอกลาย": "0271_th.mp3",
+"en|wood": "0272_wood.mp3",
+"en|Wood and jeans are opaque.": "0273_wood_and_jeans_are_opaque.mp3",
+"en|W, O, O, D": "0274_w_o_o_d.mp3",
+"th|ไม้": "0275_th.mp3",
+"en|door": "0276_door.mp3",
+"en|Which door is transparent?": "0277_which_door_is_transparent.mp3",
+"en|D, O, O, R": "0278_d_o_o_r.mp3",
+"th|ประตู": "0279_th.mp3",
+"en|create": "0280_create.mp3",
+"en|Opaque materials block all light and create shadows.": "0281_opaque_materials_block_all_light_and_cre.mp3",
+"en|C, R, E, A, T, E": "0282_c_r_e_a_t_e.mp3",
+"th|สร้าง, ทำให้เกิด": "0283_th.mp3",
+"en|classify": "0284_classify.mp3",
+"en|Classify materials as transparent, translucent, or opaque.": "0285_classify_materials_as_transparent_transl.mp3",
+"en|C, L, A, S, S, I, F, Y": "0286_c_l_a_s_s_i_f_y.mp3",
+"th|จำแนก, จัดกลุ่ม": "0287_th.mp3",
+"en|reflection": "0288_reflection.mp3",
+"en|Bouncing light is called reflection.": "0289_bouncing_light_is_called_reflection.mp3",
+"en|R, E, F, L, E, C, T, I, O, N": "0290_r_e_f_l_e_c_t_i_o_n.mp3",
+"th|การสะท้อน": "0291_th.mp3",
+"en|refraction": "0292_refraction.mp3",
+"en|The bending of light is called refraction.": "0293_the_bending_of_light_is_called_refractio.mp3",
+"en|R, E, F, R, A, C, T, I, O, N": "0294_r_e_f_r_a_c_t_i_o_n.mp3",
+"th|การหักเห": "0295_th.mp3",
+"en|mirror": "0296_mirror.mp3",
+"en|Light bounces off mirrors.": "0297_light_bounces_off_mirrors.mp3",
+"en|M, I, R, R, O, R": "0298_m_i_r_r_o_r.mp3",
+"th|กระจกเงา": "0299_th.mp3",
+"en|smooth": "0300_smooth.mp3",
+"en|Light bounces off smooth surfaces just like a ball.": "0301_light_bounces_off_smooth_surfaces_just_l.mp3",
+"en|S, M, O, O, T, H": "0302_s_m_o_o_t_h.mp3",
+"th|เรียบ, ลื่น": "0303_th.mp3",
+"en|surface": "0304_surface.mp3",
+"en|Light bounces off smooth surfaces.": "0305_light_bounces_off_smooth_surfaces.mp3",
+"en|S, U, R, F, A, C, E": "0306_s_u_r_f_a_c_e.mp3",
+"th|พื้นผิว": "0307_th.mp3",
+"en|angle": "0308_angle.mp3",
+"en|Light that enters at an angle refracts.": "0309_light_that_enters_at_an_angle_refracts.mp3",
+"en|A, N, G, L, E": "0310_a_n_g_l_e.mp3",
+"th|มุม": "0311_th.mp3",
+"en|bend": "0312_bend.mp3",
+"en|It slows down and bends.": "0313_it_slows_down_and_bends.mp3",
+"en|B, E, N, D": "0314_b_e_n_d.mp3",
+"th|หักงอ, ทำให้โค้ง": "0315_th.mp3",
+"en|bent": "0316_bent.mp3",
+"en|Observe if the pencil seems bent.": "0317_observe_if_the_pencil_seems_bent.mp3",
+"en|B, E, N, T": "0318_b_e_n_t.mp3",
+"th|งอ, โค้งแล้ว": "0319_th.mp3",
+"en|appear": "0320_appear.mp3",
+"en|The toothbrush appears broken.": "0321_the_toothbrush_appears_broken.mp3",
+"en|A, P, P, E, A, R": "0322_a_p_p_e_a_r.mp3",
+"th|ปรากฏ, ดูเหมือนว่า": "0323_th.mp3",
+"en|slowly": "0324_slowly.mp3",
+"en|Light moves more slowly through water.": "0325_light_moves_more_slowly_through_water.mp3",
+"en|S, L, O, W, L, Y": "0326_s_l_o_w_l_y.mp3",
+"th|อย่างช้า ๆ": "0327_th.mp3",
+"en|aim": "0328_aim.mp3",
+"en|Predict where to aim a spear.": "0329_predict_where_to_aim_a_spear.mp3",
+"en|A, I, M": "0330_a_i_m.mp3",
+"th|เล็ง": "0331_th.mp3",
+"en|spear": "0332_spear.mp3",
+"en|Spearing salmon is an important skill.": "0333_spearing_salmon_is_an_important_skill.mp3",
+"en|S, P, E, A, R": "0334_s_p_e_a_r.mp3",
+"th|หอก, แทงด้วยหอก": "0335_th.mp3",
+"en|spectrum": "0336_spectrum.mp3",
+"en|A spectrum is a band of colours.": "0337_a_spectrum_is_a_band_of_colours.mp3",
+"en|S, P, E, C, T, R, U, M": "0338_s_p_e_c_t_r_u_m.mp3",
+"th|สเปกตรัม, แถบสี": "0339_th.mp3",
+"en|prism": "0340_prism.mp3",
+"en|A prism can split white light into the spectrum.": "0341_a_prism_can_split_white_light_into_the_s.mp3",
+"en|P, R, I, S, M": "0342_p_r_i_s_m.mp3",
+"th|ปริซึม": "0343_th.mp3",
+"en|rainbow": "0344_rainbow.mp3",
+"en|A rainbow tells us something important about light.": "0345_a_rainbow_tells_us_something_important_a.mp3",
+"en|R, A, I, N, B, O, W": "0346_r_a_i_n_b_o_w.mp3",
+"th|รุ้งกินน้ำ": "0347_th.mp3",
+"en|white light": "0348_white_light.mp3",
+"en|What colours make up white light?": "0349_what_colours_make_up_white_light.mp3",
+"en|W, H, I, T, E,  , L, I, G, H, T": "0350_w_h_i_t_e_l_i_g_h_t.mp3",
+"th|แสงขาว": "0351_th.mp3",
+"en|split": "0352_split.mp3",
+"en|Light can be split into colours.": "0353_light_can_be_split_into_colours.mp3",
+"en|S, P, L, I, T": "0354_s_p_l_i_t.mp3",
+"th|แยกออก, ผ่า": "0355_th.mp3",
+"en|band": "0356_band.mp3",
+"en|B, A, N, D": "0357_b_a_n_d.mp3",
+"th|แถบ": "0358_th.mp3",
+"en|mix": "0359_mix.mp3",
+"en|The colours in a spectrum mix together to make white light.": "0360_the_colours_in_a_spectrum_mix_together_t.mp3",
+"en|M, I, X": "0361_m_i_x.mp3",
+"th|ผสม": "0362_th.mp3",
+"en|order": "0363_order.mp3",
+"en|The colours always appear in the same order.": "0364_the_colours_always_appear_in_the_same_or.mp3",
+"en|O, R, D, E, R": "0365_o_r_d_e_r.mp3",
+"th|ลำดับ": "0366_th.mp3",
+"en|bubble": "0367_bubble.mp3",
+"en|Take light apart with a bubble.": "0368_take_light_apart_with_a_bubble.mp3",
+"en|B, U, B, B, L, E": "0369_b_u_b_b_l_e.mp3",
+"th|ฟองสบู่": "0370_th.mp3",
+"en|indigo": "0371_indigo.mp3",
+"en|ROY G BIV: Red, Orange, Yellow, Green, Blue, Indigo, Violet.": "0372_roy_g_biv_red_orange_yellow_green_blue_i.mp3",
+"en|I, N, D, I, G, O": "0373_i_n_d_i_g_o.mp3",
+"th|สีคราม": "0374_th.mp3",
+"en|violet": "0375_violet.mp3",
+"en|The last colour of the rainbow is violet.": "0376_the_last_colour_of_the_rainbow_is_violet.mp3",
+"en|V, I, O, L, E, T": "0377_v_i_o_l_e_t.mp3",
+"th|สีม่วง": "0378_th.mp3",
+"en|crystal glass": "0379_crystal_glass.mp3",
+"en|Light can be split if it passes through crystal glass.": "0380_light_can_be_split_if_it_passes_through.mp3",
+"en|C, R, Y, S, T, A, L,  , G, L, A, S, S": "0381_c_r_y_s_t_a_l_g_l_a_s_s.mp3",
+"th|แก้วคริสตัล": "0382_th.mp3",
+"en|predict": "0383_predict.mp3",
+"en|Predict which object will produce the biggest shadow.": "0384_predict_which_object_will_produce_the_bi.mp3",
+"en|P, R, E, D, I, C, T": "0385_p_r_e_d_i_c_t.mp3",
+"th|ทำนาย, คาดคะเน": "0386_th.mp3",
+"en|conclude": "0387_conclude.mp3",
+"en|Conclude: What makes a shadow?": "0388_conclude_what_makes_a_shadow.mp3",
+"en|C, O, N, C, L, U, D, E": "0389_c_o_n_c_l_u_d_e.mp3",
+"th|สรุป": "0390_th.mp3",
+"en|record": "0391_record.mp3",
+"en|Record the colours you see in the order they occur.": "0392_record_the_colours_you_see_in_the_order.mp3",
+"en|R, E, C, O, R, D": "0393_r_e_c_o_r_d.mp3",
+"th|บันทึก": "0394_th.mp3",
+"en|measure": "0395_measure.mp3",
+"en|Measure the height of the shadows.": "0396_measure_the_height_of_the_shadows.mp3",
+"en|M, E, A, S, U, R, E": "0397_m_e_a_s_u_r_e.mp3",
+"th|วัด": "0398_th.mp3",
+"en|height": "0399_height.mp3",
+"en|Write the height of the shadow in centimetres.": "0400_write_the_height_of_the_shadow_in_centim.mp3",
+"en|H, E, I, G, H, T": "0401_h_e_i_g_h_t.mp3",
+"th|ความสูง": "0402_th.mp3",
+"en|distance": "0403_distance.mp3",
+"en|The distance between the cup and the flashlight.": "0404_the_distance_between_the_cup_and_the_fla.mp3",
+"en|D, I, S, T, A, N, C, E": "0405_d_i_s_t_a_n_c_e.mp3",
+"th|ระยะทาง": "0406_th.mp3",
+"en|trace": "0407_trace.mp3",
+"en|Trace the shadow on the white paper.": "0408_trace_the_shadow_on_the_white_paper.mp3",
+"en|T, R, A, C, E": "0409_t_r_a_c_e.mp3",
+"th|ลอกลาย, วาดตามรอย": "0410_th.mp3",
+"en|label": "0411_label.mp3",
+"en|Label your paper.": "0412_label_your_paper.mp3",
+"en|L, A, B, E, L": "0413_l_a_b_e_l.mp3",
+"th|ติดป้าย, เขียนกำกับ": "0414_th.mp3",
+"en|ruler": "0415_ruler.mp3",
+"en|Place the ruler on a table.": "0416_place_the_ruler_on_a_table.mp3",
+"en|R, U, L, E, R": "0417_r_u_l_e_r.mp3",
+"th|ไม้บรรทัด": "0418_th.mp3",
+"en|partner": "0419_partner.mp3",
+"en|Explain what you see to a partner.": "0420_explain_what_you_see_to_a_partner.mp3",
+"en|P, A, R, T, N, E, R": "0421_p_a_r_t_n_e_r.mp3",
+"th|คู่, เพื่อนร่วมงาน": "0422_th.mp3",
+"en|cardboard": "0423_cardboard.mp3",
+"en|Cut a cardboard circle.": "0424_cut_a_cardboard_circle.mp3",
+"en|C, A, R, D, B, O, A, R, D": "0425_c_a_r_d_b_o_a_r_d.mp3",
+"th|กระดาษแข็ง": "0426_th.mp3",
+"en|scissors": "0427_scissors.mp3",
+"en|You will need a pair of scissors.": "0428_you_will_need_a_pair_of_scissors.mp3",
+"en|S, C, I, S, S, O, R, S": "0429_s_c_i_s_s_o_r_s.mp3",
+"th|กรรไกร": "0430_th.mp3",
+"th|เก่งมากค่ะ จบชุดคำศัพท์แล้ว": "0431_th.mp3"
+};
+const _a = new Audio();
+_a.preload = "auto";
+function unlockSound(){ try{ _a.src = SILENT_SND; _a.play().catch(function(){}); }catch(e){} }
+function stopAll(){
+  try{ synth.cancel(); }catch(e){}
+  try{ _a.pause(); }catch(e){}
+}
+function playFile(file, my, spd){
+  return new Promise(function(res, rej){
+    if(my !== token) return res();
+    var done = false;
+    var fin = function(){ if(done) return; done = true; clearInterval(iv); _a.onended=null; _a.onerror=null; _a.onplay=null; res(); };
+    var bad = function(){ if(done) return; done = true; clearInterval(iv); _a.onended=null; _a.onerror=null; _a.onplay=null; rej(new Error("no audio")); };
+    var iv = setInterval(function(){ if(my !== token){ try{ _a.pause(); }catch(e){} fin(); } }, 120);
+    _a.onended = fin;
+    _a.onerror = bad;
+    _a.onplay  = function(){ try{ _a.playbackRate = spd; }catch(e){} };
+    try{
+      _a.src = AUDIO_BASE + file;
+      _a.playbackRate = spd;
+      var p = _a.play();
+      if(p && p.catch) p.catch(function(){ bad(); });
+    }catch(e){ bad(); }
+    setTimeout(fin, 30000);
+  });
+}
+
+function speak(text, lang, my){
+  if(my !== token || !text) return Promise.resolve();
+  var f = AUDIO_MAP[(lang === "th-TH" ? "th|" : "en|") + text];
+  if(f) return playFile(f, my, rate).catch(function(){ return speakTTS(text, lang, my); });
+  return speakTTS(text, lang, my);
+}
+
+
 let grpSel = "all", mode = "review", rate = .75, gapSec = 8;
 let sayThai = true, saySent = true;
 let list = [], idx = 0, paused = false, token = 0, wake = null;
@@ -239,6 +711,7 @@ if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = pickVoices;
 
 /* iOS/Android: เสียงจะเล่นได้ก็ต่อเมื่อถูกปลดล็อกจากการแตะของผู้ใช้ */
 function unlockAudio(){
+  unlockSound();
   try{
     const u = new SpeechSynthesisUtterance(" ");
     u.volume = 0; u.rate = 1;
@@ -270,7 +743,7 @@ function _utter(text,lang,voice){
   u.lang=lang; if(voice) u.voice=voice; u.rate=rate; u.pitch=1; u.volume=1;
   return u;
 }
-function speak(text, lang, my){
+function speakTTS(text, lang, my){
   return new Promise(res=>{
     if(my!==token||!text) return res();
     let done=false, started=false, tries=0;
@@ -278,7 +751,7 @@ function speak(text, lang, my){
     const go=()=>{
       if(done||my!==token) return;
       tries++;
-      try{ synth.cancel(); }catch(e){}
+      try{ stopAll(); }catch(e){}
       setTimeout(()=>{
         if(done||my!==token) return;
         const u=_utter(text, lang, (lang==="th-TH"?thVoice:enVoice));
@@ -393,7 +866,7 @@ async function runItem(it, my){
 
 async function runAll(from){
   const my = ++token;
-  synth.cancel();
+  stopAll();
   idx = from;
   while(idx < list.length){
     if(my !== token) return;
@@ -424,14 +897,14 @@ const reset = () => { paused = false; $("pause").textContent = "หยุด"; }
 $("pause").addEventListener("click", () => {
   paused = !paused;
   $("pause").textContent = paused ? "เล่นต่อ" : "หยุด";
-  if(paused) synth.cancel();          // iOS pause() ไม่เสถียร ใช้ cancel แทน
+  if(paused) stopAll();          // iOS pause() ไม่เสถียร ใช้ cancel แทน
   else runAll(idx);                   // เล่นต่อโดยเริ่มคำเดิมใหม่
 });
 $("repeat").addEventListener("click", () => { reset(); runAll(idx); });
 $("next").addEventListener("click",   () => { reset(); runAll(Math.min(list.length - 1, idx + 1)); });
 $("prev").addEventListener("click",   () => { reset(); runAll(Math.max(0, idx - 1)); });
 $("quit").addEventListener("click",   () => {
-  token++; synth.cancel(); paused = false; hideTimer();
+  token++; stopAll(); paused = false; hideTimer();
   if(wake){ try{ wake.release(); }catch(e){} wake = null; }
   $("setup").classList.remove("hidden");
   $("play").classList.add("hidden");
@@ -451,7 +924,7 @@ $("play").addEventListener("touchend", e => {
   }
 }, {passive:true});
 
-window.addEventListener("pagehide", () => synth.cancel());
+window.addEventListener("pagehide", () => stopAll());
 </script>
 </body>
 </html>

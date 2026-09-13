@@ -1,0 +1,1882 @@
+[
+ {
+  "id": "0001_apple",
+  "text": "apple",
+  "lang": "en"
+ },
+ {
+  "id": "0002_definition_a_round_fruit_that_is_red_or",
+  "text": "Definition. a round fruit that is red or green",
+  "lang": "en"
+ },
+ {
+  "id": "0003_i_eat_an_apple_every_day",
+  "text": "I eat an apple every day.",
+  "lang": "en"
+ },
+ {
+  "id": "0004_ball",
+  "text": "ball",
+  "lang": "en"
+ },
+ {
+  "id": "0005_definition_a_round_thing_you_play_with",
+  "text": "Definition. a round thing you play with",
+  "lang": "en"
+ },
+ {
+  "id": "0006_he_kicked_the_ball",
+  "text": "He kicked the ball.",
+  "lang": "en"
+ },
+ {
+  "id": "0007_bird",
+  "text": "bird",
+  "lang": "en"
+ },
+ {
+  "id": "0008_definition_an_animal_with_wings_that_can",
+  "text": "Definition. an animal with wings that can fly",
+  "lang": "en"
+ },
+ {
+  "id": "0009_a_bird_is_singing_in_the_tree",
+  "text": "A bird is singing in the tree.",
+  "lang": "en"
+ },
+ {
+  "id": "0010_book",
+  "text": "book",
+  "lang": "en"
+ },
+ {
+  "id": "0011_definition_pages_with_words_that_you_rea",
+  "text": "Definition. pages with words that you read",
+  "lang": "en"
+ },
+ {
+  "id": "0012_she_is_reading_a_book",
+  "text": "She is reading a book.",
+  "lang": "en"
+ },
+ {
+  "id": "0013_chair",
+  "text": "chair",
+  "lang": "en"
+ },
+ {
+  "id": "0014_definition_a_seat_for_one_person",
+  "text": "Definition. a seat for one person",
+  "lang": "en"
+ },
+ {
+  "id": "0015_please_sit_on_the_chair",
+  "text": "Please sit on the chair.",
+  "lang": "en"
+ },
+ {
+  "id": "0016_clock",
+  "text": "clock",
+  "lang": "en"
+ },
+ {
+  "id": "0017_definition_a_thing_that_shows_the_time",
+  "text": "Definition. a thing that shows the time",
+  "lang": "en"
+ },
+ {
+  "id": "0018_the_clock_says_eight_oclock",
+  "text": "The clock says eight o'clock.",
+  "lang": "en"
+ },
+ {
+  "id": "0019_cloud",
+  "text": "cloud",
+  "lang": "en"
+ },
+ {
+  "id": "0020_definition_white_or_grey_water_in_the_sk",
+  "text": "Definition. white or grey water in the sky",
+  "lang": "en"
+ },
+ {
+  "id": "0021_there_is_one_cloud_in_the_sky",
+  "text": "There is one cloud in the sky.",
+  "lang": "en"
+ },
+ {
+  "id": "0022_door",
+  "text": "door",
+  "lang": "en"
+ },
+ {
+  "id": "0023_definition_you_open_it_to_go_into_a_room",
+  "text": "Definition. you open it to go into a room",
+  "lang": "en"
+ },
+ {
+  "id": "0024_please_close_the_door",
+  "text": "Please close the door.",
+  "lang": "en"
+ },
+ {
+  "id": "0025_duck",
+  "text": "duck",
+  "lang": "en"
+ },
+ {
+  "id": "0026_definition_a_bird_that_swims_on_water",
+  "text": "Definition. a bird that swims on water",
+  "lang": "en"
+ },
+ {
+  "id": "0027_the_duck_is_in_the_pond",
+  "text": "The duck is in the pond.",
+  "lang": "en"
+ },
+ {
+  "id": "0028_flower",
+  "text": "flower",
+  "lang": "en"
+ },
+ {
+  "id": "0029_definition_the_coloured_part_of_a_plant",
+  "text": "Definition. the coloured part of a plant",
+  "lang": "en"
+ },
+ {
+  "id": "0030_she_picked_a_yellow_flower",
+  "text": "She picked a yellow flower.",
+  "lang": "en"
+ },
+ {
+  "id": "0031_garden",
+  "text": "garden",
+  "lang": "en"
+ },
+ {
+  "id": "0032_definition_a_place_outside_where_plants",
+  "text": "Definition. a place outside where plants grow",
+  "lang": "en"
+ },
+ {
+  "id": "0033_we_play_in_the_garden",
+  "text": "We play in the garden.",
+  "lang": "en"
+ },
+ {
+  "id": "0034_house",
+  "text": "house",
+  "lang": "en"
+ },
+ {
+  "id": "0035_definition_a_building_where_people_live",
+  "text": "Definition. a building where people live",
+  "lang": "en"
+ },
+ {
+  "id": "0036_my_house_is_near_the_school",
+  "text": "My house is near the school.",
+  "lang": "en"
+ },
+ {
+  "id": "0037_kite",
+  "text": "kite",
+  "lang": "en"
+ },
+ {
+  "id": "0038_definition_a_toy_that_flies_on_a_string",
+  "text": "Definition. a toy that flies on a string",
+  "lang": "en"
+ },
+ {
+  "id": "0039_we_fly_a_kite_in_the_park",
+  "text": "We fly a kite in the park.",
+  "lang": "en"
+ },
+ {
+  "id": "0040_lemon",
+  "text": "lemon",
+  "lang": "en"
+ },
+ {
+  "id": "0041_definition_a_sour_yellow_fruit",
+  "text": "Definition. a sour yellow fruit",
+  "lang": "en"
+ },
+ {
+  "id": "0042_add_some_lemon_to_the_water",
+  "text": "Add some lemon to the water.",
+  "lang": "en"
+ },
+ {
+  "id": "0043_monkey",
+  "text": "monkey",
+  "lang": "en"
+ },
+ {
+  "id": "0044_definition_an_animal_that_climbs_trees",
+  "text": "Definition. an animal that climbs trees",
+  "lang": "en"
+ },
+ {
+  "id": "0045_the_monkey_ate_a_banana",
+  "text": "The monkey ate a banana.",
+  "lang": "en"
+ },
+ {
+  "id": "0046_mouse",
+  "text": "mouse",
+  "lang": "en"
+ },
+ {
+  "id": "0047_definition_a_small_animal_with_a_long_ta",
+  "text": "Definition. a small animal with a long tail",
+  "lang": "en"
+ },
+ {
+  "id": "0048_a_mouse_ran_under_the_table",
+  "text": "A mouse ran under the table.",
+  "lang": "en"
+ },
+ {
+  "id": "0049_pencil",
+  "text": "pencil",
+  "lang": "en"
+ },
+ {
+  "id": "0050_definition_you_write_with_it",
+  "text": "Definition. you write with it",
+  "lang": "en"
+ },
+ {
+  "id": "0051_write_with_a_pencil_not_a_pen",
+  "text": "Write with a pencil, not a pen.",
+  "lang": "en"
+ },
+ {
+  "id": "0052_rabbit",
+  "text": "rabbit",
+  "lang": "en"
+ },
+ {
+  "id": "0053_definition_a_small_animal_with_long_ears",
+  "text": "Definition. a small animal with long ears",
+  "lang": "en"
+ },
+ {
+  "id": "0054_the_rabbit_is_eating_a_carrot",
+  "text": "The rabbit is eating a carrot.",
+  "lang": "en"
+ },
+ {
+  "id": "0055_school",
+  "text": "school",
+  "lang": "en"
+ },
+ {
+  "id": "0056_definition_a_place_where_children_learn",
+  "text": "Definition. a place where children learn",
+  "lang": "en"
+ },
+ {
+  "id": "0057_we_go_to_school_by_bus",
+  "text": "We go to school by bus.",
+  "lang": "en"
+ },
+ {
+  "id": "0058_table",
+  "text": "table",
+  "lang": "en"
+ },
+ {
+  "id": "0059_definition_furniture_with_a_flat_top_and",
+  "text": "Definition. furniture with a flat top and legs",
+  "lang": "en"
+ },
+ {
+  "id": "0060_put_the_books_on_the_table",
+  "text": "Put the books on the table.",
+  "lang": "en"
+ },
+ {
+  "id": "0061_window",
+  "text": "window",
+  "lang": "en"
+ },
+ {
+  "id": "0062_definition_a_glass_opening_in_a_wall",
+  "text": "Definition. a glass opening in a wall",
+  "lang": "en"
+ },
+ {
+  "id": "0063_please_open_the_window",
+  "text": "Please open the window.",
+  "lang": "en"
+ },
+ {
+  "id": "0064_yellow",
+  "text": "yellow",
+  "lang": "en"
+ },
+ {
+  "id": "0065_definition_the_colour_of_a_lemon",
+  "text": "Definition. the colour of a lemon",
+  "lang": "en"
+ },
+ {
+  "id": "0066_her_dress_is_yellow",
+  "text": "Her dress is yellow.",
+  "lang": "en"
+ },
+ {
+  "id": "0067_airport",
+  "text": "airport",
+  "lang": "en"
+ },
+ {
+  "id": "0068_definition_a_place_where_planes_arrive_a",
+  "text": "Definition. a place where planes arrive and leave",
+  "lang": "en"
+ },
+ {
+  "id": "0069_we_met_her_at_the_airport",
+  "text": "We met her at the airport.",
+  "lang": "en"
+ },
+ {
+  "id": "0070_balcony",
+  "text": "balcony",
+  "lang": "en"
+ },
+ {
+  "id": "0071_definition_a_small_area_outside_an_upsta",
+  "text": "Definition. a small area outside an upstairs window",
+  "lang": "en"
+ },
+ {
+  "id": "0072_she_waved_from_the_balcony",
+  "text": "She waved from the balcony.",
+  "lang": "en"
+ },
+ {
+  "id": "0073_basket",
+  "text": "basket",
+  "lang": "en"
+ },
+ {
+  "id": "0074_definition_a_container_you_carry_things",
+  "text": "Definition. a container you carry things in",
+  "lang": "en"
+ },
+ {
+  "id": "0075_put_the_fruit_in_the_basket",
+  "text": "Put the fruit in the basket.",
+  "lang": "en"
+ },
+ {
+  "id": "0076_blanket",
+  "text": "blanket",
+  "lang": "en"
+ },
+ {
+  "id": "0077_definition_a_warm_cover_for_a_bed",
+  "text": "Definition. a warm cover for a bed",
+  "lang": "en"
+ },
+ {
+  "id": "0078_he_pulled_the_blanket_over_him",
+  "text": "He pulled the blanket over him.",
+  "lang": "en"
+ },
+ {
+  "id": "0079_bottle",
+  "text": "bottle",
+  "lang": "en"
+ },
+ {
+  "id": "0080_definition_a_tall_container_for_drinks",
+  "text": "Definition. a tall container for drinks",
+  "lang": "en"
+ },
+ {
+  "id": "0081_i_filled_my_bottle_with_water",
+  "text": "I filled my bottle with water.",
+  "lang": "en"
+ },
+ {
+  "id": "0082_bridge",
+  "text": "bridge",
+  "lang": "en"
+ },
+ {
+  "id": "0083_definition_it_goes_over_a_river_or_road",
+  "text": "Definition. it goes over a river or road",
+  "lang": "en"
+ },
+ {
+  "id": "0084_we_walked_across_the_bridge",
+  "text": "We walked across the bridge.",
+  "lang": "en"
+ },
+ {
+  "id": "0085_camera",
+  "text": "camera",
+  "lang": "en"
+ },
+ {
+  "id": "0086_definition_you_take_photos_with_it",
+  "text": "Definition. you take photos with it",
+  "lang": "en"
+ },
+ {
+  "id": "0087_she_bought_a_new_camera",
+  "text": "She bought a new camera.",
+  "lang": "en"
+ },
+ {
+  "id": "0088_castle",
+  "text": "castle",
+  "lang": "en"
+ },
+ {
+  "id": "0089_definition_a_big_old_strong_building",
+  "text": "Definition. a big old strong building",
+  "lang": "en"
+ },
+ {
+  "id": "0090_the_castle_is_on_a_hill",
+  "text": "The castle is on a hill.",
+  "lang": "en"
+ },
+ {
+  "id": "0091_circus",
+  "text": "circus",
+  "lang": "en"
+ },
+ {
+  "id": "0092_definition_a_show_with_clowns_and_animal",
+  "text": "Definition. a show with clowns and animals",
+  "lang": "en"
+ },
+ {
+  "id": "0093_we_went_to_the_circus",
+  "text": "We went to the circus.",
+  "lang": "en"
+ },
+ {
+  "id": "0094_clever",
+  "text": "clever",
+  "lang": "en"
+ },
+ {
+  "id": "0095_definition_able_to_learn_things_quickly",
+  "text": "Definition. able to learn things quickly",
+  "lang": "en"
+ },
+ {
+  "id": "0096_my_sister_is_very_clever",
+  "text": "My sister is very clever.",
+  "lang": "en"
+ },
+ {
+  "id": "0097_coconut",
+  "text": "coconut",
+  "lang": "en"
+ },
+ {
+  "id": "0098_definition_a_big_brown_nut_from_a_palm_t",
+  "text": "Definition. a big brown nut from a palm tree",
+  "lang": "en"
+ },
+ {
+  "id": "0099_we_drank_coconut_water",
+  "text": "We drank coconut water.",
+  "lang": "en"
+ },
+ {
+  "id": "0100_cousin",
+  "text": "cousin",
+  "lang": "en"
+ },
+ {
+  "id": "0101_definition_the_child_of_your_aunt_or_unc",
+  "text": "Definition. the child of your aunt or uncle",
+  "lang": "en"
+ },
+ {
+  "id": "0102_my_cousin_lives_in_chiang_mai",
+  "text": "My cousin lives in Chiang Mai.",
+  "lang": "en"
+ },
+ {
+  "id": "0103_curtain",
+  "text": "curtain",
+  "lang": "en"
+ },
+ {
+  "id": "0104_definition_cloth_that_covers_a_window",
+  "text": "Definition. cloth that covers a window",
+  "lang": "en"
+ },
+ {
+  "id": "0105_please_close_the_curtain",
+  "text": "Please close the curtain.",
+  "lang": "en"
+ },
+ {
+  "id": "0106_dangerous",
+  "text": "dangerous",
+  "lang": "en"
+ },
+ {
+  "id": "0107_definition_it_can_hurt_you",
+  "text": "Definition. it can hurt you",
+  "lang": "en"
+ },
+ {
+  "id": "0108_fire_is_dangerous",
+  "text": "Fire is dangerous.",
+  "lang": "en"
+ },
+ {
+  "id": "0109_dictionary",
+  "text": "dictionary",
+  "lang": "en"
+ },
+ {
+  "id": "0110_definition_a_book_of_words_and_meanings",
+  "text": "Definition. a book of words and meanings",
+  "lang": "en"
+ },
+ {
+  "id": "0111_look_it_up_in_the_dictionary",
+  "text": "Look it up in the dictionary.",
+  "lang": "en"
+ },
+ {
+  "id": "0112_dinosaur",
+  "text": "dinosaur",
+  "lang": "en"
+ },
+ {
+  "id": "0113_definition_a_very_big_animal_from_long_a",
+  "text": "Definition. a very big animal from long ago",
+  "lang": "en"
+ },
+ {
+  "id": "0114_this_dinosaur_is_in_the_museum",
+  "text": "This dinosaur is in the museum.",
+  "lang": "en"
+ },
+ {
+  "id": "0115_envelope",
+  "text": "envelope",
+  "lang": "en"
+ },
+ {
+  "id": "0116_definition_you_put_a_letter_inside_it",
+  "text": "Definition. you put a letter inside it",
+  "lang": "en"
+ },
+ {
+  "id": "0117_write_the_address_on_the_envelope",
+  "text": "Write the address on the envelope.",
+  "lang": "en"
+ },
+ {
+  "id": "0118_forest",
+  "text": "forest",
+  "lang": "en"
+ },
+ {
+  "id": "0119_definition_a_place_with_many_trees",
+  "text": "Definition. a place with many trees",
+  "lang": "en"
+ },
+ {
+  "id": "0120_many_animals_live_in_the_forest",
+  "text": "Many animals live in the forest.",
+  "lang": "en"
+ },
+ {
+  "id": "0121_fridge",
+  "text": "fridge",
+  "lang": "en"
+ },
+ {
+  "id": "0122_definition_it_keeps_food_cold",
+  "text": "Definition. it keeps food cold",
+  "lang": "en"
+ },
+ {
+  "id": "0123_the_milk_is_in_the_fridge",
+  "text": "The milk is in the fridge.",
+  "lang": "en"
+ },
+ {
+  "id": "0124_glove",
+  "text": "glove",
+  "lang": "en"
+ },
+ {
+  "id": "0125_definition_you_wear_it_on_your_hand",
+  "text": "Definition. you wear it on your hand",
+  "lang": "en"
+ },
+ {
+  "id": "0126_he_lost_one_glove",
+  "text": "He lost one glove.",
+  "lang": "en"
+ },
+ {
+  "id": "0127_helicopter",
+  "text": "helicopter",
+  "lang": "en"
+ },
+ {
+  "id": "0128_definition_an_aircraft_with_spinning_bla",
+  "text": "Definition. an aircraft with spinning blades on top",
+  "lang": "en"
+ },
+ {
+  "id": "0129_the_helicopter_landed_on_the_roof",
+  "text": "The helicopter landed on the roof.",
+  "lang": "en"
+ },
+ {
+  "id": "0130_hospital",
+  "text": "hospital",
+  "lang": "en"
+ },
+ {
+  "id": "0131_definition_a_place_where_sick_people_go",
+  "text": "Definition. a place where sick people go",
+  "lang": "en"
+ },
+ {
+  "id": "0132_my_mother_works_in_a_hospital",
+  "text": "My mother works in a hospital.",
+  "lang": "en"
+ },
+ {
+  "id": "0133_island",
+  "text": "island",
+  "lang": "en"
+ },
+ {
+  "id": "0134_definition_land_with_water_all_around_it",
+  "text": "Definition. land with water all around it",
+  "lang": "en"
+ },
+ {
+  "id": "0135_phuket_is_an_island",
+  "text": "Phuket is an island.",
+  "lang": "en"
+ },
+ {
+  "id": "0136_jungle",
+  "text": "jungle",
+  "lang": "en"
+ },
+ {
+  "id": "0137_definition_a_thick_tropical_forest",
+  "text": "Definition. a thick tropical forest",
+  "lang": "en"
+ },
+ {
+  "id": "0138_tigers_live_in_the_jungle",
+  "text": "Tigers live in the jungle.",
+  "lang": "en"
+ },
+ {
+  "id": "0139_kitchen",
+  "text": "kitchen",
+  "lang": "en"
+ },
+ {
+  "id": "0140_definition_the_room_where_you_cook",
+  "text": "Definition. the room where you cook",
+  "lang": "en"
+ },
+ {
+  "id": "0141_dad_is_cooking_in_the_kitchen",
+  "text": "Dad is cooking in the kitchen.",
+  "lang": "en"
+ },
+ {
+  "id": "0142_library",
+  "text": "library",
+  "lang": "en"
+ },
+ {
+  "id": "0143_definition_a_place_with_many_books_to_bo",
+  "text": "Definition. a place with many books to borrow",
+  "lang": "en"
+ },
+ {
+  "id": "0144_i_borrowed_two_books_from_the_library",
+  "text": "I borrowed two books from the library.",
+  "lang": "en"
+ },
+ {
+  "id": "0145_message",
+  "text": "message",
+  "lang": "en"
+ },
+ {
+  "id": "0146_definition_words_you_send_to_someone",
+  "text": "Definition. words you send to someone",
+  "lang": "en"
+ },
+ {
+  "id": "0147_i_sent_her_a_message",
+  "text": "I sent her a message.",
+  "lang": "en"
+ },
+ {
+  "id": "0148_mountain",
+  "text": "mountain",
+  "lang": "en"
+ },
+ {
+  "id": "0149_definition_a_very_high_hill",
+  "text": "Definition. a very high hill",
+  "lang": "en"
+ },
+ {
+  "id": "0150_they_climbed_the_mountain",
+  "text": "They climbed the mountain.",
+  "lang": "en"
+ },
+ {
+  "id": "0151_necklace",
+  "text": "necklace",
+  "lang": "en"
+ },
+ {
+  "id": "0152_definition_jewellery_you_wear_around_you",
+  "text": "Definition. jewellery you wear around your neck",
+  "lang": "en"
+ },
+ {
+  "id": "0153_she_is_wearing_a_gold_necklace",
+  "text": "She is wearing a gold necklace.",
+  "lang": "en"
+ },
+ {
+  "id": "0154_restaurant",
+  "text": "restaurant",
+  "lang": "en"
+ },
+ {
+  "id": "0155_definition_a_place_where_you_buy_and_eat",
+  "text": "Definition. a place where you buy and eat meals",
+  "lang": "en"
+ },
+ {
+  "id": "0156_we_had_dinner_at_a_restaurant",
+  "text": "We had dinner at a restaurant.",
+  "lang": "en"
+ },
+ {
+  "id": "0157_sandwich",
+  "text": "sandwich",
+  "lang": "en"
+ },
+ {
+  "id": "0158_definition_food_between_two_pieces_of_br",
+  "text": "Definition. food between two pieces of bread",
+  "lang": "en"
+ },
+ {
+  "id": "0159_i_made_a_cheese_sandwich",
+  "text": "I made a cheese sandwich.",
+  "lang": "en"
+ },
+ {
+  "id": "0160_scissors",
+  "text": "scissors",
+  "lang": "en"
+ },
+ {
+  "id": "0161_definition_a_tool_with_two_blades_for_cu",
+  "text": "Definition. a tool with two blades for cutting",
+  "lang": "en"
+ },
+ {
+  "id": "0162_cut_the_paper_with_scissors",
+  "text": "Cut the paper with scissors.",
+  "lang": "en"
+ },
+ {
+  "id": "0163_straight",
+  "text": "straight",
+  "lang": "en"
+ },
+ {
+  "id": "0164_definition_not_bent_or_curved",
+  "text": "Definition. not bent or curved",
+  "lang": "en"
+ },
+ {
+  "id": "0165_light_travels_in_a_straight_line",
+  "text": "Light travels in a straight line.",
+  "lang": "en"
+ },
+ {
+  "id": "0166_sweater",
+  "text": "sweater",
+  "lang": "en"
+ },
+ {
+  "id": "0167_definition_warm_clothing_for_your_top_ha",
+  "text": "Definition. warm clothing for your top half",
+  "lang": "en"
+ },
+ {
+  "id": "0168_wear_a_sweater_it_is_cold",
+  "text": "Wear a sweater, it is cold.",
+  "lang": "en"
+ },
+ {
+  "id": "0169_telephone",
+  "text": "telephone",
+  "lang": "en"
+ },
+ {
+  "id": "0170_definition_you_use_it_to_talk_to_someone",
+  "text": "Definition. you use it to talk to someone far away",
+  "lang": "en"
+ },
+ {
+  "id": "0171_the_telephone_is_ringing",
+  "text": "The telephone is ringing.",
+  "lang": "en"
+ },
+ {
+  "id": "0172_umbrella",
+  "text": "umbrella",
+  "lang": "en"
+ },
+ {
+  "id": "0173_definition_it_keeps_the_rain_off_you",
+  "text": "Definition. it keeps the rain off you",
+  "lang": "en"
+ },
+ {
+  "id": "0174_take_an_umbrella_it_may_rain",
+  "text": "Take an umbrella, it may rain.",
+  "lang": "en"
+ },
+ {
+  "id": "0175_waterfall",
+  "text": "waterfall",
+  "lang": "en"
+ },
+ {
+  "id": "0176_definition_water_falling_from_a_high_pla",
+  "text": "Definition. water falling from a high place",
+  "lang": "en"
+ },
+ {
+  "id": "0177_we_swam_near_the_waterfall",
+  "text": "We swam near the waterfall.",
+  "lang": "en"
+ },
+ {
+  "id": "0178_breakfast",
+  "text": "breakfast",
+  "lang": "en"
+ },
+ {
+  "id": "0179_definition_the_first_meal_of_the_day",
+  "text": "Definition. the first meal of the day",
+  "lang": "en"
+ },
+ {
+  "id": "0180_i_have_rice_for_breakfast",
+  "text": "I have rice for breakfast.",
+  "lang": "en"
+ },
+ {
+  "id": "0181_chocolate",
+  "text": "chocolate",
+  "lang": "en"
+ },
+ {
+  "id": "0182_definition_a_sweet_brown_food",
+  "text": "Definition. a sweet brown food",
+  "lang": "en"
+ },
+ {
+  "id": "0183_she_loves_dark_chocolate",
+  "text": "She loves dark chocolate.",
+  "lang": "en"
+ },
+ {
+  "id": "0184_birthday",
+  "text": "birthday",
+  "lang": "en"
+ },
+ {
+  "id": "0185_definition_the_day_you_were_born",
+  "text": "Definition. the day you were born",
+  "lang": "en"
+ },
+ {
+  "id": "0186_my_birthday_is_in_june",
+  "text": "My birthday is in June.",
+  "lang": "en"
+ },
+ {
+  "id": "0187_doctor",
+  "text": "doctor",
+  "lang": "en"
+ },
+ {
+  "id": "0188_definition_a_person_who_helps_sick_peopl",
+  "text": "Definition. a person who helps sick people",
+  "lang": "en"
+ },
+ {
+  "id": "0189_the_doctor_gave_me_medicine",
+  "text": "The doctor gave me medicine.",
+  "lang": "en"
+ },
+ {
+  "id": "0190_dentist",
+  "text": "dentist",
+  "lang": "en"
+ },
+ {
+  "id": "0191_definition_a_doctor_for_your_teeth",
+  "text": "Definition. a doctor for your teeth",
+  "lang": "en"
+ },
+ {
+  "id": "0192_i_see_the_dentist_twice_a_year",
+  "text": "I see the dentist twice a year.",
+  "lang": "en"
+ },
+ {
+  "id": "0193_engineer",
+  "text": "engineer",
+  "lang": "en"
+ },
+ {
+  "id": "0194_definition_a_person_who_designs_machines",
+  "text": "Definition. a person who designs machines or buildings",
+  "lang": "en"
+ },
+ {
+  "id": "0195_my_father_is_an_engineer",
+  "text": "My father is an engineer.",
+  "lang": "en"
+ },
+ {
+  "id": "0196_journalist",
+  "text": "journalist",
+  "lang": "en"
+ },
+ {
+  "id": "0197_definition_a_person_who_writes_the_news",
+  "text": "Definition. a person who writes the news",
+  "lang": "en"
+ },
+ {
+  "id": "0198_the_journalist_asked_many_questions",
+  "text": "The journalist asked many questions.",
+  "lang": "en"
+ },
+ {
+  "id": "0199_mechanic",
+  "text": "mechanic",
+  "lang": "en"
+ },
+ {
+  "id": "0200_definition_a_person_who_repairs_machines",
+  "text": "Definition. a person who repairs machines and cars",
+  "lang": "en"
+ },
+ {
+  "id": "0201_the_mechanic_fixed_our_car",
+  "text": "The mechanic fixed our car.",
+  "lang": "en"
+ },
+ {
+  "id": "0202_scientist",
+  "text": "scientist",
+  "lang": "en"
+ },
+ {
+  "id": "0203_definition_a_person_who_studies_science",
+  "text": "Definition. a person who studies science",
+  "lang": "en"
+ },
+ {
+  "id": "0204_the_scientist_did_an_experiment",
+  "text": "The scientist did an experiment.",
+  "lang": "en"
+ },
+ {
+  "id": "0205_firefighter",
+  "text": "firefighter",
+  "lang": "en"
+ },
+ {
+  "id": "0206_definition_a_person_who_puts_out_fires",
+  "text": "Definition. a person who puts out fires",
+  "lang": "en"
+ },
+ {
+  "id": "0207_the_firefighter_climbed_the_ladder",
+  "text": "The firefighter climbed the ladder.",
+  "lang": "en"
+ },
+ {
+  "id": "0208_pilot",
+  "text": "pilot",
+  "lang": "en"
+ },
+ {
+  "id": "0209_definition_a_person_who_flies_a_plane",
+  "text": "Definition. a person who flies a plane",
+  "lang": "en"
+ },
+ {
+  "id": "0210_the_pilot_landed_safely",
+  "text": "The pilot landed safely.",
+  "lang": "en"
+ },
+ {
+  "id": "0211_nurse",
+  "text": "nurse",
+  "lang": "en"
+ },
+ {
+  "id": "0212_definition_a_person_who_looks_after_sick",
+  "text": "Definition. a person who looks after sick people",
+  "lang": "en"
+ },
+ {
+  "id": "0213_the_nurse_checked_my_temperature",
+  "text": "The nurse checked my temperature.",
+  "lang": "en"
+ },
+ {
+  "id": "0214_waiter",
+  "text": "waiter",
+  "lang": "en"
+ },
+ {
+  "id": "0215_definition_a_person_who_serves_food_in_a",
+  "text": "Definition. a person who serves food in a restaurant",
+  "lang": "en"
+ },
+ {
+  "id": "0216_the_waiter_brought_our_drinks",
+  "text": "The waiter brought our drinks.",
+  "lang": "en"
+ },
+ {
+  "id": "0217_australia",
+  "text": "Australia",
+  "lang": "en"
+ },
+ {
+  "id": "0218_definition_a_country_and_continent_in_th",
+  "text": "Definition. a country and continent in the south",
+  "lang": "en"
+ },
+ {
+  "id": "0219_kangaroos_live_in_australia",
+  "text": "Kangaroos live in Australia.",
+  "lang": "en"
+ },
+ {
+  "id": "0220_brazil",
+  "text": "Brazil",
+  "lang": "en"
+ },
+ {
+  "id": "0221_definition_the_largest_country_in_south",
+  "text": "Definition. the largest country in South America",
+  "lang": "en"
+ },
+ {
+  "id": "0222_brazil_is_famous_for_football",
+  "text": "Brazil is famous for football.",
+  "lang": "en"
+ },
+ {
+  "id": "0223_canada",
+  "text": "Canada",
+  "lang": "en"
+ },
+ {
+  "id": "0224_definition_a_large_country_north_of_the",
+  "text": "Definition. a large country north of the USA",
+  "lang": "en"
+ },
+ {
+  "id": "0225_it_snows_a_lot_in_canada",
+  "text": "It snows a lot in Canada.",
+  "lang": "en"
+ },
+ {
+  "id": "0226_egypt",
+  "text": "Egypt",
+  "lang": "en"
+ },
+ {
+  "id": "0227_definition_a_country_in_africa_with_pyra",
+  "text": "Definition. a country in Africa with pyramids",
+  "lang": "en"
+ },
+ {
+  "id": "0228_the_pyramids_are_in_egypt",
+  "text": "The pyramids are in Egypt.",
+  "lang": "en"
+ },
+ {
+  "id": "0229_germany",
+  "text": "Germany",
+  "lang": "en"
+ },
+ {
+  "id": "0230_definition_a_country_in_europe",
+  "text": "Definition. a country in Europe",
+  "lang": "en"
+ },
+ {
+  "id": "0231_germany_makes_many_cars",
+  "text": "Germany makes many cars.",
+  "lang": "en"
+ },
+ {
+  "id": "0232_japan",
+  "text": "Japan",
+  "lang": "en"
+ },
+ {
+  "id": "0233_definition_an_island_country_in_east_asi",
+  "text": "Definition. an island country in East Asia",
+  "lang": "en"
+ },
+ {
+  "id": "0234_japan_is_famous_for_sushi",
+  "text": "Japan is famous for sushi.",
+  "lang": "en"
+ },
+ {
+  "id": "0235_malaysia",
+  "text": "Malaysia",
+  "lang": "en"
+ },
+ {
+  "id": "0236_definition_a_country_next_to_thailand_in",
+  "text": "Definition. a country next to Thailand in the south",
+  "lang": "en"
+ },
+ {
+  "id": "0237_malaysia_is_south_of_thailand",
+  "text": "Malaysia is south of Thailand.",
+  "lang": "en"
+ },
+ {
+  "id": "0238_singapore",
+  "text": "Singapore",
+  "lang": "en"
+ },
+ {
+  "id": "0239_definition_a_small_island_country_in_sou",
+  "text": "Definition. a small island country in Southeast Asia",
+  "lang": "en"
+ },
+ {
+  "id": "0240_singapore_is_very_clean",
+  "text": "Singapore is very clean.",
+  "lang": "en"
+ },
+ {
+  "id": "0241_grandmother",
+  "text": "grandmother",
+  "lang": "en"
+ },
+ {
+  "id": "0242_definition_the_mother_of_your_mother_or",
+  "text": "Definition. the mother of your mother or father",
+  "lang": "en"
+ },
+ {
+  "id": "0243_my_grandmother_tells_me_stories",
+  "text": "My grandmother tells me stories.",
+  "lang": "en"
+ },
+ {
+  "id": "0244_grandfather",
+  "text": "grandfather",
+  "lang": "en"
+ },
+ {
+  "id": "0245_definition_the_father_of_your_mother_or",
+  "text": "Definition. the father of your mother or father",
+  "lang": "en"
+ },
+ {
+  "id": "0246_my_grandfather_grows_vegetables",
+  "text": "My grandfather grows vegetables.",
+  "lang": "en"
+ },
+ {
+  "id": "0247_daughter",
+  "text": "daughter",
+  "lang": "en"
+ },
+ {
+  "id": "0248_definition_someones_female_child",
+  "text": "Definition. someone's female child",
+  "lang": "en"
+ },
+ {
+  "id": "0249_their_daughter_is_eight_years_old",
+  "text": "Their daughter is eight years old.",
+  "lang": "en"
+ },
+ {
+  "id": "0250_nephew",
+  "text": "nephew",
+  "lang": "en"
+ },
+ {
+  "id": "0251_definition_the_son_of_your_brother_or_si",
+  "text": "Definition. the son of your brother or sister",
+  "lang": "en"
+ },
+ {
+  "id": "0252_my_nephew_is_only_two",
+  "text": "My nephew is only two.",
+  "lang": "en"
+ },
+ {
+  "id": "0253_niece",
+  "text": "niece",
+  "lang": "en"
+ },
+ {
+  "id": "0254_definition_the_daughter_of_your_brother",
+  "text": "Definition. the daughter of your brother or sister",
+  "lang": "en"
+ },
+ {
+  "id": "0255_i_bought_a_doll_for_my_niece",
+  "text": "I bought a doll for my niece.",
+  "lang": "en"
+ },
+ {
+  "id": "0256_husband",
+  "text": "husband",
+  "lang": "en"
+ },
+ {
+  "id": "0257_definition_the_man_a_woman_is_married_to",
+  "text": "Definition. the man a woman is married to",
+  "lang": "en"
+ },
+ {
+  "id": "0258_her_husband_is_a_teacher",
+  "text": "Her husband is a teacher.",
+  "lang": "en"
+ },
+ {
+  "id": "0259_butterfly",
+  "text": "butterfly",
+  "lang": "en"
+ },
+ {
+  "id": "0260_definition_an_insect_with_big_colourful",
+  "text": "Definition. an insect with big colourful wings",
+  "lang": "en"
+ },
+ {
+  "id": "0261_a_butterfly_landed_on_the_flower",
+  "text": "A butterfly landed on the flower.",
+  "lang": "en"
+ },
+ {
+  "id": "0262_crocodile",
+  "text": "crocodile",
+  "lang": "en"
+ },
+ {
+  "id": "0263_definition_a_big_reptile_with_strong_jaw",
+  "text": "Definition. a big reptile with strong jaws",
+  "lang": "en"
+ },
+ {
+  "id": "0264_the_crocodile_lives_in_the_river",
+  "text": "The crocodile lives in the river.",
+  "lang": "en"
+ },
+ {
+  "id": "0265_dolphin",
+  "text": "dolphin",
+  "lang": "en"
+ },
+ {
+  "id": "0266_definition_a_clever_sea_animal",
+  "text": "Definition. a clever sea animal",
+  "lang": "en"
+ },
+ {
+  "id": "0267_we_saw_a_dolphin_from_the_boat",
+  "text": "We saw a dolphin from the boat.",
+  "lang": "en"
+ },
+ {
+  "id": "0268_elephant",
+  "text": "elephant",
+  "lang": "en"
+ },
+ {
+  "id": "0269_definition_the_biggest_land_animal",
+  "text": "Definition. the biggest land animal",
+  "lang": "en"
+ },
+ {
+  "id": "0270_the_elephant_is_thailands_symbol",
+  "text": "The elephant is Thailand's symbol.",
+  "lang": "en"
+ },
+ {
+  "id": "0271_giraffe",
+  "text": "giraffe",
+  "lang": "en"
+ },
+ {
+  "id": "0272_definition_an_animal_with_a_very_long_ne",
+  "text": "Definition. an animal with a very long neck",
+  "lang": "en"
+ },
+ {
+  "id": "0273_the_giraffe_eats_leaves_from_tall_trees",
+  "text": "The giraffe eats leaves from tall trees.",
+  "lang": "en"
+ },
+ {
+  "id": "0274_kangaroo",
+  "text": "kangaroo",
+  "lang": "en"
+ },
+ {
+  "id": "0275_definition_an_australian_animal_that_jum",
+  "text": "Definition. an Australian animal that jumps",
+  "lang": "en"
+ },
+ {
+  "id": "0276_the_kangaroo_jumped_over_the_fence",
+  "text": "The kangaroo jumped over the fence.",
+  "lang": "en"
+ },
+ {
+  "id": "0277_octopus",
+  "text": "octopus",
+  "lang": "en"
+ },
+ {
+  "id": "0278_definition_a_sea_animal_with_eight_arms",
+  "text": "Definition. a sea animal with eight arms",
+  "lang": "en"
+ },
+ {
+  "id": "0279_an_octopus_has_eight_arms",
+  "text": "An octopus has eight arms.",
+  "lang": "en"
+ },
+ {
+  "id": "0280_penguin",
+  "text": "penguin",
+  "lang": "en"
+ },
+ {
+  "id": "0281_definition_a_black_and_white_bird_that_s",
+  "text": "Definition. a black and white bird that swims",
+  "lang": "en"
+ },
+ {
+  "id": "0282_the_penguin_cannot_fly",
+  "text": "The penguin cannot fly.",
+  "lang": "en"
+ },
+ {
+  "id": "0283_squirrel",
+  "text": "squirrel",
+  "lang": "en"
+ },
+ {
+  "id": "0284_definition_a_small_animal_with_a_bushy_t",
+  "text": "Definition. a small animal with a bushy tail",
+  "lang": "en"
+ },
+ {
+  "id": "0285_a_squirrel_ran_up_the_tree",
+  "text": "A squirrel ran up the tree.",
+  "lang": "en"
+ },
+ {
+  "id": "0286_tortoise",
+  "text": "tortoise",
+  "lang": "en"
+ },
+ {
+  "id": "0287_definition_a_slow_animal_with_a_hard_she",
+  "text": "Definition. a slow animal with a hard shell",
+  "lang": "en"
+ },
+ {
+  "id": "0288_the_tortoise_walks_very_slowly",
+  "text": "The tortoise walks very slowly.",
+  "lang": "en"
+ },
+ {
+  "id": "0289_beautiful",
+  "text": "beautiful",
+  "lang": "en"
+ },
+ {
+  "id": "0290_definition_very_pretty_to_look_at",
+  "text": "Definition. very pretty to look at",
+  "lang": "en"
+ },
+ {
+  "id": "0291_the_sunset_is_beautiful",
+  "text": "The sunset is beautiful.",
+  "lang": "en"
+ },
+ {
+  "id": "0292_because",
+  "text": "because",
+  "lang": "en"
+ },
+ {
+  "id": "0293_definition_for_the_reason_that",
+  "text": "Definition. for the reason that",
+  "lang": "en"
+ },
+ {
+  "id": "0294_i_stayed_home_because_it_rained",
+  "text": "I stayed home because it rained.",
+  "lang": "en"
+ },
+ {
+  "id": "0295_believe",
+  "text": "believe",
+  "lang": "en"
+ },
+ {
+  "id": "0296_definition_to_think_something_is_true",
+  "text": "Definition. to think something is true",
+  "lang": "en"
+ },
+ {
+  "id": "0297_i_believe_you",
+  "text": "I believe you.",
+  "lang": "en"
+ },
+ {
+  "id": "0298_business",
+  "text": "business",
+  "lang": "en"
+ },
+ {
+  "id": "0299_definition_the_work_of_buying_and_sellin",
+  "text": "Definition. the work of buying and selling",
+  "lang": "en"
+ },
+ {
+  "id": "0300_my_father_runs_a_small_business",
+  "text": "My father runs a small business.",
+  "lang": "en"
+ },
+ {
+  "id": "0301_calendar",
+  "text": "calendar",
+  "lang": "en"
+ },
+ {
+  "id": "0302_definition_it_shows_the_days_and_months",
+  "text": "Definition. it shows the days and months",
+  "lang": "en"
+ },
+ {
+  "id": "0303_mark_the_date_on_the_calendar",
+  "text": "Mark the date on the calendar.",
+  "lang": "en"
+ },
+ {
+  "id": "0304_comfortable",
+  "text": "comfortable",
+  "lang": "en"
+ },
+ {
+  "id": "0305_definition_nice_and_soft_to_use",
+  "text": "Definition. nice and soft to use",
+  "lang": "en"
+ },
+ {
+  "id": "0306_this_chair_is_comfortable",
+  "text": "This chair is comfortable.",
+  "lang": "en"
+ },
+ {
+  "id": "0307_delicious",
+  "text": "delicious",
+  "lang": "en"
+ },
+ {
+  "id": "0308_definition_tasting_very_good",
+  "text": "Definition. tasting very good",
+  "lang": "en"
+ },
+ {
+  "id": "0309_the_mango_is_delicious",
+  "text": "The mango is delicious.",
+  "lang": "en"
+ },
+ {
+  "id": "0310_different",
+  "text": "different",
+  "lang": "en"
+ },
+ {
+  "id": "0311_definition_not_the_same",
+  "text": "Definition. not the same",
+  "lang": "en"
+ },
+ {
+  "id": "0312_these_two_shirts_are_different",
+  "text": "These two shirts are different.",
+  "lang": "en"
+ },
+ {
+  "id": "0313_exercise",
+  "text": "exercise",
+  "lang": "en"
+ },
+ {
+  "id": "0314_definition_moving_your_body_to_stay_heal",
+  "text": "Definition. moving your body to stay healthy",
+  "lang": "en"
+ },
+ {
+  "id": "0315_i_do_exercise_every_morning",
+  "text": "I do exercise every morning.",
+  "lang": "en"
+ },
+ {
+  "id": "0316_favourite",
+  "text": "favourite",
+  "lang": "en"
+ },
+ {
+  "id": "0317_definition_the_one_you_like_best",
+  "text": "Definition. the one you like best",
+  "lang": "en"
+ },
+ {
+  "id": "0318_blue_is_my_favourite_colour",
+  "text": "Blue is my favourite colour.",
+  "lang": "en"
+ },
+ {
+  "id": "0319_february",
+  "text": "February",
+  "lang": "en"
+ },
+ {
+  "id": "0320_definition_the_second_month_of_the_year",
+  "text": "Definition. the second month of the year",
+  "lang": "en"
+ },
+ {
+  "id": "0321_my_birthday_is_in_february",
+  "text": "My birthday is in February.",
+  "lang": "en"
+ },
+ {
+  "id": "0322_wednesday",
+  "text": "Wednesday",
+  "lang": "en"
+ },
+ {
+  "id": "0323_definition_the_day_after_tuesday",
+  "text": "Definition. the day after Tuesday",
+  "lang": "en"
+ },
+ {
+  "id": "0324_we_have_music_on_wednesday",
+  "text": "We have music on Wednesday.",
+  "lang": "en"
+ },
+ {
+  "id": "0325_foreign",
+  "text": "foreign",
+  "lang": "en"
+ },
+ {
+  "id": "0326_definition_from_another_country",
+  "text": "Definition. from another country",
+  "lang": "en"
+ },
+ {
+  "id": "0327_she_is_learning_a_foreign_language",
+  "text": "She is learning a foreign language.",
+  "lang": "en"
+ },
+ {
+  "id": "0328_friend",
+  "text": "friend",
+  "lang": "en"
+ },
+ {
+  "id": "0329_definition_a_person_you_like_and_know_we",
+  "text": "Definition. a person you like and know well",
+  "lang": "en"
+ },
+ {
+  "id": "0330_she_is_my_best_friend",
+  "text": "She is my best friend.",
+  "lang": "en"
+ },
+ {
+  "id": "0331_guitar",
+  "text": "guitar",
+  "lang": "en"
+ },
+ {
+  "id": "0332_definition_a_musical_instrument_with_str",
+  "text": "Definition. a musical instrument with strings",
+  "lang": "en"
+ },
+ {
+  "id": "0333_he_plays_the_guitar",
+  "text": "He plays the guitar.",
+  "lang": "en"
+ },
+ {
+  "id": "0334_interesting",
+  "text": "interesting",
+  "lang": "en"
+ },
+ {
+  "id": "0335_definition_it_makes_you_want_to_know_mor",
+  "text": "Definition. it makes you want to know more",
+  "lang": "en"
+ },
+ {
+  "id": "0336_this_book_is_interesting",
+  "text": "This book is interesting.",
+  "lang": "en"
+ },
+ {
+  "id": "0337_knowledge",
+  "text": "knowledge",
+  "lang": "en"
+ },
+ {
+  "id": "0338_definition_the_things_a_person_knows",
+  "text": "Definition. the things a person knows",
+  "lang": "en"
+ },
+ {
+  "id": "0339_reading_gives_you_knowledge",
+  "text": "Reading gives you knowledge.",
+  "lang": "en"
+ },
+ {
+  "id": "0340_language",
+  "text": "language",
+  "lang": "en"
+ },
+ {
+  "id": "0341_definition_the_words_people_use_to_speak",
+  "text": "Definition. the words people use to speak",
+  "lang": "en"
+ },
+ {
+  "id": "0342_thai_is_my_first_language",
+  "text": "Thai is my first language.",
+  "lang": "en"
+ },
+ {
+  "id": "0343_necessary",
+  "text": "necessary",
+  "lang": "en"
+ },
+ {
+  "id": "0344_definition_needed_you_must_have_it",
+  "text": "Definition. needed, you must have it",
+  "lang": "en"
+ },
+ {
+  "id": "0345_water_is_necessary_for_life",
+  "text": "Water is necessary for life.",
+  "lang": "en"
+ },
+ {
+  "id": "0346_neighbour",
+  "text": "neighbour",
+  "lang": "en"
+ },
+ {
+  "id": "0347_definition_a_person_who_lives_next_to_yo",
+  "text": "Definition. a person who lives next to you",
+  "lang": "en"
+ },
+ {
+  "id": "0348_our_neighbour_has_a_dog",
+  "text": "Our neighbour has a dog.",
+  "lang": "en"
+ },
+ {
+  "id": "0349_question",
+  "text": "question",
+  "lang": "en"
+ },
+ {
+  "id": "0350_definition_something_you_ask",
+  "text": "Definition. something you ask",
+  "lang": "en"
+ },
+ {
+  "id": "0351_may_i_ask_a_question",
+  "text": "May I ask a question?",
+  "lang": "en"
+ },
+ {
+  "id": "0352_receive",
+  "text": "receive",
+  "lang": "en"
+ },
+ {
+  "id": "0353_definition_to_get_something",
+  "text": "Definition. to get something",
+  "lang": "en"
+ },
+ {
+  "id": "0354_i_receive_a_letter_every_week",
+  "text": "I receive a letter every week.",
+  "lang": "en"
+ },
+ {
+  "id": "0355_rhythm",
+  "text": "rhythm",
+  "lang": "en"
+ },
+ {
+  "id": "0356_definition_a_regular_pattern_of_beats",
+  "text": "Definition. a regular pattern of beats",
+  "lang": "en"
+ },
+ {
+  "id": "0357_clap_to_the_rhythm",
+  "text": "Clap to the rhythm.",
+  "lang": "en"
+ },
+ {
+  "id": "0358_separate",
+  "text": "separate",
+  "lang": "en"
+ },
+ {
+  "id": "0359_definition_to_divide_into_parts",
+  "text": "Definition. to divide into parts",
+  "lang": "en"
+ },
+ {
+  "id": "0360_a_prism_can_separate_white_light",
+  "text": "A prism can separate white light.",
+  "lang": "en"
+ },
+ {
+  "id": "0361_temperature",
+  "text": "temperature",
+  "lang": "en"
+ },
+ {
+  "id": "0362_definition_how_hot_or_cold_something_is",
+  "text": "Definition. how hot or cold something is",
+  "lang": "en"
+ },
+ {
+  "id": "0363_the_temperature_is_30_degrees",
+  "text": "The temperature is 30 degrees.",
+  "lang": "en"
+ },
+ {
+  "id": "0364_together",
+  "text": "together",
+  "lang": "en"
+ },
+ {
+  "id": "0365_definition_with_each_other",
+  "text": "Definition. with each other",
+  "lang": "en"
+ },
+ {
+  "id": "0366_we_walk_to_school_together",
+  "text": "We walk to school together.",
+  "lang": "en"
+ },
+ {
+  "id": "0367_weather",
+  "text": "weather",
+  "lang": "en"
+ },
+ {
+  "id": "0368_definition_if_it_is_hot_cold_sunny_or_ra",
+  "text": "Definition. if it is hot, cold, sunny or rainy",
+  "lang": "en"
+ },
+ {
+  "id": "0369_the_weather_is_sunny_today",
+  "text": "The weather is sunny today.",
+  "lang": "en"
+ },
+ {
+  "id": "0370_through",
+  "text": "through",
+  "lang": "en"
+ },
+ {
+  "id": "0371_definition_from_one_side_to_the_other",
+  "text": "Definition. from one side to the other",
+  "lang": "en"
+ },
+ {
+  "id": "0372_light_passes_through_glass",
+  "text": "Light passes through glass.",
+  "lang": "en"
+ },
+ {
+  "id": "0373_definition_not_bent",
+  "text": "Definition. not bent",
+  "lang": "en"
+ },
+ {
+  "id": "0374_draw_a_straight_line",
+  "text": "Draw a straight line.",
+  "lang": "en"
+ },
+ {
+  "id": "0375_definition_land_with_water_all_around",
+  "text": "Definition. land with water all around",
+  "lang": "en"
+ },
+ {
+  "id": "0376_samui_is_an_island",
+  "text": "Samui is an island.",
+  "lang": "en"
+ }
+]
