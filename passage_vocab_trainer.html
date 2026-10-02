@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#12233D">
+<title>ฝึกคำศัพท์จากบทอ่าน — ป.4</title>
+<style>
+  :root{
+    --bg:#12233D; --panel:#1B3352; --panel2:#234170; --edge:#2E5080;
+    --ink:#EFF4FA; --dim:#8FA9C8; --hi:#FFC845; --ok:#57D6A0; --bad:#FF7B6B;
+    --pad:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%}
+  body{background:var(--bg);color:var(--ink);min-height:100%;
+    font-family:'Sarabun','Noto Sans Thai','Segoe UI','Helvetica Neue',sans-serif}
+  .app{max-width:640px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+  button{font-family:inherit;border:none;cursor:pointer}
+  .hidden{display:none!important}
+
+  .setup{padding:22px 18px calc(30px + var(--pad));flex:1}
+  h1{font-size:25px;margin:2px 0 6px;font-weight:800;line-height:1.25}
+  .lead{color:var(--dim);font-size:14.5px;line-height:1.65;margin:0 0 6px}
+  .lbl{font-size:13px;color:var(--dim);margin:22px 0 9px;font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{padding:12px 15px;border-radius:11px;font-size:14.5px;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .chip.on{background:var(--hi);color:#12233D;border-color:var(--hi);font-weight:700}
+  .chip.wide{width:100%;text-align:left}
+  .chip.wide small{display:block;font-size:12.5px;opacity:.72;margin-top:3px;font-weight:400}
+  select.vsel{width:100%;padding:12px;border-radius:11px;font-size:15px;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge);
+    font-family:inherit;margin-bottom:8px}
+  .vtest{padding:11px 16px;border-radius:10px;font-size:13.5px;font-weight:600;
+    background:var(--panel2);color:var(--ink);border:1.5px solid var(--edge)}
+  .go{width:100%;margin-top:26px;padding:19px;font-size:19px;font-weight:800;
+    background:var(--hi);color:#12233D;border-radius:14px}
+  .note{background:rgba(255,200,69,.10);border-left:4px solid var(--hi);
+    padding:12px 14px;border-radius:0 9px 9px 0;font-size:13px;line-height:1.65;
+    margin:16px 0 4px;color:#D8E4F2}
+  details{margin-top:22px;font-size:14px;color:var(--dim)}
+  details summary{padding:12px 0;font-weight:600;color:var(--ink)}
+  details p{line-height:1.7;margin:4px 0 12px}
+
+  .stage{flex:1;display:flex;flex-direction:column;padding:14px 16px 0}
+  .top{display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--dim)}
+  .track{flex:1;height:5px;background:#0B1A2E;border-radius:4px;overflow:hidden}
+  .track i{display:block;height:100%;width:0%;background:var(--dim)}
+  .card{flex:1;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:12px 4px}
+  .num{font-size:50px;font-weight:800;color:var(--hi);line-height:1;
+    font-variant-numeric:tabular-nums}
+  .numlbl{font-size:13px;color:var(--dim)}
+  .speaker{font-size:58px;margin:4px 0 2px;line-height:1}
+  .word{font-size:clamp(32px,8vw,52px);font-weight:800;letter-spacing:1px;
+    word-break:break-word;line-height:1.15}
+  .read{font-size:19px;color:var(--hi);margin-top:8px}
+  .mean{font-size:19px;margin-top:5px}
+  .def{font-size:16px;color:#C8D8EC;margin-top:14px;line-height:1.6;
+    max-width:540px;padding:0 8px}
+  .spellout{font-size:19px;letter-spacing:8px;color:var(--hi);font-weight:700;margin-top:10px}
+  .phase{font-size:14.5px;color:var(--dim);margin-top:14px;min-height:1.4em}
+  .verdict{font-size:21px;font-weight:800;margin-top:14px}
+  .verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)}
+  input[type=text]{width:min(420px,90vw);padding:15px;border-radius:12px;font-size:23px;
+    text-align:center;letter-spacing:2px;background:#0B1A2E;color:var(--ink);
+    border:2px solid var(--edge);margin-top:18px;font-family:inherit}
+  input[type=text]:focus{outline:none;border-color:var(--hi)}
+
+  .ask{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px 14px 0}
+  .ask button{padding:13px 4px;border-radius:11px;font-size:13.5px;font-weight:600;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .ask button:active{background:var(--panel2)}
+  .bar{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px;
+    padding:10px 14px calc(16px + var(--pad));background:var(--bg)}
+  .bar button{padding:16px 4px;border-radius:12px;font-size:15px;font-weight:700;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .bar button.main{background:var(--hi);color:#12233D;font-weight:800}
+
+  .result{padding:24px 18px calc(30px + var(--pad));flex:1}
+  .score{font-size:54px;font-weight:800;color:var(--hi);line-height:1}
+  .wrongbox{margin-top:22px;background:var(--panel);border:1.5px solid var(--edge);
+    border-radius:12px;padding:14px 16px}
+  .wrongbox h3{font-size:15px;margin:0 0 10px;color:var(--bad)}
+  .wrongbox ul{margin:0;padding-left:20px;line-height:2;font-size:16px}
+  .wrongbox .you{color:var(--dim);font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ========== SETUP ========== -->
+<div class="setup" id="setup">
+  <h1>ฝึกคำศัพท์จากบทอ่าน</h1>
+  <p class="lead">Daily Warm-Ups: Reading · 8 เรื่อง · 227 คำ<br>
+     ฟังเสียง ดูความหมาย แล้วสะกดคำ — เหมือนแอป Spelling Bee แต่ใช้คำจากบทอ่านจริง</p>
+
+  <div class="lbl">เลือกเรื่อง</div>
+  <div class="chips" id="setChips"></div>
+
+  <div class="lbl">โหมดการฝึก</div>
+  <div class="chips" id="modeChips">
+    <button class="chip wide on" data-mode="review">ทบทวนคำศัพท์
+      <small>เห็นคำ คำอ่าน คำแปล และความหมายอังกฤษ พร้อมเสียง</small></button>
+    <button class="chip wide" data-mode="dictation">ฟังคำ แล้วสะกด
+      <small>ซ่อนตัวสะกด ฟังเสียงแล้วพิมพ์คำ — ตรวจให้อัตโนมัติ</small></button>
+    <button class="chip wide" data-mode="meaning">ฟังความหมาย แล้วเดาคำ
+      <small>อ่านนิยามภาษาอังกฤษให้ฟัง นักเรียนตอบว่าเป็นคำไหน</small></button>
+    <button class="chip wide" data-mode="answer">เฉลย
+      <small>อ่านคำและสะกดทีละตัวอักษร</small></button>
+  </div>
+
+  <div class="lbl">เสียงผู้อ่าน</div>
+  <select class="vsel" id="voiceSel"></select>
+  <button class="vtest" id="voiceTest">▶ ฟังตัวอย่าง</button>
+
+  <div class="lbl">ความเร็วเสียง</div>
+  <div class="chips" id="rateChips">
+    <button class="chip" data-rate="0.6">ช้ามาก</button>
+    <button class="chip on" data-rate="0.75">ช้า</button>
+    <button class="chip" data-rate="0.9">ปานกลาง</button>
+    <button class="chip" data-rate="1">ปกติ</button>
+  </div>
+
+  <div class="lbl">จำนวนคำต่อรอบ</div>
+  <div class="chips" id="cntChips">
+    <button class="chip" data-cnt="10">10 คำ</button>
+    <button class="chip on" data-cnt="20">20 คำ</button>
+    <button class="chip" data-cnt="30">30 คำ</button>
+    <button class="chip" data-cnt="0">ทั้งชุด</button>
+  </div>
+
+  <div class="lbl">ลำดับคำ</div>
+  <div class="chips" id="shufChips">
+    <button class="chip on" data-shuf="1">สุ่มลำดับ</button>
+    <button class="chip" data-shuf="0">เรียงตามเรื่อง</button>
+  </div>
+
+  <div class="lbl">อ่านคำแปลไทยด้วยหรือไม่</div>
+  <div class="chips" id="thChips">
+    <button class="chip on" data-th="1">อ่านคำแปลไทย</button>
+    <button class="chip" data-th="0">อ่านเฉพาะอังกฤษ</button>
+  </div>
+
+  <button class="go" id="start">เริ่มฝึก</button>
+  <div class="note" id="warn" style="display:none"></div>
+
+  <details>
+    <summary>วิธีใช้ และเรื่องเสียง</summary>
+    <p><b>โหมดฟังคำ แล้วสะกด</b> ใช้สอบเก็บคะแนนได้เลย นักเรียนจะไม่เห็นตัวสะกด
+       แต่ขอฟังซ้ำ ขอความหมายอังกฤษ หรือขอคำแปลไทยได้ตลอด เหมือนสนาม Spelling Bee จริง</p>
+    <p><b>โหมดฟังความหมาย แล้วเดาคำ</b> วัดความเข้าใจมากกว่าการจำตัวสะกด
+       เพราะนิยามที่อ่านให้ฟังเป็นความหมายตามบริบทของบทอ่านนั้นจริง ๆ</p>
+    <p><b>ถ้าไม่มีเสียงหรือเสียงเพี้ยน</b> เครื่องนั้นไม่มีเสียงภาษาอังกฤษติดตั้งอยู่
+       แอปจะใช้เสียงสังเคราะห์ในเครื่องก่อน แต่ถ้ามีโฟลเดอร์ <code>audio/pass/</code>
+       วางไว้ข้าง ๆ ไฟล์นี้ แอปจะเล่นไฟล์เสียงที่อัดไว้แทนอัตโนมัติ
+       ซึ่งเสียงจะเหมือนกันทุกเครื่อง</p>
+    <p>iPhone ต้องปลดสวิตช์เงียบข้างเครื่องก่อน และต้องกดปุ่มเริ่มทุกครั้ง
+       เพราะมือถือไม่อนุญาตให้เว็บเล่นเสียงเองโดยไม่มีการแตะ</p>
+  </details>
+</div>
+
+<!-- ========== PLAY ========== -->
+<div class="stage hidden" id="play">
+  <div class="top">
+    <span id="tick"></span>
+    <span class="track"><i id="track"></i></span>
+    <span id="sc"></span>
+  </div>
+  <div class="card">
+    <div class="numlbl hidden" id="numlbl">คำที่</div>
+    <div class="num hidden" id="num"></div>
+    <div class="speaker hidden" id="spk">🔊</div>
+    <div class="word hidden" id="word"></div>
+    <div class="read hidden" id="read"></div>
+    <div class="mean hidden" id="mean"></div>
+    <div class="spellout hidden" id="spellout"></div>
+    <div class="def hidden" id="def"></div>
+    <div class="phase" id="phase"></div>
+    <input type="text" id="ans" autocomplete="off" autocapitalize="off"
+           autocorrect="off" spellcheck="false" placeholder="พิมพ์คำที่ได้ยิน">
+    <div class="verdict hidden" id="verdict"></div>
+  </div>
+</div>
+<div class="ask hidden" id="ask">
+  <button id="bRepeat">🔁 ฟังอีกครั้ง</button>
+  <button id="bDef">📖 ความหมาย</button>
+  <button id="bTh">🇹🇭 คำแปลไทย</button>
+</div>
+<div class="bar hidden" id="bar">
+  <button class="main" id="bSubmit">ตอบ</button>
+  <button id="bSkip">ข้าม</button>
+  <button id="bQuit">ออก</button>
+</div>
+
+<!-- ========== RESULT ========== -->
+<div class="result hidden" id="result">
+  <div class="numlbl">คะแนน</div>
+  <div class="score" id="final"></div>
+  <div class="lead" id="pct" style="margin-top:8px"></div>
+  <div class="wrongbox hidden" id="wrongbox">
+    <h3>คำที่ต้องกลับไปทบทวน</h3>
+    <ul id="wronglist"></ul>
+  </div>
+  <button class="go" id="again">ฝึกอีกรอบ</button>
+  <button class="go" id="home" style="background:var(--panel);color:var(--ink);margin-top:10px">กลับหน้าแรก</button>
+</div>
+
+</div>
+
+<script>
+const SETS = [{"t":"Helen Keller","tag":"Nonfiction: Biography","n":1,"items":[{"w":"imagine","r":"อิ-แม-จิน","m":"จินตนาการ, นึกภาพ","d":"to make a picture in your mind of something you have not seen","k":"imagine"},{"w":"ill","r":"อิล","m":"ป่วย","d":"sick; not healthy","k":"ill"},{"w":"expect","r":"เอ็กซ์-เพคท์","m":"คาดว่าจะ","d":"to think that something will happen","k":"expect"},{"w":"survive","r":"เซอร์-ไวฟว์","m":"รอดชีวิต","d":"to stay alive after a serious illness or danger","k":"survive"},{"w":"respond","r":"ริ-สปอนด์","m":"ตอบสนอง","d":"to react when something happens around you","k":"respond"},{"w":"apparent","r":"แอพ-แพ-เรินท์","m":"ชัดเจน, ปรากฏชัด","d":"easy to see or understand; clear to everyone","k":"apparent"},{"w":"blind","r":"ไบลนด์","m":"ตาบอด","d":"not able to see","k":"blind"},{"w":"deaf","r":"เดฟ","m":"หูหนวก","d":"not able to hear","k":"deaf"},{"w":"frustrated","r":"ฟรัส-เทร-ทิด","m":"หงุดหงิด, คับข้องใจ","d":"upset because you cannot do or understand what you want","k":"frustrated"},{"w":"confused","r":"คอน-ฟิวซด์","m":"สับสน","d":"not able to understand what is happening around you","k":"confused"},{"w":"hire","r":"ไฮ-เออร์","m":"ว่าจ้าง","d":"to pay someone to come and work for you","k":"hire"},{"w":"tutor","r":"ทู-เทอร์","m":"ครูสอนพิเศษ","d":"a teacher who teaches one student alone, not a class","k":"tutor"},{"w":"success","r":"ซัค-เซส","m":"ความสำเร็จ","d":"getting the result you were working for","k":"success"},{"w":"breakthrough","r":"เบรค-ทรู","m":"ความก้าวหน้าครั้งสำคัญ","d":"a sudden important step forward after a long, hard struggle","k":"breakthrough"},{"w":"spell","r":"สเปล","m":"สะกดคำ","d":"to say or write the letters of a word in the right order","k":"spell"},{"w":"catch on","r":"แคทช์ ออน","m":"เริ่มเข้าใจ","d":"to begin to understand something after a while","k":"catch-on"},{"w":"Braille","r":"เบรลล์","m":"อักษรเบรลล์","d":"a system of raised dots that blind people read with their fingers","k":"braille"},{"w":"raised dots","r":"เรซด์ ดอทส์","m":"จุดนูน","d":"small bumps that stand up from a flat surface","k":"raised-dots"},{"w":"represent","r":"เรพ-พริ-เซนท์","m":"แทน, เป็นตัวแทนของ","d":"to stand for something else","k":"represent"},{"w":"speech","r":"สปีช","m":"สุนทรพจน์, การปราศรัย","d":"a talk given in front of a group of people","k":"speech"},{"w":"earn","r":"เอิร์น","m":"หาได้, ได้รับ (เงิน)","d":"to get money in return for work you do","k":"earn"},{"w":"foundation","r":"ฟาวน์-เด-ชั่น","m":"มูลนิธิ","d":"an organisation that collects and gives money to help a cause","k":"foundation"},{"w":"dozen","r":"ดัซ-เซิ่น","m":"โหล (12)","d":"a group of twelve","k":"dozen"},{"w":"inspire","r":"อิน-สไปร์","m":"สร้างแรงบันดาลใจ","d":"to make other people want to try hard and do good things","k":"inspire"},{"w":"worldwide","r":"เวิลด์-ไวด์","m":"ทั่วโลก","d":"in every part of the world","k":"worldwide"},{"w":"diligent","r":"ดิ-ลิ-เจินท์","m":"ขยันหมั่นเพียร","d":"working hard and carefully and never giving up","k":"diligent"},{"w":"effort","r":"เอฟ-เฟิร์ท","m":"ความพยายาม","d":"the hard work you put into doing something","k":"effort"},{"w":"obstacle","r":"ออบ-สทะ-เคิ่ล","m":"อุปสรรค","d":"something that blocks your way and makes a task hard","k":"obstacle"},{"w":"overcome","r":"โอ-เวอร์-คัม","m":"เอาชนะ (อุปสรรค)","d":"to succeed in dealing with a problem that blocks you","k":"overcome"},{"w":"pity","r":"พิท-ที่","m":"ความสงสาร","d":"a sad feeling for someone because of their trouble","k":"pity"},{"w":"orphanage","r":"ออร์-เฟิน-นิจ","m":"สถานเลี้ยงเด็กกำพร้า","d":"a home for children whose parents have died","k":"orphanage"}]},{"t":"War of 1812","tag":"Nonfiction: American History","n":2,"items":[{"w":"revolutionary","r":"เรฟ-โว-ลู-ชั่น-นะ-รี่","m":"เกี่ยวกับการปฏิวัติ","d":"to do with fighting to change or throw off a government","k":"revolutionary"},{"w":"disagree","r":"ดิส-ซะ-กรี","m":"ไม่เห็นด้วย, ขัดแย้งกัน","d":"to have a different opinion from someone else","k":"disagree"},{"w":"shipping","r":"ชิพ-ปิ้ง","m":"การขนส่งทางเรือ","d":"carrying goods from place to place by ship","k":"shipping"},{"w":"trade","r":"เทรด","m":"การค้า","d":"buying and selling goods between people or countries","k":"trade"},{"w":"take place","r":"เทค เพลส","m":"เกิดขึ้น","d":"to happen","k":"take-place"},{"w":"president","r":"เพรส-ซิ-เดินท์","m":"ประธานาธิบดี","d":"the elected leader of a country such as the United States","k":"president"},{"w":"goods","r":"กู้ดส์","m":"สินค้า","d":"things that are made or grown to be sold","k":"goods"},{"w":"involved","r":"อิน-วอลฟว์ด","m":"เข้าไปเกี่ยวข้อง, พัวพัน","d":"taking part in something, often something you should avoid","k":"involved"},{"w":"at war","r":"แอท วอร์","m":"อยู่ในภาวะสงคราม","d":"fighting against another country","k":"at-war"},{"w":"supply","r":"ซะ-พลาย","m":"จัดหา, ส่งให้","d":"to give or sell someone the things they need","k":"supply"},{"w":"weapon","r":"เวพ-เพิ่น","m":"อาวุธ","d":"a thing used to fight or hurt, such as a gun","k":"weapon"},{"w":"search","r":"เซิร์ช","m":"ตรวจค้น","d":"to look through something carefully to find what is hidden","k":"search"},{"w":"treated poorly","r":"ทรี-ทิด พัว-ลี่","m":"ถูกปฏิบัติอย่างไม่เป็นธรรม","d":"not given fair or respectful treatment","k":"treated-poorly"},{"w":"mad","r":"แมด","m":"โกรธ","d":"very angry","k":"mad"},{"w":"end up","r":"เอนด์ อัพ","m":"ลงเอยด้วย","d":"to finally be in a situation you did not plan for","k":"end-up"},{"w":"Capitol","r":"แคพ-พิ-เทิ่ล","m":"อาคารรัฐสภาสหรัฐฯ","d":"the building in Washington where the U.S. Congress meets","k":"capitol"},{"w":"burn","r":"เบิร์น","m":"เผา, ไหม้","d":"to destroy with fire","k":"burn"},{"w":"treaty","r":"ทรี-ที่","m":"สนธิสัญญา","d":"a written agreement between countries, often to stop a war","k":"treaty"},{"w":"sign","r":"ไซน์","m":"ลงนาม","d":"to write your name on a paper to show you agree","k":"sign"},{"w":"as a result","r":"แอส อะ ริ-ซัลท์","m":"ผลที่ตามมาคือ","d":"because of what happened before","k":"as-a-result"},{"w":"powerful","r":"เพา-เออร์-ฟูล","m":"ทรงอำนาจ","d":"strong enough to influence or control others","k":"powerful"},{"w":"player","r":"เพล-เออร์","m":"ผู้มีบทบาทสำคัญ","d":"someone who takes part in something and has real influence","k":"player"},{"w":"participant","r":"พาร์-ทิส-ซิ-เพินท์","m":"ผู้เข้าร่วม","d":"a person who takes part in an activity or event","k":"participant"},{"w":"territory","r":"เท-ริ-ทอ-รี่","m":"ดินแดน","d":"an area of land that a country owns or controls","k":"territory"},{"w":"arrangement","r":"อะ-เรนจ์-เมินท์","m":"ข้อตกลง","d":"a plan or deal made between two sides","k":"arrangement"},{"w":"similarity","r":"ซิ-มิ-แล-ริ-ตี้","m":"ความคล้ายคลึงกัน","d":"a way in which two things are alike","k":"similarity"}]},{"t":"Static Electricity","tag":"Nonfiction: Science","n":3,"items":[{"w":"static electricity","r":"สแตท-ติค อิ-เล็ค-ทริ-ซิ-ตี้","m":"ไฟฟ้าสถิต","d":"electricity that builds up on an object instead of flowing away","k":"static-electricity"},{"w":"drag","r":"แดรก","m":"ลาก, ถูไถ","d":"to pull something slowly along a surface","k":"drag"},{"w":"shock","r":"ช็อค","m":"ไฟฟ้าช็อต","d":"a sudden sharp feeling you get when electricity passes through you","k":"shock"},{"w":"atom","r":"แอท-เทิ่ม","m":"อะตอม","d":"the smallest piece that every material is built from","k":"atom"},{"w":"particle","r":"พาร์-ทิ-เคิ่ล","m":"อนุภาค","d":"a very tiny piece of matter","k":"particle"},{"w":"electron","r":"อิ-เล็ค-ทรอน","m":"อิเล็กตรอน","d":"a tiny particle inside an atom that carries a negative charge","k":"electron"},{"w":"electric charge","r":"อิ-เล็ค-ทริค ชาร์จ","m":"ประจุไฟฟ้า","d":"the amount of electricity an object is holding","k":"electric-charge"},{"w":"negative","r":"เนก-กะ-ทิฟว์","m":"เป็นลบ (ประจุ)","d":"the kind of electric charge that an electron carries","k":"negative"},{"w":"cause","r":"คอส","m":"สาเหตุ","d":"the reason why something happens","k":"cause"},{"w":"current","r":"เคอ-เรินท์","m":"กระแสไฟฟ้า","d":"electricity moving steadily in one direction, like water in a pipe","k":"current"},{"w":"flow","r":"โฟลว์","m":"ไหล","d":"to move along steadily and smoothly","k":"flow"},{"w":"vigorous","r":"วิก-กะ-รัส","m":"แรง, หนักหน่วง","d":"done with a lot of force and energy","k":"vigorous"},{"w":"rubbing","r":"รับ-บิ้ง","m":"การถู","d":"moving one thing back and forth against another","k":"rubbing"},{"w":"brushing","r":"บรัช-ชิ่ง","m":"การปัด","d":"sweeping something lightly across a surface","k":"brushing"},{"w":"electric field","r":"อิ-เล็ค-ทริค ฟีลด์","m":"สนามไฟฟ้า","d":"the space around an object where its electric charge can act","k":"electric-field"},{"w":"affect","r":"แอฟ-เฟคท์","m":"ส่งผลต่อ","d":"to cause a change in something","k":"affect"},{"w":"produce","r":"โพร-ดิวซ์","m":"ทำให้เกิด","d":"to make something happen or come into being","k":"produce"},{"w":"unlike charges","r":"อัน-ไลค์ ชาร์-จิส","m":"ประจุต่างชนิดกัน","d":"charges that are not the same — one positive and one negative","k":"unlike-charges"},{"w":"attract","r":"แอท-แทรคท์","m":"ดึงดูด","d":"to pull toward each other","k":"attract"},{"w":"popping sound","r":"พอพ-ปิ้ง เซานด์","m":"เสียงเปาะแปะ","d":"a small, sharp snapping noise","k":"popping-sound"},{"w":"infer","r":"อิน-เฟอร์","m":"อนุมาน, สรุปเอาเอง","d":"to work out something that the writer did not say directly","k":"infer"},{"w":"statement","r":"สเตท-เมินท์","m":"ข้อความ, คำกล่าว","d":"a sentence that tells you that something is true","k":"statement"}]},{"t":"Geology","tag":"Nonfiction: Science","n":4,"items":[{"w":"geology","r":"จี-ออล-โล-จี้","m":"ธรณีวิทยา","d":"the study of the Earth, its rocks, and its history","k":"geology"},{"w":"geologist","r":"จี-ออล-โล-จิสต์","m":"นักธรณีวิทยา","d":"a scientist who studies rocks to learn about the Earth","k":"geologist"},{"w":"billion","r":"บิล-เลี่ยน","m":"พันล้าน","d":"one thousand million","k":"billion"},{"w":"provide","r":"โพร-ไวด์","m":"ให้, จัดหาให้","d":"to give what is needed","k":"provide"},{"w":"determine","r":"ดิ-เทอร์-มิน","m":"หาคำตอบให้แน่ชัด","d":"to find out something for certain by studying it","k":"determine"},{"w":"mineral","r":"มิน-เนอ-เริ่ล","m":"แร่","d":"a natural solid substance found in the ground","k":"mineral"},{"w":"marble","r":"มาร์-เบิ่ล","m":"หินอ่อน","d":"a hard rock made of just one mineral, used for floors and statues","k":"marble"},{"w":"quartzite","r":"ควอตซ์-ไซต์","m":"หินควอตไซต์","d":"a very hard rock made almost entirely of quartz","k":"quartzite"},{"w":"element","r":"เอล-ลิ-เมินท์","m":"ธาตุ","d":"a basic substance that cannot be broken into simpler ones","k":"element"},{"w":"silicon","r":"ซิ-ลิ-เคิ่น","m":"ซิลิคอน","d":"a common element found in sand and in most rocks","k":"silicon"},{"w":"carbon","r":"คาร์-เบิ่น","m":"คาร์บอน","d":"an element found in all living things and in many rocks","k":"carbon"},{"w":"crust","r":"ครัสท์","m":"เปลือกโลก","d":"the hard outer layer of the Earth","k":"crust"},{"w":"layer","r":"เล-เยอร์","m":"ชั้น","d":"one thickness of material lying on top of another","k":"layer"},{"w":"drill","r":"ดริล","m":"เจาะ","d":"to make a deep hole with a turning tool","k":"drill"},{"w":"directly","r":"ดิ-เรคท์-ลี่","m":"โดยตรง","d":"without anything in between","k":"directly"},{"w":"constantly","r":"คอน-สเตินท์-ลี่","m":"อย่างไม่หยุด","d":"all the time; without stopping","k":"constantly"},{"w":"shuffled","r":"ชัฟ-เฟิ่ลด์","m":"ถูกสับเปลี่ยนที่","d":"moved around and mixed up into a different order","k":"shuffled"},{"w":"formed","r":"ฟอร์มด์","m":"ก่อตัวขึ้น, เกิดเป็นรูปร่าง","d":"made or shaped into something, often slowly over a long time","k":"formed"},{"w":"volcanic","r":"วอล-แคน-นิค","m":"เกี่ยวกับภูเขาไฟ","d":"coming from a volcano; caused by a volcano","k":"volcanic"},{"w":"magma","r":"แมก-ม่า","m":"หินหนืด","d":"hot melted rock that lies under the Earth's crust","k":"magma"},{"w":"beneath","r":"บิ-นีธ","m":"ใต้, ข้างใต้","d":"under something","k":"beneath"},{"w":"forced","r":"ฟอร์สท์","m":"ถูกดันขึ้นมา","d":"pushed with great power, not moving by itself","k":"forced"},{"w":"surface","r":"เซอร์-เฟส","m":"พื้นผิว","d":"the top or outside part of something","k":"surface"},{"w":"overturned","r":"โอ-เวอร์-เทิร์นด์","m":"ถูกพลิกคว่ำ","d":"turned upside down","k":"overturned"},{"w":"earthquake","r":"เอิร์ธ-เควค","m":"แผ่นดินไหว","d":"a sudden violent shaking of the ground","k":"earthquake"},{"w":"process","r":"โพร-เซส","m":"กระบวนการ","d":"a series of changes that happen one after another over a long time","k":"process"},{"w":"weathering","r":"เวธ-เธอ-ริ่ง","m":"การผุพัง","d":"the slow breaking down of rock caused by the weather","k":"weathering"},{"w":"erosion","r":"อิ-โร-ชั่น","m":"การกัดเซาะ","d":"the wearing away of rock and soil by water, ice, or wind","k":"erosion"},{"w":"play a role in","r":"เพลย์ อะ โรล อิน","m":"มีส่วนทำให้เกิด","d":"to be one of the things that helps cause something to happen","k":"play-a-role-in"},{"w":"breakdown","r":"เบรค-ดาวน์","m":"การแตกสลาย","d":"the process of falling apart into smaller pieces","k":"breakdown"},{"w":"contribute","r":"คอน-ทริบ-บิวท์","m":"มีส่วนทำให้เกิด","d":"to help make something happen, along with other causes","k":"contribute"},{"w":"combination","r":"คอม-บิ-เน-ชั่น","m":"การผสมรวมกัน","d":"a mixture of two or more things together","k":"combination"}]},{"t":"Toucan","tag":"Nonfiction: Animals","n":5,"items":[{"w":"toucan","r":"ทู-แคน","m":"นกทูแคน","d":"a brightly coloured rain forest bird with a very large bill","k":"toucan"},{"w":"colorful","r":"คัล-เลอร์-ฟูล","m":"มีสีสันสดใส","d":"having many bright colours","k":"colorful"},{"w":"flock","r":"ฟล็อค","m":"ฝูง (นก)","d":"a group of birds that live and move about together","k":"flock"},{"w":"rain forest","r":"เรน ฟอ-เรสต์","m":"ป่าฝน","d":"a thick, wet forest in a hot part of the world","k":"rain-forest"},{"w":"hop","r":"ฮอพ","m":"กระโดด","d":"to jump a short distance","k":"hop"},{"w":"croaking sound","r":"โคร-คิ่ง เซานด์","m":"เสียงร้องแหบต่ำ","d":"a low, rough noise like the sound a frog makes","k":"croaking-sound"},{"w":"feather","r":"เฟธ-เธอร์","m":"ขนนก","d":"one of the light soft parts that cover a bird's body","k":"feather"},{"w":"toe","r":"โท","m":"นิ้วเท้า","d":"one of the parts at the end of a foot","k":"toe"},{"w":"frontward","r":"ฟรันท์-เวิร์ด","m":"ไปทางด้านหน้า","d":"pointing toward the front","k":"frontward"},{"w":"backwards","r":"แบค-เวิร์ดส์","m":"ไปทางด้านหลัง","d":"pointing toward the back","k":"backwards"},{"w":"grasp","r":"กราสพ์","m":"จับยึด, เกาะ","d":"to take hold of something and hold it tightly","k":"grasp"},{"w":"branch","r":"บรานช์","m":"กิ่งไม้","d":"an arm of a tree that grows out from the trunk","k":"branch"},{"w":"bill","r":"บิล","m":"จะงอยปาก","d":"the hard mouth part at the front of a bird","k":"bill"},{"w":"protrude","r":"โพร-ทรูด","m":"ยื่นออกมา","d":"to stick out beyond the rest of something","k":"protrude"},{"w":"average","r":"แอฟ-เวอ-ริจ","m":"โดยเฉลี่ย","d":"the usual or middle amount, not the biggest or smallest","k":"average"},{"w":"length","r":"เลงธ์","m":"ความยาว","d":"how long something is from end to end","k":"length"},{"w":"male","r":"เมล","m":"ตัวผู้","d":"a boy or man animal","k":"male"},{"w":"female","r":"ฟี-เมล","m":"ตัวเมีย","d":"a girl or woman animal","k":"female"},{"w":"coloration","r":"คัล-เลอ-เร-ชั่น","m":"ลวดลายสีสัน","d":"the pattern and arrangement of colours on an animal","k":"coloration"},{"w":"similar","r":"ซิ-มิ-ล่าร์","m":"คล้ายกัน","d":"almost the same as something else","k":"similar"},{"w":"insect","r":"อิน-เซคท์","m":"แมลง","d":"a small animal with six legs, such as an ant or a beetle","k":"insect"},{"w":"tree frog","r":"ทรี ฟรอก","m":"กบต้นไม้","d":"a small frog that lives up in trees","k":"tree-frog"},{"w":"whole","r":"โฮล","m":"ทั้งลูก, ทั้งชิ้น","d":"complete and not cut into pieces","k":"whole"},{"w":"regurgitate","r":"ริ-เกอร์-จิ-เทท","m":"ขย้อนออกมา","d":"to bring food back up out of the stomach","k":"regurgitate"},{"w":"seed","r":"ซีด","m":"เมล็ด","d":"the small part of a plant that a new plant grows from","k":"seed"},{"w":"incubate","r":"อิง-คิว-เบท","m":"กกไข่, ฟักไข่","d":"to keep eggs warm until the babies come out","k":"incubate"},{"w":"chick","r":"ชิค","m":"ลูกนก","d":"a very young bird","k":"chick"},{"w":"predator","r":"เพรด-ดะ-เทอร์","m":"สัตว์นักล่า","d":"an animal that hunts and eats other animals","k":"predator"}]},{"t":"The Panda Bear","tag":"Nonfiction: Animals","n":6,"items":[{"w":"unusual","r":"อัน-ยู-ชวล","m":"แปลก, ไม่ธรรมดา","d":"not common; different from all the others","k":"unusual"},{"w":"southwestern","r":"เซาธ์-เวส-เทิร์น","m":"ทางตะวันตกเฉียงใต้","d":"in the south-west part of a country","k":"southwestern"},{"w":"misty","r":"มิส-ตี้","m":"มีหมอกปกคลุม","d":"covered with thin cloud lying close to the ground","k":"misty"},{"w":"bamboo","r":"แบม-บู","m":"ไผ่","d":"a tall grass with hard hollow stems that pandas eat","k":"bamboo"},{"w":"giant","r":"ไจ-เอินท์","m":"ขนาดยักษ์","d":"very large for its kind","k":"giant"},{"w":"weigh","r":"เวย์","m":"มีน้ำหนัก","d":"to have a certain heaviness","k":"weigh"},{"w":"pound","r":"เพานด์","m":"ปอนด์ (หน่วยน้ำหนัก)","d":"a unit of weight, about 0.45 of a kilogram","k":"pound"},{"w":"height","r":"ไฮท์","m":"ความสูง","d":"how tall something is from the ground up","k":"height"},{"w":"newborn","r":"นิว-บอร์น","m":"แรกเกิด","d":"only just born","k":"newborn"},{"w":"cub","r":"คับ","m":"ลูกหมี","d":"a baby bear","k":"cub"},{"w":"chipmunk","r":"ชิพ-มังค์","m":"กระรอกลายชิปมังก์","d":"a small striped animal like a squirrel — used here to show size","k":"chipmunk"},{"w":"helpless","r":"เฮลพ์-เลส","m":"ช่วยตัวเองไม่ได้","d":"not able to look after itself at all","k":"helpless"},{"w":"rely on","r":"ริ-ไล ออน","m":"พึ่งพาอาศัย","d":"to need someone else and depend on them","k":"rely-on"},{"w":"active","r":"แอค-ทิฟว์","m":"ตื่นตัว, เคลื่อนไหว","d":"moving about and doing things rather than resting","k":"active"},{"w":"wrist","r":"ริสท์","m":"ข้อมือ","d":"the joint between the hand and the arm","k":"wrist"},{"w":"enable","r":"อิ-เน-เบิ่ล","m":"ทำให้สามารถ","d":"to make it possible for someone to do something","k":"enable"},{"w":"stalk","r":"สตอล์ค","m":"ลำต้น","d":"the main stem of a plant","k":"stalk"},{"w":"peel away","r":"พีล อะ-เวย์","m":"ลอกออก","d":"to pull off the outer layer of something","k":"peel-away"},{"w":"outer edge","r":"เอา-เทอร์ เอดจ์","m":"ขอบด้านนอก","d":"the part on the outside","k":"outer-edge"},{"w":"inner portion","r":"อิน-เนอร์ พอร์-ชั่น","m":"ส่วนด้านใน","d":"the part on the inside","k":"inner-portion"},{"w":"molar","r":"โม-ล่าร์","m":"ฟันกราม","d":"a wide tooth at the back of the mouth used for crushing food","k":"molar"},{"w":"crush","r":"ครัช","m":"บดขยี้","d":"to press very hard until something breaks into pieces","k":"crush"},{"w":"methodical","r":"เม-ธอด-ดิ-เคิ่ล","m":"เป็นระบบระเบียบ","d":"done carefully, in the same order, step by step","k":"methodical"},{"w":"manner","r":"แมน-เนอร์","m":"ลักษณะท่าทาง","d":"the way in which someone does something","k":"manner"},{"w":"hibernate","r":"ไฮ-เบอร์-เนท","m":"จำศีล","d":"to sleep through the whole winter","k":"hibernate"},{"w":"climate","r":"ไคล-เมท","m":"ภูมิอากาศ","d":"the kind of weather a place usually has all year round","k":"climate"},{"w":"captivity","r":"แคพ-ทิฟ-วิ-ตี้","m":"การถูกกักขัง","d":"being kept in a zoo or cage instead of living free","k":"captivity"}]},{"t":"Ladybugs","tag":"Nonfiction: Animals","n":7,"items":[{"w":"beetle","r":"บี-เทิ่ล","m":"ด้วง","d":"an insect with a hard shell-like cover over its wings","k":"beetle"},{"w":"dot","r":"ดอท","m":"จุด","d":"a small round mark","k":"dot"},{"w":"harmless","r":"ฮาร์ม-เลส","m":"ไม่เป็นอันตราย","d":"not able to hurt anyone or anything","k":"harmless"},{"w":"sting","r":"สติง","m":"ต่อย","d":"to hurt someone by pushing a sharp point into the skin","k":"sting"},{"w":"disease","r":"ดิ-ซีส","m":"โรค","d":"an illness that can be passed from one living thing to another","k":"disease"},{"w":"Middle Ages","r":"มิด-เดิ่ล เอ-จิส","m":"ยุคกลาง","d":"the time in Europe from about 500 to 1500 years ago","k":"middle-ages"},{"w":"crop","r":"ครอพ","m":"พืชผล","d":"plants that farmers grow for food","k":"crop"},{"w":"villager","r":"วิล-ลิ-เจอร์","m":"ชาวบ้าน","d":"a person who lives in a small country town","k":"villager"},{"w":"pray","r":"เพรย์","m":"สวดอ้อนวอน","d":"to speak to God and ask for help","k":"pray"},{"w":"harmful","r":"ฮาร์ม-ฟูล","m":"เป็นอันตราย","d":"able to hurt or damage something","k":"harmful"},{"w":"shorten","r":"ชอร์ท-เทิ่น","m":"ทำให้สั้นลง","d":"to make something shorter than it was","k":"shorten"},{"w":"good luck","r":"กู้ด ลัค","m":"โชคดี","d":"good things that happen to you by chance","k":"good-luck"},{"w":"belief","r":"บิ-ลีฟ","m":"ความเชื่อ","d":"something people hold to be true, even without proof","k":"belief"},{"w":"land on","r":"แลนด์ ออน","m":"ลงเกาะ, ร่อนลง","d":"to come down from the air and rest on something","k":"land-on"},{"w":"maiden","r":"เม-เดิ่น","m":"หญิงสาว","d":"an old word for a young woman who is not married","k":"maiden"},{"w":"marry","r":"แม-รี่","m":"แต่งงาน","d":"to become someone's husband or wife","k":"marry"},{"w":"farmer","r":"ฟาร์-เมอร์","m":"ชาวนา, เกษตรกร","d":"a person who grows crops or raises animals","k":"farmer"},{"w":"harvest","r":"ฮาร์-เวสต์","m":"ผลผลิตที่เก็บเกี่ยวได้","d":"the crops gathered in at the end of a growing season","k":"harvest"},{"w":"spot","r":"สปอท","m":"จุด, แต้มสี","d":"a small round mark of colour on a surface","k":"spot"},{"w":"fortune","r":"ฟอร์-ชุน","m":"โชคลาภ","d":"luck, especially luck that brings good things","k":"fortune"},{"w":"poison","r":"พอย-เซิ่น","m":"ยาพิษ","d":"something that kills or badly harms a living thing","k":"poison"},{"w":"get rid of","r":"เก็ท ริด ออฟ","m":"กำจัดให้หมดไป","d":"to make something you do not want go away","k":"get-rid-of"},{"w":"aphid","r":"เอ-ฟิด","m":"เพลี้ยอ่อน","d":"a tiny insect that harms plants by sucking their juice","k":"aphid"},{"w":"tiny","r":"ไท-นี่","m":"เล็กจิ๋ว","d":"very, very small","k":"tiny"},{"w":"suck","r":"ซัค","m":"ดูด","d":"to pull liquid in through a small opening","k":"suck"},{"w":"juice","r":"จูซ","m":"น้ำเลี้ยง (ของพืช)","d":"the liquid inside a plant or a fruit","k":"juice"},{"w":"leaves","r":"ลีฟวส์","m":"ใบไม้ (พหูพจน์ของ leaf)","d":"the flat green parts that grow out from a plant","k":"leaves"},{"w":"insecticide","r":"อิน-เซค-ทิ-ไซด์","m":"ยาฆ่าแมลง","d":"a chemical made to kill insects","k":"insecticide"},{"w":"reproduce","r":"รี-โพร-ดิวซ์","m":"สืบพันธุ์","d":"to have babies or young","k":"reproduce"},{"w":"anatomy","r":"อะ-แนท-โท-มี่","m":"กายวิภาค, โครงสร้างร่างกาย","d":"the parts that a living body is made of","k":"anatomy"}]},{"t":"Walt Disney","tag":"Nonfiction: Biography","n":8,"items":[{"w":"create","r":"คริ-เอท","m":"สร้างขึ้นมา","d":"to make something that did not exist before","k":"create"},{"w":"amazing","r":"อะ-เม-ซิ่ง","m":"น่าทึ่ง","d":"so good or surprising that it fills people with wonder","k":"amazing"},{"w":"theme park","r":"ธีม พาร์ค","m":"สวนสนุก","d":"a large park built around one idea, with rides and shows","k":"theme-park"},{"w":"pioneer","r":"ไพ-โอ-เนียร์","m":"ผู้บุกเบิก","d":"the first person to do something new that others follow","k":"pioneer"},{"w":"motion pictures","r":"โม-ชั่น พิค-เชอร์ส","m":"ภาพยนตร์","d":"films; moving pictures shown on a screen","k":"motion-pictures"},{"w":"receive","r":"ริ-ซีฟว์","m":"ได้รับ","d":"to be given something","k":"receive"},{"w":"award","r":"อะ-วอร์ด","m":"รางวัล","d":"a prize given to someone for doing something very well","k":"award"},{"w":"raised","r":"เรซด์","m":"ถูกเลี้ยงดูมา","d":"brought up and cared for as a child","k":"raised"},{"w":"sibling","r":"ซิบ-ลิ่ง","m":"พี่น้อง","d":"a brother or a sister","k":"sibling"},{"w":"encourage","r":"เอน-เค้อ-ริจ","m":"ให้กำลังใจ, สนับสนุน","d":"to give someone the confidence to keep going","k":"encourage"},{"w":"encouragement","r":"เอน-เค้อ-ริจ-เมินท์","m":"การให้กำลังใจ","d":"words or actions that make someone want to keep trying","k":"encouragement"},{"w":"creativity","r":"ครี-เอ-ทิ-วิ-ตี้","m":"ความคิดสร้างสรรค์","d":"the ability to think of new and original ideas","k":"creativity"},{"w":"sketch","r":"สเก็ตช์","m":"ภาพร่าง","d":"a quick, rough drawing","k":"sketch"},{"w":"serve","r":"เซิร์ฟว์","m":"ปฏิบัติหน้าที่, รับใช้","d":"to work for a country or an organisation for a period of time","k":"serve"},{"w":"Red Cross","r":"เรด ครอส","m":"กาชาด","d":"an organisation that helps people hurt in wars and disasters","k":"red-cross"},{"w":"advertising","r":"แอด-เวอร์-ไท-ซิ่ง","m":"การโฆษณา","d":"the work of making people want to buy something","k":"advertising"},{"w":"cartoonist","r":"คาร์-ทูน-นิสต์","m":"นักเขียนการ์ตูน","d":"a person whose job is drawing cartoons","k":"cartoonist"},{"w":"market","r":"มาร์-เค็ท","m":"ทำการตลาด","d":"to find ways to sell something to people","k":"market"},{"w":"animated","r":"แอน-นิ-เม-ทิด","m":"ที่ทำเป็นภาพเคลื่อนไหว","d":"made of drawings shown one after another so they seem to move","k":"animated"},{"w":"animation","r":"แอน-นิ-เม-ชั่น","m":"ภาพเคลื่อนไหว, แอนิเมชัน","d":"the art of making drawings move on a screen","k":"animation"},{"w":"brought to life","r":"บรอท ทู ไลฟ์","m":"ทำให้มีชีวิตขึ้นมา","d":"made to seem real and alive","k":"brought-to-life"},{"w":"perfect","r":"เพอร์-เฟคท์","m":"ทำให้สมบูรณ์แบบ","d":"to keep improving something until it has no faults","k":"perfect"},{"w":"combination","r":"คอม-บิ-เน-ชั่น","m":"การผสมผสาน","d":"two or more things joined so they work as one","k":"combination"},{"w":"dwarfs","r":"ดวอร์ฟส์","m":"คนแคระ","d":"small people in old stories, often shown working in mines","k":"dwarfs"},{"w":"produce","r":"โพร-ดิวซ์","m":"ผลิต, สร้างออกมา","d":"to make something, especially a great many of them","k":"produce"},{"w":"indifferent","r":"อิน-ดิฟ-เฟอ-เรินท์","m":"เฉย ๆ, ไม่สนใจ","d":"having no strong feeling about something either way","k":"indifferent"},{"w":"disapprove","r":"ดิส-ซะ-พรูฟว์","m":"ไม่เห็นชอบ","d":"to think that something is bad or wrong","k":"disapprove"},{"w":"unsure","r":"อัน-ชัวร์","m":"ไม่แน่ใจ","d":"not certain about something","k":"unsure"},{"w":"admire","r":"แอด-ไมร์","m":"ชื่นชม, ยกย่อง","d":"to look up to someone and think highly of them","k":"admire"},{"w":"trailblazer","r":"เทรล-เบล-เซอร์","m":"ผู้บุกเบิกเส้นทางใหม่","d":"a person who makes a new path for others to follow","k":"trailblazer"},{"w":"nomad","r":"โน-แมด","m":"ชนเร่ร่อน","d":"a person who moves from place to place instead of living in one home","k":"nomad"}]}];
+
+const $=id=>document.getElementById(id);
+const synth=window.speechSynthesis;
+let setSel="all", mode="review", rate=.75, cnt=20, shuf=1, sayThai=true;
+let list=[], idx=0, score=0, wrong=[], answered=false, enVoice=null, thVoice=null, token=0;
+
+/* ---------- เลือกชุด ---------- */
+(function(){
+  const c=$("setChips");
+  const mk=(v,label,sub,on)=>{const b=document.createElement("button");
+    b.className="chip wide"+(on?" on":"");b.dataset.s=v;
+    b.innerHTML=label+"<small>"+sub+"</small>";c.appendChild(b);};
+  mk("all","ทุกเรื่องรวมกัน","227 คำ",true);
+  SETS.forEach((s,i)=>mk(i, s.n+". "+s.t, s.tag+" · "+s.items.length+" คำ",false));
+})();
+function single(box,attr,fn){
+  $(box).addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
+    [...$(box).children].forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");fn(b.dataset[attr]);});
+}
+single("setChips","s",  v=>setSel=v);
+single("modeChips","mode",v=>mode=v);
+single("rateChips","rate",v=>rate=parseFloat(v));
+single("cntChips","cnt", v=>cnt=parseInt(v));
+single("shufChips","shuf",v=>shuf=parseInt(v));
+single("thChips","th",   v=>sayThai=(v==="1"));
+
+/* ---------- เสียง ---------- */
+function pickVoices(){
+  const vs=synth.getVoices()||[];
+  if(!vs.length)return;
+  const en=vs.filter(v=>/^en/i.test(v.lang));
+  const th=vs.filter(v=>/^th/i.test(v.lang));
+  thVoice=th[0]||null;
+  if(!en.length){
+    $("warn").style.display="block";
+    $("warn").textContent="เครื่องนี้ไม่มีเสียงภาษาอังกฤษ เสียงที่ได้ยินอาจเพี้ยน "
+      +"แนะนำให้เปิดด้วย Chrome หรือ Edge หรือใช้ไฟล์เสียงที่อัดไว้";
+  }
+}
+function fillVoiceSel(){
+  const sel=$("voiceSel"); if(!sel)return;
+  const vs=(synth.getVoices()||[]).filter(v=>/^en/i.test(v.lang));
+  if(!vs.length){sel.innerHTML='<option>ไม่พบเสียงภาษาอังกฤษในเครื่องนี้</option>';return;}
+  const score=v=>{let s=0;const n=(v.name||"").toLowerCase();
+    if(n.includes("google"))s+=100;
+    if(n.includes("natural")||n.includes("neural"))s+=80;
+    if(n.includes("enhanced")||n.includes("premium"))s+=60;
+    if(!v.localService)s+=50;
+    if(/en-us/i.test(v.lang))s+=20;
+    if(/en-gb/i.test(v.lang))s+=10;
+    return -s;};
+  vs.sort((a,b)=>score(a)-score(b));
+  const cur=sel.value; sel.innerHTML="";
+  vs.forEach(v=>{const o=document.createElement("option");
+    o.value=v.name;
+    o.textContent=v.name+" ("+v.lang+")"+(v.localService?"":"  ★ ออนไลน์ เสียงดีกว่า");
+    sel.appendChild(o);});
+  if(cur&&vs.some(v=>v.name===cur))sel.value=cur;
+  enVoice=vs.find(v=>v.name===sel.value)||vs[0];
+  sel.onchange=()=>{enVoice=(synth.getVoices()||[]).find(v=>v.name===sel.value)||enVoice;};
+  $("voiceTest").onclick=()=>{
+    try{synth.cancel();}catch(e){}
+    const u=new SpeechSynthesisUtterance("Harvest. H, A, R, V, E, S, T. Harvest.");
+    u.lang="en-US"; if(enVoice)u.voice=enVoice; u.rate=rate;
+    setTimeout(()=>synth.speak(u),60);
+  };
+}
+pickVoices(); fillVoiceSel();
+if(synth.onvoiceschanged!==undefined)
+  synth.onvoiceschanged=()=>{pickVoices();fillVoiceSel();};
+function unlock(){try{const u=new SpeechSynthesisUtterance(" ");u.volume=0;synth.speak(u);}catch(e){}
+  pickVoices();fillVoiceSel();}
+
+/* ---------- เล่นไฟล์เสียงก่อน ถ้าไม่มีค่อยใช้เสียงสังเคราะห์ ---------- */
+const AUDIO_BASE="audio/pass/";
+let _audioOK=null, _cur=null, _keep=null;
+function keepAlive(on){
+  if(on){ if(_keep)return;
+    _keep=setInterval(()=>{try{if(synth.speaking)synth.resume();}catch(e){}},7000);
+  }else{clearInterval(_keep);_keep=null;}
+}
+document.addEventListener("touchstart",()=>{try{synth.resume();}catch(e){}},{passive:true});
+document.addEventListener("click",()=>{try{synth.resume();}catch(e){}});
+function stopAudio(){try{if(_cur){_cur.pause();_cur=null;}}catch(e){}}
+function playFile(url,my){
+  return new Promise(res=>{
+    if(my!==token)return res(true);
+    let done=false;
+    const fin=ok=>{if(!done){done=true;_cur=null;res(ok);}};
+    const a=new Audio(url); _cur=a; a.preload="auto";
+    a.onended=()=>fin(true); a.onerror=()=>fin(false);
+    try{a.playbackRate=Math.max(0.5,Math.min(1.4,rate/0.8));}catch(e){}
+    const p=a.play(); if(p&&p.catch)p.catch(()=>fin(false));
+    setTimeout(()=>{if(!done)fin(true);},30000);
+  });
+}
+function ttsSay(text,lang,my){
+  return new Promise(res=>{
+    if(my!==token||!text)return res();
+    let done=false,started=false,tries=0;
+    const fin=()=>{if(!done){done=true;res();}};
+    const go=()=>{
+      if(done||my!==token)return;
+      tries++;
+      try{synth.cancel();}catch(e){}
+      setTimeout(()=>{
+        if(done||my!==token)return;
+        const u=new SpeechSynthesisUtterance(text);
+        u.lang=lang;
+        const v=(lang==="th-TH")?thVoice:enVoice;
+        if(v)u.voice=v;
+        u.rate=rate;u.pitch=1;u.volume=1;
+        u.onstart=()=>{started=true;};
+        u.onend=fin;
+        u.onerror=()=>{if(!started&&tries<3)go();else fin();};
+        try{synth.speak(u);}catch(e){fin();}
+        setTimeout(()=>{if(!started&&!done&&tries<3)go();},450);
+      },60);
+    };
+    keepAlive(true); go();
+    setTimeout(fin,3000+text.length*110/rate);
+  });
+}
+async function speak(text,lang,my,file){
+  if(file&&_audioOK!==false){
+    const ok=await playFile(AUDIO_BASE+file,my);
+    if(ok){_audioOK=true;return;}
+    if(_audioOK===null)_audioOK=false;
+  }
+  return ttsSay(text,lang,my);
+}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+
+/* ---------- สร้างรายการ ---------- */
+function build(){
+  let pool=[];
+  if(setSel==="all") SETS.forEach(s=>s.items.forEach(it=>pool.push({...it,p:s.n,t:s.t})));
+  else { const s=SETS[+setSel]; s.items.forEach(it=>pool.push({...it,p:s.n,t:s.t})); }
+  if(shuf) for(let i=pool.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[pool[i],pool[j]]=[pool[j],pool[i]];}
+  list = cnt>0 ? pool.slice(0,cnt) : pool;
+}
+const F=it=>({w:"p"+it.p+"/"+it.k+"_w.mp3", d:"p"+it.p+"/"+it.k+"_d.mp3",
+              m:"p"+it.p+"/"+it.k+"_m.mp3", l:"p"+it.p+"/"+it.k+"_l.mp3"});
+
+function show(ids){
+  ["numlbl","num","spk","word","read","mean","spellout","def"].forEach(k=>
+    $(k).classList.toggle("hidden",!ids.includes(k)));
+}
+
+/* ---------- ถามทีละคำ ---------- */
+async function ask(){
+  const my=++token;
+  answered=false;
+  const it=list[idx], f=F(it);
+  $("num").textContent=idx+1;
+  $("tick").textContent=(idx+1)+"/"+list.length;
+  $("track").style.width=((idx+1)/list.length*100)+"%";
+  $("sc").textContent="ถูก "+score;
+  $("word").textContent=it.w;
+  $("read").textContent=it.r;
+  $("mean").textContent=it.m;
+  $("def").textContent=it.d;
+  $("spellout").textContent=it.w.toUpperCase().split("").join(" ");
+  $("verdict").classList.add("hidden");
+  $("bSubmit").textContent = (mode==="review"||mode==="answer") ? "คำต่อไป" : "ตอบ";
+  $("bSubmit").onclick = (mode==="review"||mode==="answer") ? next : submit;
+  const typing = (mode==="dictation"||mode==="meaning");
+  $("ans").classList.toggle("hidden",!typing);
+  if(typing){$("ans").value="";$("ans").focus();}
+
+  const en=(t,file)=>speak(t,"en-US",my,file);
+  const th=(t,file)=>sayThai?speak(t,"th-TH",my,file):Promise.resolve();
+
+  if(mode==="review"){
+    show(["word","read","mean"]);
+    $("phase").textContent="ฟังคำศัพท์";
+    await en(it.w,f.w); await wait(420);
+    await en(it.w,f.w); await wait(320);
+    $("phase").textContent="คำแปล";
+    await th(it.m,f.m); await wait(260);
+    show(["word","read","mean","def"]);
+    $("phase").textContent="ความหมายในบทอ่าน";
+    await en(it.d,f.d);
+    $("phase").textContent="อ่านตาม";
+
+  }else if(mode==="dictation"){
+    show(["numlbl","num","spk"]);
+    $("phase").textContent="ตั้งใจฟัง";
+    await en(it.w,f.w); await wait(550);
+    await en(it.w,f.w);
+    $("phase").textContent="พิมพ์คำที่ได้ยิน  (ขอฟังซ้ำ ความหมาย หรือคำแปลไทยได้)";
+
+  }else if(mode==="meaning"){
+    show(["numlbl","num","spk"]);
+    $("phase").textContent="ฟังความหมาย แล้วเดาว่าเป็นคำไหน";
+    await en(it.d,f.d); await wait(400);
+    show(["numlbl","num","spk","def"]);
+    $("phase").textContent="พิมพ์คำที่ตรงกับความหมายนี้";
+
+  }else{ // answer
+    show(["word","read","mean"]);
+    $("phase").textContent="เฉลย";
+    await en(it.w,f.w); await wait(420);
+    show(["word","spellout","read","mean"]);
+    $("phase").textContent="สะกดทีละตัว";
+    await en(it.w.toUpperCase().split("").join(", "),f.l); await wait(400);
+    await en(it.w,f.w);
+    await th(it.m,f.m);
+    $("phase").textContent="ตรวจคำตอบของตัวเอง";
+  }
+}
+
+function submit(){
+  if(answered)return;
+  answered=true;
+  const it=list[idx];
+  const given=$("ans").value.trim();
+  const ok=given.toLowerCase()===it.w.toLowerCase();
+  if(ok){score++;$("verdict").textContent="✓ ถูกต้อง";$("verdict").className="verdict ok";}
+  else{wrong.push([it.w,given||"(ไม่ได้ตอบ)",it.m]);
+       $("verdict").textContent="✗ ยังไม่ถูก";$("verdict").className="verdict bad";}
+  $("verdict").classList.remove("hidden");
+  $("ans").classList.add("hidden");
+  show(["word","spellout","read","mean","def"]);
+  $("phase").textContent="";
+  $("sc").textContent="ถูก "+score;
+  $("bSubmit").textContent="คำต่อไป";
+  $("bSubmit").onclick=next;
+}
+function next(){
+  stopAudio();
+  idx++;
+  if(idx>=list.length)return finish();
+  ask();
+}
+function finish(){
+  token++; try{synth.cancel();}catch(e){} stopAudio(); keepAlive(false);
+  $("play").classList.add("hidden");$("ask").classList.add("hidden");$("bar").classList.add("hidden");
+  $("result").classList.remove("hidden");
+  const graded=(mode==="dictation"||mode==="meaning");
+  $("final").textContent = graded ? (score+" / "+list.length) : (list.length+" คำ");
+  if(graded){
+    const p=Math.round(score/list.length*100);
+    let msg;
+    if(p===100)msg="เต็ม ไม่พลาดสักคำ";
+    else if(p>=80)msg="แม่นมาก เหลือเก็บคำที่พลาดอีกนิดเดียว";
+    else if(p>=60)msg="ใช้ได้ ลองซ้อมชุดเดิมซ้ำให้ขึ้นเกิน 80";
+    else msg="ยังต้องซ้อมอีก ลองลดเหลือ 10 คำต่อรอบ แล้วเน้นคำที่ผิด";
+    $("pct").textContent=p+"%  ·  "+msg;
+  }else $("pct").textContent="ทบทวนครบแล้ว";
+  if(wrong.length){
+    $("wrongbox").classList.remove("hidden");
+    $("wronglist").innerHTML=wrong.map(w=>
+      "<li><b>"+w[0]+"</b> <span class='you'>— ที่ตอบ: "+w[1]+" · "+w[2]+"</span></li>").join("");
+  }else $("wrongbox").classList.add("hidden");
+}
+
+/* ---------- ปุ่ม ---------- */
+$("start").onclick=()=>{
+  unlock(); build();
+  idx=0;score=0;wrong=[];
+  $("setup").classList.add("hidden");
+  $("play").classList.remove("hidden");$("ask").classList.remove("hidden");$("bar").classList.remove("hidden");
+  $("result").classList.add("hidden");
+  ask();
+};
+$("bRepeat").onclick=async()=>{const my=token;stopAudio();
+  const it=list[idx],f=F(it);
+  await speak(mode==="meaning"?it.d:it.w,"en-US",my,mode==="meaning"?f.d:f.w);};
+$("bDef").onclick=async()=>{const my=token;stopAudio();
+  const it=list[idx],f=F(it);
+  $("def").classList.remove("hidden"); $("def").textContent=it.d;
+  await speak(it.d,"en-US",my,f.d);};
+$("bTh").onclick=async()=>{const my=token;stopAudio();
+  const it=list[idx],f=F(it);
+  $("mean").classList.remove("hidden"); $("mean").textContent=it.m;
+  await speak(it.m,"th-TH",my,f.m);};
+$("bSkip").onclick=()=>{
+  if(!answered&&(mode==="dictation"||mode==="meaning"))
+    wrong.push([list[idx].w,"(ข้าม)",list[idx].m]);
+  next();
+};
+$("bQuit").onclick=()=>finish();
+$("again").onclick=()=>{$("result").classList.add("hidden");$("start").click();};
+$("home").onclick=()=>{
+  token++;try{synth.cancel();}catch(e){}stopAudio();keepAlive(false);
+  $("result").classList.add("hidden");$("setup").classList.remove("hidden");
+};
+$("ans").addEventListener("keydown",e=>{if(e.key==="Enter")submit();});
+window.addEventListener("pagehide",()=>{try{synth.cancel();}catch(e){}stopAudio();});
+</script>
+</body>
+</html>
