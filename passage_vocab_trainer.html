@@ -69,6 +69,23 @@
     border:2px solid var(--edge);margin-top:18px;font-family:inherit}
   input[type=text]:focus{outline:none;border-color:var(--hi)}
 
+  /* คีย์บอร์ดของแอปเอง กันคำแนะนำอัตโนมัติจากคีย์บอร์ดเครื่อง */
+  .typed{width:min(460px,92vw);min-height:64px;margin-top:16px;padding:12px 14px;
+    border-radius:12px;background:#0B1A2E;border:2px solid var(--edge);
+    font-size:26px;letter-spacing:3px;display:flex;align-items:center;
+    justify-content:center;word-break:break-word;line-height:1.3}
+  .typed.on{border-color:var(--hi)}
+  .typed .ph{color:#54708F;font-size:16px;letter-spacing:0}
+  .caret{display:inline-block;width:2px;height:27px;background:var(--hi);
+    margin-left:2px;vertical-align:-4px;animation:bl 1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+  .kb{padding:8px 10px 0}
+  .kb .row{display:flex;gap:5px;justify-content:center;margin-bottom:5px}
+  .kb button{flex:1;max-width:60px;padding:13px 0;border-radius:9px;font-size:17px;
+    font-weight:700;background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .kb button:active{background:var(--hi);color:#12233D}
+  .kb button.wide{max-width:none;flex:2.2;font-size:14px;font-weight:600}
+
   .ask{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px 14px 0}
   .ask button{padding:13px 4px;border-radius:11px;font-size:13.5px;font-weight:600;
     background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
@@ -138,6 +155,16 @@
     <button class="chip" data-shuf="0">เรียงตามเรื่อง</button>
   </div>
 
+  <div class="lbl">คีย์บอร์ดที่ใช้พิมพ์คำตอบ</div>
+  <div class="chips" id="kbChips">
+    <button class="chip on" data-kb="1">ในแอป — แนะนำ</button>
+    <button class="chip" data-kb="0">ของเครื่อง</button>
+  </div>
+  <div class="note" style="margin-top:10px">
+    คีย์บอร์ดของมือถือจะเดาคำและสะกดให้อัตโนมัติ ทำให้วัดผลไม่ได้จริง
+    แอปจึงมีคีย์บอร์ด A–Z ของตัวเองให้ใช้แทน ไม่มีคำแนะนำใด ๆ
+  </div>
+
   <div class="lbl">อ่านคำแปลไทยด้วยหรือไม่</div>
   <div class="chips" id="thChips">
     <button class="chip on" data-th="1">อ่านคำแปลไทย</button>
@@ -181,9 +208,11 @@
     <div class="phase" id="phase"></div>
     <input type="text" id="ans" autocomplete="off" autocapitalize="off"
            autocorrect="off" spellcheck="false" placeholder="พิมพ์คำที่ได้ยิน">
+    <div class="typed hidden" id="typed"></div>
     <div class="verdict hidden" id="verdict"></div>
   </div>
 </div>
+<div class="kb hidden" id="kb"></div>
 <div class="ask hidden" id="ask">
   <button id="bRepeat">🔁 ฟังอีกครั้ง</button>
   <button id="bDef">📖 ความหมาย</button>
@@ -215,8 +244,38 @@ const SETS = [{"t":"Helen Keller","tag":"Nonfiction: Biography","n":1,"items":[{
 
 const $=id=>document.getElementById(id);
 const synth=window.speechSynthesis;
-let setSel="all", mode="review", rate=.75, cnt=20, shuf=1, sayThai=true;
+let setSel="all", mode="review", rate=.75, cnt=20, shuf=1, sayThai=true, useKB=true;
 let list=[], idx=0, score=0, wrong=[], answered=false, enVoice=null, thVoice=null, token=0;
+let typed="";
+
+/* ---------- คีย์บอร์ด A-Z ของแอปเอง ---------- */
+(function buildKB(){
+  const kb=$("kb");
+  "ABCDEFG|HIJKLMN|OPQRSTU|VWXYZ".split("|").forEach(r=>{
+    const d=document.createElement("div"); d.className="row";
+    r.split("").forEach(ch=>{
+      const b=document.createElement("button"); b.type="button"; b.textContent=ch;
+      b.onclick=()=>{ if(!answered){ typed+=ch.toLowerCase(); renderTyped(); } };
+      d.appendChild(b);
+    });
+    kb.appendChild(d);
+  });
+  const last=document.createElement("div"); last.className="row";
+  const mk=(label,fn)=>{const b=document.createElement("button");
+    b.type="button"; b.className="wide"; b.textContent=label; b.onclick=fn;
+    last.appendChild(b);};
+  mk("เว้นวรรค", ()=>{ if(!answered){ typed+=" "; renderTyped(); } });
+  mk("⌫ ลบ",    ()=>{ if(!answered){ typed=typed.slice(0,-1); renderTyped(); } });
+  mk("ลบทั้งหมด",()=>{ if(!answered){ typed=""; renderTyped(); } });
+  kb.appendChild(last);
+})();
+function renderTyped(){
+  const t=$("typed");
+  t.classList.toggle("on", typed.length>0);
+  t.innerHTML = typed.length
+    ? typed.replace(/ /g,"&nbsp;") + '<span class="caret"></span>'
+    : '<span class="ph">แตะตัวอักษรด้านล่างเพื่อสะกดคำ</span>';
+}
 
 /* ---------- เลือกชุด ---------- */
 (function(){
@@ -238,6 +297,7 @@ single("rateChips","rate",v=>rate=parseFloat(v));
 single("cntChips","cnt", v=>cnt=parseInt(v));
 single("shufChips","shuf",v=>shuf=parseInt(v));
 single("thChips","th",   v=>sayThai=(v==="1"));
+single("kbChips","kb",   v=>useKB=(v==="1"));
 
 /* ---------- เสียง ---------- */
 function pickVoices(){
@@ -380,8 +440,14 @@ async function ask(){
   $("bSubmit").textContent = (mode==="review"||mode==="answer") ? "คำต่อไป" : "ตอบ";
   $("bSubmit").onclick = (mode==="review"||mode==="answer") ? next : submit;
   const typing = (mode==="dictation"||mode==="meaning");
-  $("ans").classList.toggle("hidden",!typing);
-  if(typing){$("ans").value="";$("ans").focus();}
+  typed="";
+  $("ans").classList.toggle("hidden", !(typing && !useKB));
+  $("typed").classList.toggle("hidden", !(typing && useKB));
+  $("kb").classList.toggle("hidden",    !(typing && useKB));
+  if(typing){
+    if(useKB) renderTyped();
+    else { $("ans").value=""; $("ans").focus(); }
+  }
 
   const en=(t,file)=>speak(t,"en-US",my,file);
   const th=(t,file)=>sayThai?speak(t,"th-TH",my,file):Promise.resolve();
@@ -429,13 +495,15 @@ function submit(){
   if(answered)return;
   answered=true;
   const it=list[idx];
-  const given=$("ans").value.trim();
+  const given=(useKB ? typed : $("ans").value).trim();
   const ok=given.toLowerCase()===it.w.toLowerCase();
   if(ok){score++;$("verdict").textContent="✓ ถูกต้อง";$("verdict").className="verdict ok";}
   else{wrong.push([it.w,given||"(ไม่ได้ตอบ)",it.m]);
        $("verdict").textContent="✗ ยังไม่ถูก";$("verdict").className="verdict bad";}
   $("verdict").classList.remove("hidden");
   $("ans").classList.add("hidden");
+  $("typed").classList.add("hidden");
+  $("kb").classList.add("hidden");
   show(["word","spellout","read","mean","def"]);
   $("phase").textContent="";
   $("sc").textContent="ถูก "+score;
@@ -450,7 +518,7 @@ function next(){
 }
 function finish(){
   token++; try{synth.cancel();}catch(e){} stopAudio(); keepAlive(false);
-  $("play").classList.add("hidden");$("ask").classList.add("hidden");$("bar").classList.add("hidden");
+  $("play").classList.add("hidden");$("ask").classList.add("hidden");$("bar").classList.add("hidden");$("kb").classList.add("hidden");
   $("result").classList.remove("hidden");
   const graded=(mode==="dictation"||mode==="meaning");
   $("final").textContent = graded ? (score+" / "+list.length) : (list.length+" คำ");
