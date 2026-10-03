@@ -300,22 +300,29 @@ single("thChips","th",   v=>sayThai=(v==="1"));
 single("kbChips","kb",   v=>useKB=(v==="1"));
 
 /* ---------- เสียง ---------- */
+let _audioOK=null;          // true = ไฟล์เสียงใช้ได้  false = ใช้ไม่ได้  null = ยังไม่รู้
+let noEnVoice=false;
+function updateWarn(){
+  const w=$("warn"); if(!w)return;
+  if(_audioOK===true || !noEnVoice){ w.style.display="none"; return; }
+  w.style.display="block";
+  w.textContent = (_audioOK===false)
+    ? "เครื่องนี้ไม่มีเสียงภาษาอังกฤษ และยังโหลดไฟล์เสียงไม่ได้ ลองเช็กอินเทอร์เน็ต หรือเปิดด้วย Chrome"
+    : "เครื่องนี้ไม่มีเสียงภาษาอังกฤษ แอปจะใช้ไฟล์เสียงที่อัดไว้แทน";
+}
 function pickVoices(){
   const vs=synth.getVoices()||[];
   if(!vs.length)return;
   const en=vs.filter(v=>/^en/i.test(v.lang));
   const th=vs.filter(v=>/^th/i.test(v.lang));
   thVoice=th[0]||null;
-  if(!en.length){
-    $("warn").style.display="block";
-    $("warn").textContent="เครื่องนี้ไม่มีเสียงภาษาอังกฤษ เสียงที่ได้ยินอาจเพี้ยน "
-      +"แนะนำให้เปิดด้วย Chrome หรือ Edge หรือใช้ไฟล์เสียงที่อัดไว้";
-  }
+  noEnVoice=!en.length;
+  updateWarn();
 }
 function fillVoiceSel(){
   const sel=$("voiceSel"); if(!sel)return;
   const vs=(synth.getVoices()||[]).filter(v=>/^en/i.test(v.lang));
-  if(!vs.length){sel.innerHTML='<option>ไม่พบเสียงภาษาอังกฤษในเครื่องนี้</option>';return;}
+  if(!vs.length){sel.innerHTML='<option>ไม่มีเสียงในเครื่อง — ใช้ไฟล์เสียงที่อัดไว้</option>';return;}
   const score=v=>{let s=0;const n=(v.name||"").toLowerCase();
     if(n.includes("google"))s+=100;
     if(n.includes("natural")||n.includes("neural"))s+=80;
@@ -348,7 +355,16 @@ function unlock(){try{const u=new SpeechSynthesisUtterance(" ");u.volume=0;synth
 
 /* ---------- เล่นไฟล์เสียงก่อน ถ้าไม่มีค่อยใช้เสียงสังเคราะห์ ---------- */
 const AUDIO_BASE="audio/pass/";
-let _audioOK=null, _cur=null, _keep=null;
+let _cur=null, _keep=null;
+/* ตรวจตั้งแต่เปิดแอปว่าไฟล์เสียงโหลดได้หรือไม่ จะได้ไม่ขึ้นเตือนผิด */
+(function probeAudio(){
+  try{
+    const a=new Audio(AUDIO_BASE+"p1/imagine_w.mp3");
+    a.preload="metadata";
+    a.onloadedmetadata=()=>{_audioOK=true;updateWarn();};
+    a.onerror=()=>{if(_audioOK===null){_audioOK=false;updateWarn();}};
+  }catch(e){}
+})();
 function keepAlive(on){
   if(on){ if(_keep)return;
     _keep=setInterval(()=>{try{if(synth.speaking)synth.resume();}catch(e){}},7000);
@@ -399,8 +415,8 @@ function ttsSay(text,lang,my){
 async function speak(text,lang,my,file){
   if(file&&_audioOK!==false){
     const ok=await playFile(AUDIO_BASE+file,my);
-    if(ok){_audioOK=true;return;}
-    if(_audioOK===null)_audioOK=false;
+    if(ok){if(_audioOK!==true){_audioOK=true;updateWarn();}return;}
+    if(_audioOK===null){_audioOK=false;updateWarn();}
   }
   return ttsSay(text,lang,my);
 }
