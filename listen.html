@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#12233D">
+<title>ฟังคำศัพท์ต่อเนื่อง — สำหรับฟังในรถ</title>
+<style>
+  :root{--bg:#12233D;--panel:#1B3352;--panel2:#234170;--edge:#2E5080;
+        --ink:#EFF4FA;--dim:#8FA9C8;--hi:#7FE0A8;--pad:env(safe-area-inset-bottom,0px)}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);
+    font-family:'Sarabun','Noto Sans Thai','Segoe UI',sans-serif;
+    padding-bottom:calc(150px + var(--pad))}
+  .wrap{max-width:640px;margin:0 auto;padding:22px 16px 10px}
+  h1{font-size:23px;margin:0 0 6px;font-weight:800}
+  .lead{color:var(--dim);font-size:14px;line-height:1.7;margin:0 0 18px}
+  .grp{font-size:13px;color:var(--dim);font-weight:700;margin:24px 0 10px;
+       text-transform:none;letter-spacing:.3px}
+  .trk{display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    background:var(--panel);border:1.5px solid var(--edge);color:var(--ink);
+    border-radius:12px;padding:13px 14px;margin-bottom:8px;font-family:inherit}
+  .trk.on{border-color:var(--hi);background:var(--panel2)}
+  .trk .ic{font-size:20px;width:26px;flex:none;text-align:center;color:var(--hi)}
+  .trk .tx{flex:1;min-width:0}
+  .trk .t1{display:block;font-size:15.5px;font-weight:700;line-height:1.35}
+  .trk .t2{display:block;font-size:12.5px;color:var(--dim);margin-top:3px}
+  .trk .dl{flex:none;font-size:12px;color:var(--dim);padding:7px 9px;
+    border:1.5px solid var(--edge);border-radius:9px;text-decoration:none}
+  .bar{position:fixed;left:0;right:0;bottom:0;background:#0E1D33;
+    border-top:1.5px solid var(--edge);padding:12px 16px calc(14px + var(--pad))}
+  .bar .inner{max-width:640px;margin:0 auto}
+  .now{font-size:14.5px;font-weight:700;margin-bottom:3px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sub{font-size:12px;color:var(--dim);margin-bottom:9px}
+  .ctr{display:grid;grid-template-columns:1fr 1.5fr 1fr;gap:9px}
+  .ctr button{padding:15px 4px;border-radius:12px;font-size:15px;font-weight:700;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge);
+    font-family:inherit;cursor:pointer}
+  .ctr button.main{background:var(--hi);color:#0E1D33;font-weight:800;font-size:17px}
+  .opt{display:flex;gap:8px;margin-top:9px}
+  .opt button{flex:1;padding:9px 4px;border-radius:9px;font-size:12.5px;
+    background:transparent;color:var(--dim);border:1.5px solid var(--edge);
+    font-family:inherit;cursor:pointer}
+  .opt button.on{background:var(--hi);color:#0E1D33;border-color:var(--hi);font-weight:700}
+  .note{background:rgba(127,224,168,.10);border-left:4px solid var(--hi);
+    padding:12px 14px;border-radius:0 9px 9px 0;font-size:13px;line-height:1.7;
+    margin:18px 0 0;color:#D8E4F2}
+  .note b{color:var(--ink)}
+  a.back{display:inline-block;margin-top:18px;color:var(--dim);font-size:13.5px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>ฟังคำศัพท์ต่อเนื่อง</h1>
+  <p class="lead">สำหรับเปิดฟังในรถหรือระหว่างทำอย่างอื่น ไม่ต้องกดอะไรเลย<br>
+     แต่ละคำจะอ่านว่า <b>คำศัพท์ → สะกดทีละตัว → คำศัพท์ซ้ำ → ประโยคตัวอย่าง</b>
+     แล้วไปคำถัดไปเอง จบแทร็กก็เล่นแทร็กต่อไปอัตโนมัติ</p>
+  <div id="list"></div>
+
+  <div class="note">
+    <b>เปิดฟังในรถ</b> ต่อบลูทูธรถแล้วกดเล่นได้เลย ปิดจอมือถือได้ เสียงไม่หยุด
+    และกดเล่น/หยุด ข้ามแทร็ก จากหน้าจอรถหรือพวงมาลัยได้<br><br>
+    <b>ฟังตอนไม่มีเน็ต</b> กดปุ่ม ⤓ ท้ายแต่ละแทร็กเพื่อบันทึกไฟล์ลงเครื่องไว้ก่อน<br><br>
+    <b>iPhone</b> ต้องปลดสวิตช์เงียบข้างเครื่อง และต้องกดปุ่มเล่นครั้งแรกด้วยตัวเอง
+  </div>
+  <a class="back" href="./">← กลับหน้ารวมแอป</a>
+</div>
+
+<div class="bar">
+  <div class="inner">
+    <div class="now" id="now">ยังไม่ได้เลือกแทร็ก</div>
+    <div class="sub" id="sub">แตะแทร็กด้านบนเพื่อเริ่มฟัง</div>
+    <div class="ctr">
+      <button id="prev">⏮ ก่อนหน้า</button>
+      <button class="main" id="play">▶ เล่น</button>
+      <button id="next">ถัดไป ⏭</button>
+    </div>
+    <div class="opt">
+      <button id="auto" class="on">เล่นต่อเนื่อง</button>
+      <button id="sp09">ช้าลง 0.9×</button>
+      <button id="sp10" class="on">ความเร็วปกติ</button>
+    </div>
+  </div>
+</div>
+
+<audio id="au" preload="none"></audio>
+
+<script>
+const T=[{"f":"bee_01.mp3","title":"Spelling Bee ชุดที่ 1","sub":"คำที่ 1–25 · 25 คำ","grp":"Spelling Bee (ป.3–ป.4)"},{"f":"bee_02.mp3","title":"Spelling Bee ชุดที่ 2","sub":"คำที่ 26–50 · 25 คำ","grp":"Spelling Bee (ป.3–ป.4)"},{"f":"bee_03.mp3","title":"Spelling Bee ชุดที่ 3","sub":"คำที่ 51–75 · 25 คำ","grp":"Spelling Bee (ป.3–ป.4)"},{"f":"bee_04.mp3","title":"Spelling Bee ชุดที่ 4","sub":"คำที่ 76–100 · 25 คำ","grp":"Spelling Bee (ป.3–ป.4)"},{"f":"bee_05.mp3","title":"Spelling Bee ชุดที่ 5","sub":"คำที่ 101–124 · 24 คำ","grp":"Spelling Bee (ป.3–ป.4)"},{"f":"sci_01.mp3","title":"คำศัพท์เรื่องแสง ชุดที่ 1","sub":"คำที่ 1–20 · 20 คำ","grp":"วิทยาศาสตร์ เรื่องแสง (ป.4)"},{"f":"sci_02.mp3","title":"คำศัพท์เรื่องแสง ชุดที่ 2","sub":"คำที่ 21–40 · 20 คำ","grp":"วิทยาศาสตร์ เรื่องแสง (ป.4)"},{"f":"sci_03.mp3","title":"คำศัพท์เรื่องแสง ชุดที่ 3","sub":"คำที่ 41–60 · 20 คำ","grp":"วิทยาศาสตร์ เรื่องแสง (ป.4)"},{"f":"sci_04.mp3","title":"คำศัพท์เรื่องแสง ชุดที่ 4","sub":"คำที่ 61–80 · 20 คำ","grp":"วิทยาศาสตร์ เรื่องแสง (ป.4)"},{"f":"sci_05.mp3","title":"คำศัพท์เรื่องแสง ชุดที่ 5","sub":"คำที่ 81–100 · 20 คำ","grp":"วิทยาศาสตร์ เรื่องแสง (ป.4)"},{"f":"sci_06.mp3","title":"คำศัพท์เรื่องแสง ชุดที่ 6","sub":"คำที่ 101–108 · 8 คำ","grp":"วิทยาศาสตร์ เรื่องแสง (ป.4)"},{"f":"pass_1.mp3","title":"1. Helen Keller","sub":"Nonfiction: Biography · 31 คำ","grp":"คำศัพท์จากบทอ่าน Daily Warm-Ups"},{"f":"pass_2.mp3","title":"2. War of 1812","sub":"Nonfiction: American History · 26 คำ","grp":"คำศัพท์จากบทอ่าน Daily Warm-Ups"},{"f":"pass_3.mp3","title":"3. Static Electricity","sub":"Nonfiction: Science · 22 คำ","grp":"คำศัพท์จากบทอ่าน Daily Warm-Ups"},{"f":"pass_4.mp3","title":"4. Geology","sub":"Nonfiction: Science · 32 คำ","grp":"คำศัพท์จากบทอ่าน Daily Warm-Ups"},{"f":"pass_5.mp3","title":"5. Toucan","sub":"Nonfiction: Animals · 28 คำ","grp":"คำศัพท์จากบทอ่าน Daily Warm-Ups"},{"f":"pass_6.mp3","title":"6. The Panda Bear","sub":"Nonfiction: Animals · 27 คำ","grp":"คำศัพท์จากบทอ่าน Daily Warm-Ups"},{"f":"pass_7.mp3","title":"7. Ladybugs","sub":"Nonfiction: Animals · 30 คำ","grp":"คำศัพท์จากบทอ่าน Daily Warm-Ups"},{"f":"pass_8.mp3","title":"8. Walt Disney","sub":"Nonfiction: Biography · 31 คำ","grp":"คำศัพท์จากบทอ่าน Daily Warm-Ups"}];
+const BASE="audio/car/";
+const $=id=>document.getElementById(id);
+const au=$("au");
+let cur=-1, autoNext=true;
+
+(function render(){
+  const box=$("list"); let g="";
+  T.forEach((t,i)=>{
+    if(t.grp!==g){ g=t.grp;
+      const h=document.createElement("div"); h.className="grp"; h.textContent=g; box.appendChild(h); }
+    const row=document.createElement("div"); row.className="trk"; row.id="r"+i;
+    row.innerHTML='<span class="ic" id="i'+i+'">▶</span>'+
+      '<span class="tx"><span class="t1">'+t.title+'</span>'+
+      '<span class="t2">'+t.sub+'</span></span>';
+    row.onclick=e=>{ if(e.target.classList.contains("dl"))return; load(i,true); };
+    const a=document.createElement("a");
+    a.className="dl"; a.textContent="⤓"; a.href=BASE+t.f; a.download=t.f;
+    a.title="บันทึกไฟล์ลงเครื่อง";
+    a.onclick=e=>e.stopPropagation();
+    row.appendChild(a);
+    box.appendChild(row);
+  });
+})();
+
+function paint(){
+  T.forEach((t,i)=>{
+    const r=$("r"+i), ic=$("i"+i); if(!r)return;
+    r.classList.toggle("on", i===cur);
+    ic.textContent = (i===cur && !au.paused) ? "❚❚" : "▶";
+  });
+  if(cur>=0){ $("now").textContent=T[cur].title; $("sub").textContent=T[cur].grp+" · "+T[cur].sub; }
+  $("play").textContent = au.paused ? "▶ เล่น" : "❚❚ หยุด";
+}
+
+function load(i,go){
+  if(i<0||i>=T.length)return;
+  cur=i;
+  au.src=BASE+T[i].f;
+  au.load();
+  if(go){ const p=au.play(); if(p&&p.catch)p.catch(()=>{}); }
+  media();
+  paint();
+}
+function media(){
+  if(!("mediaSession" in navigator)||cur<0)return;
+  try{
+    navigator.mediaSession.metadata=new MediaMetadata({
+      title:T[cur].title, artist:T[cur].grp, album:"ฟังคำศัพท์ต่อเนื่อง"});
+    navigator.mediaSession.setActionHandler("previoustrack",()=>load(cur-1,true));
+    navigator.mediaSession.setActionHandler("nexttrack",()=>load(cur+1,true));
+    navigator.mediaSession.setActionHandler("play",()=>{au.play();});
+    navigator.mediaSession.setActionHandler("pause",()=>{au.pause();});
+  }catch(e){}
+}
+
+$("play").onclick=()=>{
+  if(cur<0)return load(0,true);
+  if(au.paused){const p=au.play(); if(p&&p.catch)p.catch(()=>{});}
+  else au.pause();
+};
+$("prev").onclick=()=>load(cur<=0?0:cur-1,true);
+$("next").onclick=()=>load(cur+1>=T.length?0:cur+1,true);
+$("auto").onclick=e=>{autoNext=!autoNext;e.target.classList.toggle("on",autoNext);};
+$("sp09").onclick=()=>{au.playbackRate=0.9;$("sp09").classList.add("on");$("sp10").classList.remove("on");};
+$("sp10").onclick=()=>{au.playbackRate=1;$("sp10").classList.add("on");$("sp09").classList.remove("on");};
+
+au.addEventListener("play",paint);
+au.addEventListener("pause",paint);
+au.addEventListener("ended",()=>{ if(autoNext && cur+1<T.length) load(cur+1,true); else paint(); });
+au.addEventListener("error",()=>{
+  $("sub").textContent="เปิดไฟล์นี้ไม่ได้ อาจยังไม่ได้อัปขึ้นเซิร์ฟเวอร์";
+});
+paint();
+</script>
+</body>
+</html>
