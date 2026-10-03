@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#12233D">
-<title>ฝึก Spelling Bee — ป.4 (Level 2)</title>
+<title>ฝึกสะกดคำ Spelling Bee — ป.3–ป.4</title>
 <style>
   :root{
     --bg:#12233D; --panel:#1B3352; --panel2:#234170; --edge:#2E5080;
@@ -16,16 +16,13 @@
   html,body{margin:0;height:100%}
   body{background:var(--bg);color:var(--ink);min-height:100%;
     font-family:'Sarabun','Noto Sans Thai','Segoe UI','Helvetica Neue',sans-serif}
-  .app{max-width:620px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+  .app{max-width:640px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
   button{font-family:inherit;border:none;cursor:pointer}
   .hidden{display:none!important}
 
-  /* ---- setup ---- */
   .setup{padding:22px 18px calc(30px + var(--pad));flex:1}
   h1{font-size:25px;margin:2px 0 6px;font-weight:800;line-height:1.25}
   .lead{color:var(--dim);font-size:14.5px;line-height:1.65;margin:0 0 6px}
-  .note{background:rgba(255,200,69,.10);border-left:4px solid var(--hi);
-    padding:12px 14px;border-radius:0 9px 9px 0;font-size:13px;line-height:1.65;margin:16px 0 4px;color:#D8E4F2}
   .lbl{font-size:13px;color:var(--dim);margin:22px 0 9px;font-weight:600}
   .chips{display:flex;flex-wrap:wrap;gap:8px}
   .chip{padding:12px 15px;border-radius:11px;font-size:14.5px;
@@ -33,37 +30,62 @@
   .chip.on{background:var(--hi);color:#12233D;border-color:var(--hi);font-weight:700}
   .chip.wide{width:100%;text-align:left}
   .chip.wide small{display:block;font-size:12.5px;opacity:.72;margin-top:3px;font-weight:400}
+  select.vsel{width:100%;padding:12px;border-radius:11px;font-size:15px;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge);
+    font-family:inherit;margin-bottom:8px}
+  .vtest{padding:11px 16px;border-radius:10px;font-size:13.5px;font-weight:600;
+    background:var(--panel2);color:var(--ink);border:1.5px solid var(--edge)}
   .go{width:100%;margin-top:26px;padding:19px;font-size:19px;font-weight:800;
     background:var(--hi);color:#12233D;border-radius:14px}
+  .note{background:rgba(255,200,69,.10);border-left:4px solid var(--hi);
+    padding:12px 14px;border-radius:0 9px 9px 0;font-size:13px;line-height:1.65;
+    margin:16px 0 4px;color:#D8E4F2}
   details{margin-top:22px;font-size:14px;color:var(--dim)}
   details summary{padding:12px 0;font-weight:600;color:var(--ink)}
   details p{line-height:1.7;margin:4px 0 12px}
 
-  /* ---- stage ---- */
   .stage{flex:1;display:flex;flex-direction:column;padding:14px 16px 0}
   .top{display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--dim)}
   .track{flex:1;height:5px;background:#0B1A2E;border-radius:4px;overflow:hidden}
   .track i{display:block;height:100%;width:0%;background:var(--dim)}
   .card{flex:1;display:flex;flex-direction:column;align-items:center;
     justify-content:center;text-align:center;padding:12px 4px}
-  .num{font-size:54px;font-weight:800;color:var(--hi);line-height:1;font-variant-numeric:tabular-nums}
+  .num{font-size:50px;font-weight:800;color:var(--hi);line-height:1;
+    font-variant-numeric:tabular-nums}
   .numlbl{font-size:13px;color:var(--dim)}
-  .speaker{font-size:64px;margin:6px 0 2px;line-height:1}
-  .phase{font-size:15px;color:var(--dim);margin-top:8px;min-height:1.4em}
-  .hint{font-size:16px;color:#C8D8EC;margin-top:16px;line-height:1.6;
-    max-width:520px;padding:0 8px}
-  .hint b{color:var(--hi)}
-  .reveal{font-size:44px;font-weight:800;letter-spacing:2px;margin-top:8px;word-break:break-word}
-  .spellout{font-size:20px;letter-spacing:8px;color:var(--hi);font-weight:700;margin-top:8px}
-  .verdict{font-size:22px;font-weight:800;margin-top:14px}
+  .speaker{font-size:58px;margin:4px 0 2px;line-height:1}
+  .word{font-size:clamp(32px,8vw,52px);font-weight:800;letter-spacing:1px;
+    word-break:break-word;line-height:1.15}
+  .mean{font-size:20px;margin-top:7px;color:var(--hi)}
+  .def{font-size:16px;color:#C8D8EC;margin-top:14px;line-height:1.6;
+    max-width:540px;padding:0 8px}
+  .sent{font-size:15.5px;color:#9FB6D2;margin-top:10px;line-height:1.6;
+    max-width:540px;padding:0 8px;font-style:italic}
+  .spellout{font-size:19px;letter-spacing:8px;color:var(--hi);font-weight:700;margin-top:10px}
+  .phase{font-size:14.5px;color:var(--dim);margin-top:14px;min-height:1.4em}
+  .verdict{font-size:21px;font-weight:800;margin-top:14px}
   .verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)}
-
-  input[type=text]{width:min(420px,90vw);padding:15px;border-radius:12px;font-size:24px;
+  input[type=text]{width:min(420px,90vw);padding:15px;border-radius:12px;font-size:23px;
     text-align:center;letter-spacing:2px;background:#0B1A2E;color:var(--ink);
     border:2px solid var(--edge);margin-top:18px;font-family:inherit}
   input[type=text]:focus{outline:none;border-color:var(--hi)}
 
-  /* ---- ask bar ---- */
+  .typed{width:min(460px,92vw);min-height:64px;margin-top:16px;padding:12px 14px;
+    border-radius:12px;background:#0B1A2E;border:2px solid var(--edge);
+    font-size:26px;letter-spacing:3px;display:flex;align-items:center;
+    justify-content:center;word-break:break-word;line-height:1.3}
+  .typed.on{border-color:var(--hi)}
+  .typed .ph{color:#54708F;font-size:16px;letter-spacing:0}
+  .caret{display:inline-block;width:2px;height:27px;background:var(--hi);
+    margin-left:2px;vertical-align:-4px;animation:bl 1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+  .kb{padding:8px 10px 0}
+  .kb .row{display:flex;gap:5px;justify-content:center;margin-bottom:5px}
+  .kb button{flex:1;max-width:60px;padding:13px 0;border-radius:9px;font-size:17px;
+    font-weight:700;background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .kb button:active{background:var(--hi);color:#12233D}
+  .kb button.wide{max-width:none;flex:2.2;font-size:14px;font-weight:600}
+
   .ask{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px 14px 0}
   .ask button{padding:13px 4px;border-radius:11px;font-size:13.5px;font-weight:600;
     background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
@@ -74,9 +96,8 @@
     background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
   .bar button.main{background:var(--hi);color:#12233D;font-weight:800}
 
-  /* ---- result ---- */
   .result{padding:24px 18px calc(30px + var(--pad));flex:1}
-  .score{font-size:56px;font-weight:800;color:var(--hi);line-height:1}
+  .score{font-size:54px;font-weight:800;color:var(--hi);line-height:1}
   .wrongbox{margin-top:22px;background:var(--panel);border:1.5px solid var(--edge);
     border-radius:12px;padding:14px 16px}
   .wrongbox h3{font-size:15px;margin:0 0 10px;color:var(--bad)}
@@ -87,28 +108,28 @@
 <body>
 <div class="app">
 
-<!-- ================= SETUP ================= -->
 <div class="setup" id="setup">
-  <h1>ฝึก Spelling Bee</h1>
-  <p class="lead">ระดับ ป.3–ป.4 (Level 2) · ฝึกแบบเดียวกับสนามจริง
-     ฟังคำ ขอฟังซ้ำ ขอความหมาย ขอประโยค แล้วจึงสะกด</p>
+  <h1>ฝึกสะกดคำ Spelling Bee</h1>
+  <p class="lead">ระดับ 2 · ป.3–ป.4 · 124 คำ<br>ฟังเสียง ฟังความหมาย แล้วสะกดคำ — รูปแบบเดียวกับสนามแข่งจริง</p>
 
-  <div class="note">
-    <b>ชุดคำในแอปนี้เป็นชุดฝึกซ้อม</b> ผมรวบรวมให้ตรงระดับ CEFR Starters และ Movers
-    ตามที่การแข่งขันใช้เป็นฐาน แต่ <b>ไม่ใช่รายการคำอย่างเป็นทางการ</b>
-    ควรขอไฟล์รายการคำจากผู้จัดมาซ้อมควบคู่กันด้วย
-  </div>
-
-  <div class="lbl">ชุดคำศัพท์</div>
+  <div class="lbl">เลือกชุดคำ</div>
   <div class="chips" id="setChips"></div>
 
   <div class="lbl">โหมดการฝึก</div>
   <div class="chips" id="modeChips">
-    <button class="chip wide on" data-mode="type">พิมพ์คำตอบ — ตรวจให้อัตโนมัติ
-      <small>เหมาะกับซ้อมเอง รู้ผลทันทีทุกคำ</small></button>
-    <button class="chip wide" data-mode="paper">เขียนลงกระดาษ — กดดูเฉลย
-      <small>เหมือนสนามจริงมากกว่า ฝึกเขียนด้วยมือ</small></button>
+    <button class="chip wide on" data-mode="review">ทบทวนคำศัพท์
+      <small>เห็นคำ ความหมายภาษาอังกฤษ และประโยคตัวอย่าง พร้อมเสียง</small></button>
+    <button class="chip wide" data-mode="dictation">ฟังคำ แล้วสะกด
+      <small>ซ่อนตัวสะกด ฟังเสียงแล้วพิมพ์คำ — ตรวจให้อัตโนมัติ</small></button>
+    <button class="chip wide" data-mode="meaning">ฟังความหมาย แล้วเดาคำ
+      <small>อ่านนิยามภาษาอังกฤษให้ฟัง นักเรียนตอบว่าเป็นคำไหน</small></button>
+    <button class="chip wide" data-mode="answer">เฉลย
+      <small>อ่านคำและสะกดทีละตัวอักษร</small></button>
   </div>
+
+  <div class="lbl">เสียงผู้อ่าน</div>
+  <select class="vsel" id="voiceSel"></select>
+  <button class="vtest" id="voiceTest">▶ ฟังตัวอย่าง</button>
 
   <div class="lbl">ความเร็วเสียง</div>
   <div class="chips" id="rateChips">
@@ -126,28 +147,39 @@
     <button class="chip" data-cnt="0">ทั้งชุด</button>
   </div>
 
-  <div class="lbl">สลับลำดับคำ</div>
+  <div class="lbl">ลำดับคำ</div>
   <div class="chips" id="shufChips">
     <button class="chip on" data-shuf="1">สุ่มลำดับ</button>
     <button class="chip" data-shuf="0">เรียงตามชุด</button>
   </div>
 
+  <div class="lbl">คีย์บอร์ดที่ใช้พิมพ์คำตอบ</div>
+  <div class="chips" id="kbChips">
+    <button class="chip on" data-kb="1">ในแอป — แนะนำ</button>
+    <button class="chip" data-kb="0">ของเครื่อง</button>
+  </div>
+  <div class="note" style="margin-top:10px">
+    คีย์บอร์ดของมือถือจะเดาคำและสะกดให้อัตโนมัติ ทำให้วัดผลไม่ได้จริง
+    แอปจึงมีคีย์บอร์ด A–Z ของตัวเองให้ใช้แทน ไม่มีคำแนะนำใด ๆ
+  </div>
+
+
   <button class="go" id="start">เริ่มฝึก</button>
   <div class="note" id="warn" style="display:none"></div>
 
   <details>
-    <summary>กติกาสนามจริง และวิธีใช้แอปนี้</summary>
-    <p><b>ในสนามจริง</b> ผู้อ่านจะอ่านคำให้ฟัง นักเรียนมีสิทธิ์ขอให้อ่านซ้ำ
-       ขอความหมาย ขอประโยคตัวอย่าง และขอชนิดของคำได้ก่อนตอบ
-       การขอไม่ถือว่าเสียคะแนน แอปนี้จึงทำปุ่มสามปุ่มนั้นไว้ให้ฝึกใช้จนติดเป็นนิสัย</p>
-    <p><b>สิ่งที่เด็กมักพลาด</b> คือรีบสะกดทันทีที่ได้ยิน ทั้งที่ยังไม่แน่ใจว่าเป็นคำไหน
-       เช่น their กับ there ถ้าขอประโยคก่อนจะรู้ทันที ฝึกให้ขอทุกครั้งแม้จะมั่นใจ</p>
-    <p><b>ไม่มีเสียงภาษาอังกฤษ</b> เปิดด้วย Chrome หรือ Edge
-       iPhone ต้องปลดสวิตช์เงียบข้างเครื่องก่อน</p>
+    <summary>วิธีใช้ และเรื่องเสียง</summary>
+    <p><b>โหมดฟังคำ แล้วสะกด</b> ใช้สอบเก็บคะแนนได้เลย นักเรียนจะไม่เห็นตัวสะกด
+       แต่ขอฟังซ้ำหรือขอคำใบ้ได้ตลอด เหมือนสนาม Spelling Bee จริง</p>
+    <p><b>ฟังความหมาย แล้วเดาคำ</b> วัดความเข้าใจความหมาย ไม่ใช่แค่จำตัวสะกด เหมาะใช้ก่อนลงสนามจริง เพราะกรรมการจะอ่านนิยามให้ฟังเช่นกัน</p>
+    <p><b>ถ้าไม่มีเสียงหรือเสียงเพี้ยน</b> เครื่องนั้นไม่มีเสียงภาษาอังกฤษติดตั้งอยู่
+       แอปจะเล่นไฟล์เสียงที่อัดไว้ในโฟลเดอร์ <code>audio/bee/</code> ก่อนเสมอ
+       ซึ่งเสียงจะเหมือนกันทุกเครื่อง ถ้าไฟล์ไหนไม่มี จึงค่อยใช้เสียงในเครื่องแทน</p>
+    <p>iPhone ต้องปลดสวิตช์เงียบข้างเครื่องก่อน และต้องกดปุ่มเริ่มทุกครั้ง
+       เพราะมือถือไม่อนุญาตให้เว็บเล่นเสียงเองโดยไม่มีการแตะ</p>
   </details>
 </div>
 
-<!-- ================= PLAY ================= -->
 <div class="stage hidden" id="play">
   <div class="top">
     <span id="tick"></span>
@@ -155,22 +187,26 @@
     <span id="sc"></span>
   </div>
   <div class="card">
-    <div class="numlbl" id="numlbl">คำที่</div>
-    <div class="num" id="num"></div>
-    <div class="speaker" id="spk">🔊</div>
-    <div class="phase" id="phase"></div>
-    <div class="hint hidden" id="hint"></div>
-    <input type="text" id="ans" autocomplete="off" autocapitalize="off"
-           autocorrect="off" spellcheck="false" placeholder="สะกดคำที่ได้ยิน">
-    <div class="reveal hidden" id="reveal"></div>
+    <div class="numlbl hidden" id="numlbl">คำที่</div>
+    <div class="num hidden" id="num"></div>
+    <div class="speaker hidden" id="spk">🔊</div>
+    <div class="word hidden" id="word"></div>
+    <div class="mean hidden" id="mean"></div>
     <div class="spellout hidden" id="spellout"></div>
+    <div class="def hidden" id="def"></div>
+    <div class="sent hidden" id="sent"></div>
+    <div class="phase" id="phase"></div>
+    <input type="text" id="ans" autocomplete="off" autocapitalize="off"
+           autocorrect="off" spellcheck="false" placeholder="พิมพ์คำที่ได้ยิน">
+    <div class="typed hidden" id="typed"></div>
     <div class="verdict hidden" id="verdict"></div>
   </div>
 </div>
+<div class="kb hidden" id="kb"></div>
 <div class="ask hidden" id="ask">
   <button id="bRepeat">🔁 ฟังอีกครั้ง</button>
   <button id="bDef">📖 ความหมาย</button>
-  <button id="bSent">📝 ประโยค</button>
+  <button id="bTh">💬 ประโยค</button>
 </div>
 <div class="bar hidden" id="bar">
   <button class="main" id="bSubmit">ตอบ</button>
@@ -178,7 +214,6 @@
   <button id="bQuit">ออก</button>
 </div>
 
-<!-- ================= RESULT ================= -->
 <div class="result hidden" id="result">
   <div class="numlbl">คะแนน</div>
   <div class="score" id="final"></div>
@@ -194,774 +229,355 @@
 </div>
 
 <script>
-/* ============ ชุดคำศัพท์ ============ */
-const BANKS = {
- starters: { name:"Starters (Pre-A1) พื้นฐาน", words:[
-  ["apple","a round fruit that is red or green","I eat an apple every day."],
-  ["ball","a round thing you play with","He kicked the ball."],
-  ["bird","an animal with wings that can fly","A bird is singing in the tree."],
-  ["book","pages with words that you read","She is reading a book."],
-  ["chair","a seat for one person","Please sit on the chair."],
-  ["clock","a thing that shows the time","The clock says eight o'clock."],
-  ["cloud","white or grey water in the sky","There is one cloud in the sky."],
-  ["door","you open it to go into a room","Please close the door."],
-  ["duck","a bird that swims on water","The duck is in the pond."],
-  ["flower","the coloured part of a plant","She picked a yellow flower."],
-  ["garden","a place outside where plants grow","We play in the garden."],
-  ["house","a building where people live","My house is near the school."],
-  ["kite","a toy that flies on a string","We fly a kite in the park."],
-  ["lemon","a sour yellow fruit","Add some lemon to the water."],
-  ["monkey","an animal that climbs trees","The monkey ate a banana."],
-  ["mouse","a small animal with a long tail","A mouse ran under the table."],
-  ["pencil","you write with it","Write with a pencil, not a pen."],
-  ["rabbit","a small animal with long ears","The rabbit is eating a carrot."],
-  ["school","a place where children learn","We go to school by bus."],
-  ["table","furniture with a flat top and legs","Put the books on the table."],
-  ["window","a glass opening in a wall","Please open the window."],
-  ["yellow","the colour of a lemon","Her dress is yellow."]
- ]},
+const SETS = [{"n":1,"t":"ชุดที่ 1","tag":"คำที่ 1–25","items":[{"w":"apple","m":"","d":"a round fruit that is red or green","s":"I eat an apple every day.","k":"apple"},{"w":"ball","m":"","d":"a round thing you play with","s":"He kicked the ball.","k":"ball"},{"w":"bird","m":"","d":"an animal with wings that can fly","s":"A bird is singing in the tree.","k":"bird"},{"w":"book","m":"","d":"pages with words that you read","s":"She is reading a book.","k":"book"},{"w":"chair","m":"","d":"a seat for one person","s":"Please sit on the chair.","k":"chair"},{"w":"clock","m":"","d":"a thing that shows the time","s":"The clock says eight o'clock.","k":"clock"},{"w":"cloud","m":"","d":"white or grey water in the sky","s":"There is one cloud in the sky.","k":"cloud"},{"w":"door","m":"","d":"you open it to go into a room","s":"Please close the door.","k":"door"},{"w":"duck","m":"","d":"a bird that swims on water","s":"The duck is in the pond.","k":"duck"},{"w":"flower","m":"","d":"the coloured part of a plant","s":"She picked a yellow flower.","k":"flower"},{"w":"garden","m":"","d":"a place outside where plants grow","s":"We play in the garden.","k":"garden"},{"w":"house","m":"","d":"a building where people live","s":"My house is near the school.","k":"house"},{"w":"kite","m":"","d":"a toy that flies on a string","s":"We fly a kite in the park.","k":"kite"},{"w":"lemon","m":"","d":"a sour yellow fruit","s":"Add some lemon to the water.","k":"lemon"},{"w":"monkey","m":"","d":"an animal that climbs trees","s":"The monkey ate a banana.","k":"monkey"},{"w":"mouse","m":"","d":"a small animal with a long tail","s":"A mouse ran under the table.","k":"mouse"},{"w":"pencil","m":"","d":"you write with it","s":"Write with a pencil, not a pen.","k":"pencil"},{"w":"rabbit","m":"","d":"a small animal with long ears","s":"The rabbit is eating a carrot.","k":"rabbit"},{"w":"school","m":"","d":"a place where children learn","s":"We go to school by bus.","k":"school"},{"w":"table","m":"","d":"furniture with a flat top and legs","s":"Put the books on the table.","k":"table"},{"w":"window","m":"","d":"a glass opening in a wall","s":"Please open the window.","k":"window"},{"w":"yellow","m":"","d":"the colour of a lemon","s":"Her dress is yellow.","k":"yellow"},{"w":"airport","m":"","d":"a place where planes arrive and leave","s":"We met her at the airport.","k":"airport"},{"w":"balcony","m":"","d":"a small area outside an upstairs window","s":"She waved from the balcony.","k":"balcony"},{"w":"basket","m":"","d":"a container you carry things in","s":"Put the fruit in the basket.","k":"basket"}]},{"n":2,"t":"ชุดที่ 2","tag":"คำที่ 26–50","items":[{"w":"blanket","m":"","d":"a warm cover for a bed","s":"He pulled the blanket over him.","k":"blanket"},{"w":"bottle","m":"","d":"a tall container for drinks","s":"I filled my bottle with water.","k":"bottle"},{"w":"bridge","m":"","d":"it goes over a river or road","s":"We walked across the bridge.","k":"bridge"},{"w":"camera","m":"","d":"you take photos with it","s":"She bought a new camera.","k":"camera"},{"w":"castle","m":"","d":"a big old strong building","s":"The castle is on a hill.","k":"castle"},{"w":"circus","m":"","d":"a show with clowns and animals","s":"We went to the circus.","k":"circus"},{"w":"clever","m":"","d":"able to learn things quickly","s":"My sister is very clever.","k":"clever"},{"w":"coconut","m":"","d":"a big brown nut from a palm tree","s":"We drank coconut water.","k":"coconut"},{"w":"cousin","m":"","d":"the child of your aunt or uncle","s":"My cousin lives in Chiang Mai.","k":"cousin"},{"w":"curtain","m":"","d":"cloth that covers a window","s":"Please close the curtain.","k":"curtain"},{"w":"dangerous","m":"","d":"it can hurt you","s":"Fire is dangerous.","k":"dangerous"},{"w":"dictionary","m":"","d":"a book of words and meanings","s":"Look it up in the dictionary.","k":"dictionary"},{"w":"dinosaur","m":"","d":"a very big animal from long ago","s":"This dinosaur is in the museum.","k":"dinosaur"},{"w":"envelope","m":"","d":"you put a letter inside it","s":"Write the address on the envelope.","k":"envelope"},{"w":"forest","m":"","d":"a place with many trees","s":"Many animals live in the forest.","k":"forest"},{"w":"fridge","m":"","d":"it keeps food cold","s":"The milk is in the fridge.","k":"fridge"},{"w":"glove","m":"","d":"you wear it on your hand","s":"He lost one glove.","k":"glove"},{"w":"helicopter","m":"","d":"an aircraft with spinning blades on top","s":"The helicopter landed on the roof.","k":"helicopter"},{"w":"hospital","m":"","d":"a place where sick people go","s":"My mother works in a hospital.","k":"hospital"},{"w":"island","m":"","d":"land with water all around it","s":"Phuket is an island.","k":"island"},{"w":"jungle","m":"","d":"a thick tropical forest","s":"Tigers live in the jungle.","k":"jungle"},{"w":"kitchen","m":"","d":"the room where you cook","s":"Dad is cooking in the kitchen.","k":"kitchen"},{"w":"library","m":"","d":"a place with many books to borrow","s":"I borrowed two books from the library.","k":"library"},{"w":"message","m":"","d":"words you send to someone","s":"I sent her a message.","k":"message"},{"w":"mountain","m":"","d":"a very high hill","s":"They climbed the mountain.","k":"mountain"}]},{"n":3,"t":"ชุดที่ 3","tag":"คำที่ 51–75","items":[{"w":"necklace","m":"","d":"jewellery you wear around your neck","s":"She is wearing a gold necklace.","k":"necklace"},{"w":"restaurant","m":"","d":"a place where you buy and eat meals","s":"We had dinner at a restaurant.","k":"restaurant"},{"w":"sandwich","m":"","d":"food between two pieces of bread","s":"I made a cheese sandwich.","k":"sandwich"},{"w":"scissors","m":"","d":"a tool with two blades for cutting","s":"Cut the paper with scissors.","k":"scissors"},{"w":"straight","m":"","d":"not bent or curved","s":"Light travels in a straight line.","k":"straight"},{"w":"sweater","m":"","d":"warm clothing for your top half","s":"Wear a sweater, it is cold.","k":"sweater"},{"w":"telephone","m":"","d":"you use it to talk to someone far away","s":"The telephone is ringing.","k":"telephone"},{"w":"umbrella","m":"","d":"it keeps the rain off you","s":"Take an umbrella, it may rain.","k":"umbrella"},{"w":"waterfall","m":"","d":"water falling from a high place","s":"We swam near the waterfall.","k":"waterfall"},{"w":"breakfast","m":"","d":"the first meal of the day","s":"I have rice for breakfast.","k":"breakfast"},{"w":"chocolate","m":"","d":"a sweet brown food","s":"She loves dark chocolate.","k":"chocolate"},{"w":"birthday","m":"","d":"the day you were born","s":"My birthday is in June.","k":"birthday"},{"w":"doctor","m":"","d":"a person who helps sick people","s":"The doctor gave me medicine.","k":"doctor"},{"w":"dentist","m":"","d":"a doctor for your teeth","s":"I see the dentist twice a year.","k":"dentist"},{"w":"engineer","m":"","d":"a person who designs machines or buildings","s":"My father is an engineer.","k":"engineer"},{"w":"journalist","m":"","d":"a person who writes the news","s":"The journalist asked many questions.","k":"journalist"},{"w":"mechanic","m":"","d":"a person who repairs machines and cars","s":"The mechanic fixed our car.","k":"mechanic"},{"w":"scientist","m":"","d":"a person who studies science","s":"The scientist did an experiment.","k":"scientist"},{"w":"firefighter","m":"","d":"a person who puts out fires","s":"The firefighter climbed the ladder.","k":"firefighter"},{"w":"pilot","m":"","d":"a person who flies a plane","s":"The pilot landed safely.","k":"pilot"},{"w":"nurse","m":"","d":"a person who looks after sick people","s":"The nurse checked my temperature.","k":"nurse"},{"w":"waiter","m":"","d":"a person who serves food in a restaurant","s":"The waiter brought our drinks.","k":"waiter"},{"w":"Australia","m":"","d":"a country and continent in the south","s":"Kangaroos live in Australia.","k":"australia"},{"w":"Brazil","m":"","d":"the largest country in South America","s":"Brazil is famous for football.","k":"brazil"},{"w":"Canada","m":"","d":"a large country north of the USA","s":"It snows a lot in Canada.","k":"canada"}]},{"n":4,"t":"ชุดที่ 4","tag":"คำที่ 76–100","items":[{"w":"Egypt","m":"","d":"a country in Africa with pyramids","s":"The pyramids are in Egypt.","k":"egypt"},{"w":"Germany","m":"","d":"a country in Europe","s":"Germany makes many cars.","k":"germany"},{"w":"Japan","m":"","d":"an island country in East Asia","s":"Japan is famous for sushi.","k":"japan"},{"w":"Malaysia","m":"","d":"a country next to Thailand in the south","s":"Malaysia is south of Thailand.","k":"malaysia"},{"w":"Singapore","m":"","d":"a small island country in Southeast Asia","s":"Singapore is very clean.","k":"singapore"},{"w":"grandmother","m":"","d":"the mother of your mother or father","s":"My grandmother tells me stories.","k":"grandmother"},{"w":"grandfather","m":"","d":"the father of your mother or father","s":"My grandfather grows vegetables.","k":"grandfather"},{"w":"daughter","m":"","d":"someone's female child","s":"Their daughter is eight years old.","k":"daughter"},{"w":"nephew","m":"","d":"the son of your brother or sister","s":"My nephew is only two.","k":"nephew"},{"w":"niece","m":"","d":"the daughter of your brother or sister","s":"I bought a doll for my niece.","k":"niece"},{"w":"husband","m":"","d":"the man a woman is married to","s":"Her husband is a teacher.","k":"husband"},{"w":"butterfly","m":"","d":"an insect with big colourful wings","s":"A butterfly landed on the flower.","k":"butterfly"},{"w":"crocodile","m":"","d":"a big reptile with strong jaws","s":"The crocodile lives in the river.","k":"crocodile"},{"w":"dolphin","m":"","d":"a clever sea animal","s":"We saw a dolphin from the boat.","k":"dolphin"},{"w":"elephant","m":"","d":"the biggest land animal","s":"The elephant is Thailand's symbol.","k":"elephant"},{"w":"giraffe","m":"","d":"an animal with a very long neck","s":"The giraffe eats leaves from tall trees.","k":"giraffe"},{"w":"kangaroo","m":"","d":"an Australian animal that jumps","s":"The kangaroo jumped over the fence.","k":"kangaroo"},{"w":"octopus","m":"","d":"a sea animal with eight arms","s":"An octopus has eight arms.","k":"octopus"},{"w":"penguin","m":"","d":"a black and white bird that swims","s":"The penguin cannot fly.","k":"penguin"},{"w":"squirrel","m":"","d":"a small animal with a bushy tail","s":"A squirrel ran up the tree.","k":"squirrel"},{"w":"tortoise","m":"","d":"a slow animal with a hard shell","s":"The tortoise walks very slowly.","k":"tortoise"},{"w":"beautiful","m":"","d":"very pretty to look at","s":"The sunset is beautiful.","k":"beautiful"},{"w":"because","m":"","d":"for the reason that","s":"I stayed home because it rained.","k":"because"},{"w":"believe","m":"","d":"to think something is true","s":"I believe you.","k":"believe"},{"w":"business","m":"","d":"the work of buying and selling","s":"My father runs a small business.","k":"business"}]},{"n":5,"t":"ชุดที่ 5","tag":"คำที่ 101–124","items":[{"w":"calendar","m":"","d":"it shows the days and months","s":"Mark the date on the calendar.","k":"calendar"},{"w":"comfortable","m":"","d":"nice and soft to use","s":"This chair is comfortable.","k":"comfortable"},{"w":"delicious","m":"","d":"tasting very good","s":"The mango is delicious.","k":"delicious"},{"w":"different","m":"","d":"not the same","s":"These two shirts are different.","k":"different"},{"w":"exercise","m":"","d":"moving your body to stay healthy","s":"I do exercise every morning.","k":"exercise"},{"w":"favourite","m":"","d":"the one you like best","s":"Blue is my favourite colour.","k":"favourite"},{"w":"February","m":"","d":"the second month of the year","s":"My birthday is in February.","k":"february"},{"w":"Wednesday","m":"","d":"the day after Tuesday","s":"We have music on Wednesday.","k":"wednesday"},{"w":"foreign","m":"","d":"from another country","s":"She is learning a foreign language.","k":"foreign"},{"w":"friend","m":"","d":"a person you like and know well","s":"She is my best friend.","k":"friend"},{"w":"guitar","m":"","d":"a musical instrument with strings","s":"He plays the guitar.","k":"guitar"},{"w":"interesting","m":"","d":"it makes you want to know more","s":"This book is interesting.","k":"interesting"},{"w":"knowledge","m":"","d":"the things a person knows","s":"Reading gives you knowledge.","k":"knowledge"},{"w":"language","m":"","d":"the words people use to speak","s":"Thai is my first language.","k":"language"},{"w":"necessary","m":"","d":"needed, you must have it","s":"Water is necessary for life.","k":"necessary"},{"w":"neighbour","m":"","d":"a person who lives next to you","s":"Our neighbour has a dog.","k":"neighbour"},{"w":"question","m":"","d":"something you ask","s":"May I ask a question?","k":"question"},{"w":"receive","m":"","d":"to get something","s":"I receive a letter every week.","k":"receive"},{"w":"rhythm","m":"","d":"a regular pattern of beats","s":"Clap to the rhythm.","k":"rhythm"},{"w":"separate","m":"","d":"to divide into parts","s":"A prism can separate white light.","k":"separate"},{"w":"temperature","m":"","d":"how hot or cold something is","s":"The temperature is 30 degrees.","k":"temperature"},{"w":"together","m":"","d":"with each other","s":"We walk to school together.","k":"together"},{"w":"weather","m":"","d":"if it is hot, cold, sunny or rainy","s":"The weather is sunny today.","k":"weather"},{"w":"through","m":"","d":"from one side to the other","s":"Light passes through glass.","k":"through"}]}];
+const HAS = {d:true, m:false, s:true, l:false};
 
- movers: { name:"Movers (A1) ระดับแข่งขัน", words:[
-  ["airport","a place where planes arrive and leave","We met her at the airport."],
-  ["balcony","a small area outside an upstairs window","She waved from the balcony."],
-  ["basket","a container you carry things in","Put the fruit in the basket."],
-  ["blanket","a warm cover for a bed","He pulled the blanket over him."],
-  ["bottle","a tall container for drinks","I filled my bottle with water."],
-  ["bridge","it goes over a river or road","We walked across the bridge."],
-  ["camera","you take photos with it","She bought a new camera."],
-  ["castle","a big old strong building","The castle is on a hill."],
-  ["circus","a show with clowns and animals","We went to the circus."],
-  ["clever","able to learn things quickly","My sister is very clever."],
-  ["coconut","a big brown nut from a palm tree","We drank coconut water."],
-  ["cousin","the child of your aunt or uncle","My cousin lives in Chiang Mai."],
-  ["curtain","cloth that covers a window","Please close the curtain."],
-  ["dangerous","it can hurt you","Fire is dangerous."],
-  ["dictionary","a book of words and meanings","Look it up in the dictionary."],
-  ["dinosaur","a very big animal from long ago","This dinosaur is in the museum."],
-  ["envelope","you put a letter inside it","Write the address on the envelope."],
-  ["forest","a place with many trees","Many animals live in the forest."],
-  ["fridge","it keeps food cold","The milk is in the fridge."],
-  ["glove","you wear it on your hand","He lost one glove."],
-  ["helicopter","an aircraft with spinning blades on top","The helicopter landed on the roof."],
-  ["hospital","a place where sick people go","My mother works in a hospital."],
-  ["island","land with water all around it","Phuket is an island."],
-  ["jungle","a thick tropical forest","Tigers live in the jungle."],
-  ["kitchen","the room where you cook","Dad is cooking in the kitchen."],
-  ["library","a place with many books to borrow","I borrowed two books from the library."],
-  ["message","words you send to someone","I sent her a message."],
-  ["mountain","a very high hill","They climbed the mountain."],
-  ["necklace","jewellery you wear around your neck","She is wearing a gold necklace."],
-  ["restaurant","a place where you buy and eat meals","We had dinner at a restaurant."],
-  ["sandwich","food between two pieces of bread","I made a cheese sandwich."],
-  ["scissors","a tool with two blades for cutting","Cut the paper with scissors."],
-  ["straight","not bent or curved","Light travels in a straight line."],
-  ["sweater","warm clothing for your top half","Wear a sweater, it is cold."],
-  ["telephone","you use it to talk to someone far away","The telephone is ringing."],
-  ["umbrella","it keeps the rain off you","Take an umbrella, it may rain."],
-  ["waterfall","water falling from a high place","We swam near the waterfall."],
-  ["breakfast","the first meal of the day","I have rice for breakfast."],
-  ["chocolate","a sweet brown food","She loves dark chocolate."],
-  ["birthday","the day you were born","My birthday is in June."]
- ]},
+const $=id=>document.getElementById(id);
+const synth=window.speechSynthesis;
+let setSel="all", mode="review", rate=.75, cnt=20, shuf=1, sayThai=true, useKB=true;
+let list=[], idx=0, score=0, wrong=[], answered=false, enVoice=null, thVoice=null, token=0;
+let typed="";
 
- topics: { name:"หมวดเฉพาะ อาชีพ ประเทศ ครอบครัว สัตว์", words:[
-  ["doctor","a person who helps sick people","The doctor gave me medicine."],
-  ["dentist","a doctor for your teeth","I see the dentist twice a year."],
-  ["engineer","a person who designs machines or buildings","My father is an engineer."],
-  ["journalist","a person who writes the news","The journalist asked many questions."],
-  ["mechanic","a person who repairs machines and cars","The mechanic fixed our car."],
-  ["scientist","a person who studies science","The scientist did an experiment."],
-  ["firefighter","a person who puts out fires","The firefighter climbed the ladder."],
-  ["pilot","a person who flies a plane","The pilot landed safely."],
-  ["nurse","a person who looks after sick people","The nurse checked my temperature."],
-  ["waiter","a person who serves food in a restaurant","The waiter brought our drinks."],
-  ["Australia","a country and continent in the south","Kangaroos live in Australia."],
-  ["Brazil","the largest country in South America","Brazil is famous for football."],
-  ["Canada","a large country north of the USA","It snows a lot in Canada."],
-  ["Egypt","a country in Africa with pyramids","The pyramids are in Egypt."],
-  ["Germany","a country in Europe","Germany makes many cars."],
-  ["Japan","an island country in East Asia","Japan is famous for sushi."],
-  ["Malaysia","a country next to Thailand in the south","Malaysia is south of Thailand."],
-  ["Singapore","a small island country in Southeast Asia","Singapore is very clean."],
-  ["grandmother","the mother of your mother or father","My grandmother tells me stories."],
-  ["grandfather","the father of your mother or father","My grandfather grows vegetables."],
-  ["daughter","someone's female child","Their daughter is eight years old."],
-  ["nephew","the son of your brother or sister","My nephew is only two."],
-  ["niece","the daughter of your brother or sister","I bought a doll for my niece."],
-  ["husband","the man a woman is married to","Her husband is a teacher."],
-  ["butterfly","an insect with big colourful wings","A butterfly landed on the flower."],
-  ["crocodile","a big reptile with strong jaws","The crocodile lives in the river."],
-  ["dolphin","a clever sea animal","We saw a dolphin from the boat."],
-  ["elephant","the biggest land animal","The elephant is Thailand's symbol."],
-  ["giraffe","an animal with a very long neck","The giraffe eats leaves from tall trees."],
-  ["kangaroo","an Australian animal that jumps","The kangaroo jumped over the fence."],
-  ["octopus","a sea animal with eight arms","An octopus has eight arms."],
-  ["penguin","a black and white bird that swims","The penguin cannot fly."],
-  ["squirrel","a small animal with a bushy tail","A squirrel ran up the tree."],
-  ["tortoise","a slow animal with a hard shell","The tortoise walks very slowly."]
- ]},
-
- tricky: { name:"คำที่สะกดพลาดบ่อย ชิงชนะเลิศ", words:[
-  ["beautiful","very pretty to look at","The sunset is beautiful."],
-  ["because","for the reason that","I stayed home because it rained."],
-  ["believe","to think something is true","I believe you."],
-  ["business","the work of buying and selling","My father runs a small business."],
-  ["calendar","it shows the days and months","Mark the date on the calendar."],
-  ["comfortable","nice and soft to use","This chair is comfortable."],
-  ["delicious","tasting very good","The mango is delicious."],
-  ["different","not the same","These two shirts are different."],
-  ["exercise","moving your body to stay healthy","I do exercise every morning."],
-  ["favourite","the one you like best","Blue is my favourite colour."],
-  ["February","the second month of the year","My birthday is in February."],
-  ["Wednesday","the day after Tuesday","We have music on Wednesday."],
-  ["foreign","from another country","She is learning a foreign language."],
-  ["friend","a person you like and know well","She is my best friend."],
-  ["guitar","a musical instrument with strings","He plays the guitar."],
-  ["interesting","it makes you want to know more","This book is interesting."],
-  ["knowledge","the things a person knows","Reading gives you knowledge."],
-  ["language","the words people use to speak","Thai is my first language."],
-  ["necessary","needed, you must have it","Water is necessary for life."],
-  ["neighbour","a person who lives next to you","Our neighbour has a dog."],
-  ["question","something you ask","May I ask a question?"],
-  ["receive","to get something","I receive a letter every week."],
-  ["rhythm","a regular pattern of beats","Clap to the rhythm."],
-  ["separate","to divide into parts","A prism can separate white light."],
-  ["temperature","how hot or cold something is","The temperature is 30 degrees."],
-  ["together","with each other","We walk to school together."],
-  ["weather","if it is hot, cold, sunny or rainy","The weather is sunny today."],
-  ["through","from one side to the other","Light passes through glass."],
-  ["straight","not bent","Draw a straight line."],
-  ["island","land with water all around","Samui is an island."]
- ]}
-};
-
-/* ============ state ============ */
-const $ = id => document.getElementById(id);
-const synth = window.speechSynthesis;
-
-/* ============ ตัวเล่นไฟล์เสียง mp3 (เติมเข้ามาใหม่) ============
-   เล่นไฟล์จากโฟลเดอร์ audio/bee/ ถ้าไม่พบไฟล์จะถอยไปใช้เสียงในเครื่องแบบเดิม */
-const AUDIO_BASE = "audio/bee/";
-const SILENT_SND = "data:audio/wav;base64,UklGRqQHAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YYAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-const AUDIO_MAP = {
-"en|apple": "0001_apple.mp3",
-"en|Definition. a round fruit that is red or green": "0002_definition_a_round_fruit_that_is_red_or.mp3",
-"en|I eat an apple every day.": "0003_i_eat_an_apple_every_day.mp3",
-"en|ball": "0004_ball.mp3",
-"en|Definition. a round thing you play with": "0005_definition_a_round_thing_you_play_with.mp3",
-"en|He kicked the ball.": "0006_he_kicked_the_ball.mp3",
-"en|bird": "0007_bird.mp3",
-"en|Definition. an animal with wings that can fly": "0008_definition_an_animal_with_wings_that_can.mp3",
-"en|A bird is singing in the tree.": "0009_a_bird_is_singing_in_the_tree.mp3",
-"en|book": "0010_book.mp3",
-"en|Definition. pages with words that you read": "0011_definition_pages_with_words_that_you_rea.mp3",
-"en|She is reading a book.": "0012_she_is_reading_a_book.mp3",
-"en|chair": "0013_chair.mp3",
-"en|Definition. a seat for one person": "0014_definition_a_seat_for_one_person.mp3",
-"en|Please sit on the chair.": "0015_please_sit_on_the_chair.mp3",
-"en|clock": "0016_clock.mp3",
-"en|Definition. a thing that shows the time": "0017_definition_a_thing_that_shows_the_time.mp3",
-"en|The clock says eight o'clock.": "0018_the_clock_says_eight_oclock.mp3",
-"en|cloud": "0019_cloud.mp3",
-"en|Definition. white or grey water in the sky": "0020_definition_white_or_grey_water_in_the_sk.mp3",
-"en|There is one cloud in the sky.": "0021_there_is_one_cloud_in_the_sky.mp3",
-"en|door": "0022_door.mp3",
-"en|Definition. you open it to go into a room": "0023_definition_you_open_it_to_go_into_a_room.mp3",
-"en|Please close the door.": "0024_please_close_the_door.mp3",
-"en|duck": "0025_duck.mp3",
-"en|Definition. a bird that swims on water": "0026_definition_a_bird_that_swims_on_water.mp3",
-"en|The duck is in the pond.": "0027_the_duck_is_in_the_pond.mp3",
-"en|flower": "0028_flower.mp3",
-"en|Definition. the coloured part of a plant": "0029_definition_the_coloured_part_of_a_plant.mp3",
-"en|She picked a yellow flower.": "0030_she_picked_a_yellow_flower.mp3",
-"en|garden": "0031_garden.mp3",
-"en|Definition. a place outside where plants grow": "0032_definition_a_place_outside_where_plants.mp3",
-"en|We play in the garden.": "0033_we_play_in_the_garden.mp3",
-"en|house": "0034_house.mp3",
-"en|Definition. a building where people live": "0035_definition_a_building_where_people_live.mp3",
-"en|My house is near the school.": "0036_my_house_is_near_the_school.mp3",
-"en|kite": "0037_kite.mp3",
-"en|Definition. a toy that flies on a string": "0038_definition_a_toy_that_flies_on_a_string.mp3",
-"en|We fly a kite in the park.": "0039_we_fly_a_kite_in_the_park.mp3",
-"en|lemon": "0040_lemon.mp3",
-"en|Definition. a sour yellow fruit": "0041_definition_a_sour_yellow_fruit.mp3",
-"en|Add some lemon to the water.": "0042_add_some_lemon_to_the_water.mp3",
-"en|monkey": "0043_monkey.mp3",
-"en|Definition. an animal that climbs trees": "0044_definition_an_animal_that_climbs_trees.mp3",
-"en|The monkey ate a banana.": "0045_the_monkey_ate_a_banana.mp3",
-"en|mouse": "0046_mouse.mp3",
-"en|Definition. a small animal with a long tail": "0047_definition_a_small_animal_with_a_long_ta.mp3",
-"en|A mouse ran under the table.": "0048_a_mouse_ran_under_the_table.mp3",
-"en|pencil": "0049_pencil.mp3",
-"en|Definition. you write with it": "0050_definition_you_write_with_it.mp3",
-"en|Write with a pencil, not a pen.": "0051_write_with_a_pencil_not_a_pen.mp3",
-"en|rabbit": "0052_rabbit.mp3",
-"en|Definition. a small animal with long ears": "0053_definition_a_small_animal_with_long_ears.mp3",
-"en|The rabbit is eating a carrot.": "0054_the_rabbit_is_eating_a_carrot.mp3",
-"en|school": "0055_school.mp3",
-"en|Definition. a place where children learn": "0056_definition_a_place_where_children_learn.mp3",
-"en|We go to school by bus.": "0057_we_go_to_school_by_bus.mp3",
-"en|table": "0058_table.mp3",
-"en|Definition. furniture with a flat top and legs": "0059_definition_furniture_with_a_flat_top_and.mp3",
-"en|Put the books on the table.": "0060_put_the_books_on_the_table.mp3",
-"en|window": "0061_window.mp3",
-"en|Definition. a glass opening in a wall": "0062_definition_a_glass_opening_in_a_wall.mp3",
-"en|Please open the window.": "0063_please_open_the_window.mp3",
-"en|yellow": "0064_yellow.mp3",
-"en|Definition. the colour of a lemon": "0065_definition_the_colour_of_a_lemon.mp3",
-"en|Her dress is yellow.": "0066_her_dress_is_yellow.mp3",
-"en|airport": "0067_airport.mp3",
-"en|Definition. a place where planes arrive and leave": "0068_definition_a_place_where_planes_arrive_a.mp3",
-"en|We met her at the airport.": "0069_we_met_her_at_the_airport.mp3",
-"en|balcony": "0070_balcony.mp3",
-"en|Definition. a small area outside an upstairs window": "0071_definition_a_small_area_outside_an_upsta.mp3",
-"en|She waved from the balcony.": "0072_she_waved_from_the_balcony.mp3",
-"en|basket": "0073_basket.mp3",
-"en|Definition. a container you carry things in": "0074_definition_a_container_you_carry_things.mp3",
-"en|Put the fruit in the basket.": "0075_put_the_fruit_in_the_basket.mp3",
-"en|blanket": "0076_blanket.mp3",
-"en|Definition. a warm cover for a bed": "0077_definition_a_warm_cover_for_a_bed.mp3",
-"en|He pulled the blanket over him.": "0078_he_pulled_the_blanket_over_him.mp3",
-"en|bottle": "0079_bottle.mp3",
-"en|Definition. a tall container for drinks": "0080_definition_a_tall_container_for_drinks.mp3",
-"en|I filled my bottle with water.": "0081_i_filled_my_bottle_with_water.mp3",
-"en|bridge": "0082_bridge.mp3",
-"en|Definition. it goes over a river or road": "0083_definition_it_goes_over_a_river_or_road.mp3",
-"en|We walked across the bridge.": "0084_we_walked_across_the_bridge.mp3",
-"en|camera": "0085_camera.mp3",
-"en|Definition. you take photos with it": "0086_definition_you_take_photos_with_it.mp3",
-"en|She bought a new camera.": "0087_she_bought_a_new_camera.mp3",
-"en|castle": "0088_castle.mp3",
-"en|Definition. a big old strong building": "0089_definition_a_big_old_strong_building.mp3",
-"en|The castle is on a hill.": "0090_the_castle_is_on_a_hill.mp3",
-"en|circus": "0091_circus.mp3",
-"en|Definition. a show with clowns and animals": "0092_definition_a_show_with_clowns_and_animal.mp3",
-"en|We went to the circus.": "0093_we_went_to_the_circus.mp3",
-"en|clever": "0094_clever.mp3",
-"en|Definition. able to learn things quickly": "0095_definition_able_to_learn_things_quickly.mp3",
-"en|My sister is very clever.": "0096_my_sister_is_very_clever.mp3",
-"en|coconut": "0097_coconut.mp3",
-"en|Definition. a big brown nut from a palm tree": "0098_definition_a_big_brown_nut_from_a_palm_t.mp3",
-"en|We drank coconut water.": "0099_we_drank_coconut_water.mp3",
-"en|cousin": "0100_cousin.mp3",
-"en|Definition. the child of your aunt or uncle": "0101_definition_the_child_of_your_aunt_or_unc.mp3",
-"en|My cousin lives in Chiang Mai.": "0102_my_cousin_lives_in_chiang_mai.mp3",
-"en|curtain": "0103_curtain.mp3",
-"en|Definition. cloth that covers a window": "0104_definition_cloth_that_covers_a_window.mp3",
-"en|Please close the curtain.": "0105_please_close_the_curtain.mp3",
-"en|dangerous": "0106_dangerous.mp3",
-"en|Definition. it can hurt you": "0107_definition_it_can_hurt_you.mp3",
-"en|Fire is dangerous.": "0108_fire_is_dangerous.mp3",
-"en|dictionary": "0109_dictionary.mp3",
-"en|Definition. a book of words and meanings": "0110_definition_a_book_of_words_and_meanings.mp3",
-"en|Look it up in the dictionary.": "0111_look_it_up_in_the_dictionary.mp3",
-"en|dinosaur": "0112_dinosaur.mp3",
-"en|Definition. a very big animal from long ago": "0113_definition_a_very_big_animal_from_long_a.mp3",
-"en|This dinosaur is in the museum.": "0114_this_dinosaur_is_in_the_museum.mp3",
-"en|envelope": "0115_envelope.mp3",
-"en|Definition. you put a letter inside it": "0116_definition_you_put_a_letter_inside_it.mp3",
-"en|Write the address on the envelope.": "0117_write_the_address_on_the_envelope.mp3",
-"en|forest": "0118_forest.mp3",
-"en|Definition. a place with many trees": "0119_definition_a_place_with_many_trees.mp3",
-"en|Many animals live in the forest.": "0120_many_animals_live_in_the_forest.mp3",
-"en|fridge": "0121_fridge.mp3",
-"en|Definition. it keeps food cold": "0122_definition_it_keeps_food_cold.mp3",
-"en|The milk is in the fridge.": "0123_the_milk_is_in_the_fridge.mp3",
-"en|glove": "0124_glove.mp3",
-"en|Definition. you wear it on your hand": "0125_definition_you_wear_it_on_your_hand.mp3",
-"en|He lost one glove.": "0126_he_lost_one_glove.mp3",
-"en|helicopter": "0127_helicopter.mp3",
-"en|Definition. an aircraft with spinning blades on top": "0128_definition_an_aircraft_with_spinning_bla.mp3",
-"en|The helicopter landed on the roof.": "0129_the_helicopter_landed_on_the_roof.mp3",
-"en|hospital": "0130_hospital.mp3",
-"en|Definition. a place where sick people go": "0131_definition_a_place_where_sick_people_go.mp3",
-"en|My mother works in a hospital.": "0132_my_mother_works_in_a_hospital.mp3",
-"en|island": "0133_island.mp3",
-"en|Definition. land with water all around it": "0134_definition_land_with_water_all_around_it.mp3",
-"en|Phuket is an island.": "0135_phuket_is_an_island.mp3",
-"en|jungle": "0136_jungle.mp3",
-"en|Definition. a thick tropical forest": "0137_definition_a_thick_tropical_forest.mp3",
-"en|Tigers live in the jungle.": "0138_tigers_live_in_the_jungle.mp3",
-"en|kitchen": "0139_kitchen.mp3",
-"en|Definition. the room where you cook": "0140_definition_the_room_where_you_cook.mp3",
-"en|Dad is cooking in the kitchen.": "0141_dad_is_cooking_in_the_kitchen.mp3",
-"en|library": "0142_library.mp3",
-"en|Definition. a place with many books to borrow": "0143_definition_a_place_with_many_books_to_bo.mp3",
-"en|I borrowed two books from the library.": "0144_i_borrowed_two_books_from_the_library.mp3",
-"en|message": "0145_message.mp3",
-"en|Definition. words you send to someone": "0146_definition_words_you_send_to_someone.mp3",
-"en|I sent her a message.": "0147_i_sent_her_a_message.mp3",
-"en|mountain": "0148_mountain.mp3",
-"en|Definition. a very high hill": "0149_definition_a_very_high_hill.mp3",
-"en|They climbed the mountain.": "0150_they_climbed_the_mountain.mp3",
-"en|necklace": "0151_necklace.mp3",
-"en|Definition. jewellery you wear around your neck": "0152_definition_jewellery_you_wear_around_you.mp3",
-"en|She is wearing a gold necklace.": "0153_she_is_wearing_a_gold_necklace.mp3",
-"en|restaurant": "0154_restaurant.mp3",
-"en|Definition. a place where you buy and eat meals": "0155_definition_a_place_where_you_buy_and_eat.mp3",
-"en|We had dinner at a restaurant.": "0156_we_had_dinner_at_a_restaurant.mp3",
-"en|sandwich": "0157_sandwich.mp3",
-"en|Definition. food between two pieces of bread": "0158_definition_food_between_two_pieces_of_br.mp3",
-"en|I made a cheese sandwich.": "0159_i_made_a_cheese_sandwich.mp3",
-"en|scissors": "0160_scissors.mp3",
-"en|Definition. a tool with two blades for cutting": "0161_definition_a_tool_with_two_blades_for_cu.mp3",
-"en|Cut the paper with scissors.": "0162_cut_the_paper_with_scissors.mp3",
-"en|straight": "0163_straight.mp3",
-"en|Definition. not bent or curved": "0164_definition_not_bent_or_curved.mp3",
-"en|Light travels in a straight line.": "0165_light_travels_in_a_straight_line.mp3",
-"en|sweater": "0166_sweater.mp3",
-"en|Definition. warm clothing for your top half": "0167_definition_warm_clothing_for_your_top_ha.mp3",
-"en|Wear a sweater, it is cold.": "0168_wear_a_sweater_it_is_cold.mp3",
-"en|telephone": "0169_telephone.mp3",
-"en|Definition. you use it to talk to someone far away": "0170_definition_you_use_it_to_talk_to_someone.mp3",
-"en|The telephone is ringing.": "0171_the_telephone_is_ringing.mp3",
-"en|umbrella": "0172_umbrella.mp3",
-"en|Definition. it keeps the rain off you": "0173_definition_it_keeps_the_rain_off_you.mp3",
-"en|Take an umbrella, it may rain.": "0174_take_an_umbrella_it_may_rain.mp3",
-"en|waterfall": "0175_waterfall.mp3",
-"en|Definition. water falling from a high place": "0176_definition_water_falling_from_a_high_pla.mp3",
-"en|We swam near the waterfall.": "0177_we_swam_near_the_waterfall.mp3",
-"en|breakfast": "0178_breakfast.mp3",
-"en|Definition. the first meal of the day": "0179_definition_the_first_meal_of_the_day.mp3",
-"en|I have rice for breakfast.": "0180_i_have_rice_for_breakfast.mp3",
-"en|chocolate": "0181_chocolate.mp3",
-"en|Definition. a sweet brown food": "0182_definition_a_sweet_brown_food.mp3",
-"en|She loves dark chocolate.": "0183_she_loves_dark_chocolate.mp3",
-"en|birthday": "0184_birthday.mp3",
-"en|Definition. the day you were born": "0185_definition_the_day_you_were_born.mp3",
-"en|My birthday is in June.": "0186_my_birthday_is_in_june.mp3",
-"en|doctor": "0187_doctor.mp3",
-"en|Definition. a person who helps sick people": "0188_definition_a_person_who_helps_sick_peopl.mp3",
-"en|The doctor gave me medicine.": "0189_the_doctor_gave_me_medicine.mp3",
-"en|dentist": "0190_dentist.mp3",
-"en|Definition. a doctor for your teeth": "0191_definition_a_doctor_for_your_teeth.mp3",
-"en|I see the dentist twice a year.": "0192_i_see_the_dentist_twice_a_year.mp3",
-"en|engineer": "0193_engineer.mp3",
-"en|Definition. a person who designs machines or buildings": "0194_definition_a_person_who_designs_machines.mp3",
-"en|My father is an engineer.": "0195_my_father_is_an_engineer.mp3",
-"en|journalist": "0196_journalist.mp3",
-"en|Definition. a person who writes the news": "0197_definition_a_person_who_writes_the_news.mp3",
-"en|The journalist asked many questions.": "0198_the_journalist_asked_many_questions.mp3",
-"en|mechanic": "0199_mechanic.mp3",
-"en|Definition. a person who repairs machines and cars": "0200_definition_a_person_who_repairs_machines.mp3",
-"en|The mechanic fixed our car.": "0201_the_mechanic_fixed_our_car.mp3",
-"en|scientist": "0202_scientist.mp3",
-"en|Definition. a person who studies science": "0203_definition_a_person_who_studies_science.mp3",
-"en|The scientist did an experiment.": "0204_the_scientist_did_an_experiment.mp3",
-"en|firefighter": "0205_firefighter.mp3",
-"en|Definition. a person who puts out fires": "0206_definition_a_person_who_puts_out_fires.mp3",
-"en|The firefighter climbed the ladder.": "0207_the_firefighter_climbed_the_ladder.mp3",
-"en|pilot": "0208_pilot.mp3",
-"en|Definition. a person who flies a plane": "0209_definition_a_person_who_flies_a_plane.mp3",
-"en|The pilot landed safely.": "0210_the_pilot_landed_safely.mp3",
-"en|nurse": "0211_nurse.mp3",
-"en|Definition. a person who looks after sick people": "0212_definition_a_person_who_looks_after_sick.mp3",
-"en|The nurse checked my temperature.": "0213_the_nurse_checked_my_temperature.mp3",
-"en|waiter": "0214_waiter.mp3",
-"en|Definition. a person who serves food in a restaurant": "0215_definition_a_person_who_serves_food_in_a.mp3",
-"en|The waiter brought our drinks.": "0216_the_waiter_brought_our_drinks.mp3",
-"en|Australia": "0217_australia.mp3",
-"en|Definition. a country and continent in the south": "0218_definition_a_country_and_continent_in_th.mp3",
-"en|Kangaroos live in Australia.": "0219_kangaroos_live_in_australia.mp3",
-"en|Brazil": "0220_brazil.mp3",
-"en|Definition. the largest country in South America": "0221_definition_the_largest_country_in_south.mp3",
-"en|Brazil is famous for football.": "0222_brazil_is_famous_for_football.mp3",
-"en|Canada": "0223_canada.mp3",
-"en|Definition. a large country north of the USA": "0224_definition_a_large_country_north_of_the.mp3",
-"en|It snows a lot in Canada.": "0225_it_snows_a_lot_in_canada.mp3",
-"en|Egypt": "0226_egypt.mp3",
-"en|Definition. a country in Africa with pyramids": "0227_definition_a_country_in_africa_with_pyra.mp3",
-"en|The pyramids are in Egypt.": "0228_the_pyramids_are_in_egypt.mp3",
-"en|Germany": "0229_germany.mp3",
-"en|Definition. a country in Europe": "0230_definition_a_country_in_europe.mp3",
-"en|Germany makes many cars.": "0231_germany_makes_many_cars.mp3",
-"en|Japan": "0232_japan.mp3",
-"en|Definition. an island country in East Asia": "0233_definition_an_island_country_in_east_asi.mp3",
-"en|Japan is famous for sushi.": "0234_japan_is_famous_for_sushi.mp3",
-"en|Malaysia": "0235_malaysia.mp3",
-"en|Definition. a country next to Thailand in the south": "0236_definition_a_country_next_to_thailand_in.mp3",
-"en|Malaysia is south of Thailand.": "0237_malaysia_is_south_of_thailand.mp3",
-"en|Singapore": "0238_singapore.mp3",
-"en|Definition. a small island country in Southeast Asia": "0239_definition_a_small_island_country_in_sou.mp3",
-"en|Singapore is very clean.": "0240_singapore_is_very_clean.mp3",
-"en|grandmother": "0241_grandmother.mp3",
-"en|Definition. the mother of your mother or father": "0242_definition_the_mother_of_your_mother_or.mp3",
-"en|My grandmother tells me stories.": "0243_my_grandmother_tells_me_stories.mp3",
-"en|grandfather": "0244_grandfather.mp3",
-"en|Definition. the father of your mother or father": "0245_definition_the_father_of_your_mother_or.mp3",
-"en|My grandfather grows vegetables.": "0246_my_grandfather_grows_vegetables.mp3",
-"en|daughter": "0247_daughter.mp3",
-"en|Definition. someone's female child": "0248_definition_someones_female_child.mp3",
-"en|Their daughter is eight years old.": "0249_their_daughter_is_eight_years_old.mp3",
-"en|nephew": "0250_nephew.mp3",
-"en|Definition. the son of your brother or sister": "0251_definition_the_son_of_your_brother_or_si.mp3",
-"en|My nephew is only two.": "0252_my_nephew_is_only_two.mp3",
-"en|niece": "0253_niece.mp3",
-"en|Definition. the daughter of your brother or sister": "0254_definition_the_daughter_of_your_brother.mp3",
-"en|I bought a doll for my niece.": "0255_i_bought_a_doll_for_my_niece.mp3",
-"en|husband": "0256_husband.mp3",
-"en|Definition. the man a woman is married to": "0257_definition_the_man_a_woman_is_married_to.mp3",
-"en|Her husband is a teacher.": "0258_her_husband_is_a_teacher.mp3",
-"en|butterfly": "0259_butterfly.mp3",
-"en|Definition. an insect with big colourful wings": "0260_definition_an_insect_with_big_colourful.mp3",
-"en|A butterfly landed on the flower.": "0261_a_butterfly_landed_on_the_flower.mp3",
-"en|crocodile": "0262_crocodile.mp3",
-"en|Definition. a big reptile with strong jaws": "0263_definition_a_big_reptile_with_strong_jaw.mp3",
-"en|The crocodile lives in the river.": "0264_the_crocodile_lives_in_the_river.mp3",
-"en|dolphin": "0265_dolphin.mp3",
-"en|Definition. a clever sea animal": "0266_definition_a_clever_sea_animal.mp3",
-"en|We saw a dolphin from the boat.": "0267_we_saw_a_dolphin_from_the_boat.mp3",
-"en|elephant": "0268_elephant.mp3",
-"en|Definition. the biggest land animal": "0269_definition_the_biggest_land_animal.mp3",
-"en|The elephant is Thailand's symbol.": "0270_the_elephant_is_thailands_symbol.mp3",
-"en|giraffe": "0271_giraffe.mp3",
-"en|Definition. an animal with a very long neck": "0272_definition_an_animal_with_a_very_long_ne.mp3",
-"en|The giraffe eats leaves from tall trees.": "0273_the_giraffe_eats_leaves_from_tall_trees.mp3",
-"en|kangaroo": "0274_kangaroo.mp3",
-"en|Definition. an Australian animal that jumps": "0275_definition_an_australian_animal_that_jum.mp3",
-"en|The kangaroo jumped over the fence.": "0276_the_kangaroo_jumped_over_the_fence.mp3",
-"en|octopus": "0277_octopus.mp3",
-"en|Definition. a sea animal with eight arms": "0278_definition_a_sea_animal_with_eight_arms.mp3",
-"en|An octopus has eight arms.": "0279_an_octopus_has_eight_arms.mp3",
-"en|penguin": "0280_penguin.mp3",
-"en|Definition. a black and white bird that swims": "0281_definition_a_black_and_white_bird_that_s.mp3",
-"en|The penguin cannot fly.": "0282_the_penguin_cannot_fly.mp3",
-"en|squirrel": "0283_squirrel.mp3",
-"en|Definition. a small animal with a bushy tail": "0284_definition_a_small_animal_with_a_bushy_t.mp3",
-"en|A squirrel ran up the tree.": "0285_a_squirrel_ran_up_the_tree.mp3",
-"en|tortoise": "0286_tortoise.mp3",
-"en|Definition. a slow animal with a hard shell": "0287_definition_a_slow_animal_with_a_hard_she.mp3",
-"en|The tortoise walks very slowly.": "0288_the_tortoise_walks_very_slowly.mp3",
-"en|beautiful": "0289_beautiful.mp3",
-"en|Definition. very pretty to look at": "0290_definition_very_pretty_to_look_at.mp3",
-"en|The sunset is beautiful.": "0291_the_sunset_is_beautiful.mp3",
-"en|because": "0292_because.mp3",
-"en|Definition. for the reason that": "0293_definition_for_the_reason_that.mp3",
-"en|I stayed home because it rained.": "0294_i_stayed_home_because_it_rained.mp3",
-"en|believe": "0295_believe.mp3",
-"en|Definition. to think something is true": "0296_definition_to_think_something_is_true.mp3",
-"en|I believe you.": "0297_i_believe_you.mp3",
-"en|business": "0298_business.mp3",
-"en|Definition. the work of buying and selling": "0299_definition_the_work_of_buying_and_sellin.mp3",
-"en|My father runs a small business.": "0300_my_father_runs_a_small_business.mp3",
-"en|calendar": "0301_calendar.mp3",
-"en|Definition. it shows the days and months": "0302_definition_it_shows_the_days_and_months.mp3",
-"en|Mark the date on the calendar.": "0303_mark_the_date_on_the_calendar.mp3",
-"en|comfortable": "0304_comfortable.mp3",
-"en|Definition. nice and soft to use": "0305_definition_nice_and_soft_to_use.mp3",
-"en|This chair is comfortable.": "0306_this_chair_is_comfortable.mp3",
-"en|delicious": "0307_delicious.mp3",
-"en|Definition. tasting very good": "0308_definition_tasting_very_good.mp3",
-"en|The mango is delicious.": "0309_the_mango_is_delicious.mp3",
-"en|different": "0310_different.mp3",
-"en|Definition. not the same": "0311_definition_not_the_same.mp3",
-"en|These two shirts are different.": "0312_these_two_shirts_are_different.mp3",
-"en|exercise": "0313_exercise.mp3",
-"en|Definition. moving your body to stay healthy": "0314_definition_moving_your_body_to_stay_heal.mp3",
-"en|I do exercise every morning.": "0315_i_do_exercise_every_morning.mp3",
-"en|favourite": "0316_favourite.mp3",
-"en|Definition. the one you like best": "0317_definition_the_one_you_like_best.mp3",
-"en|Blue is my favourite colour.": "0318_blue_is_my_favourite_colour.mp3",
-"en|February": "0319_february.mp3",
-"en|Definition. the second month of the year": "0320_definition_the_second_month_of_the_year.mp3",
-"en|My birthday is in February.": "0321_my_birthday_is_in_february.mp3",
-"en|Wednesday": "0322_wednesday.mp3",
-"en|Definition. the day after Tuesday": "0323_definition_the_day_after_tuesday.mp3",
-"en|We have music on Wednesday.": "0324_we_have_music_on_wednesday.mp3",
-"en|foreign": "0325_foreign.mp3",
-"en|Definition. from another country": "0326_definition_from_another_country.mp3",
-"en|She is learning a foreign language.": "0327_she_is_learning_a_foreign_language.mp3",
-"en|friend": "0328_friend.mp3",
-"en|Definition. a person you like and know well": "0329_definition_a_person_you_like_and_know_we.mp3",
-"en|She is my best friend.": "0330_she_is_my_best_friend.mp3",
-"en|guitar": "0331_guitar.mp3",
-"en|Definition. a musical instrument with strings": "0332_definition_a_musical_instrument_with_str.mp3",
-"en|He plays the guitar.": "0333_he_plays_the_guitar.mp3",
-"en|interesting": "0334_interesting.mp3",
-"en|Definition. it makes you want to know more": "0335_definition_it_makes_you_want_to_know_mor.mp3",
-"en|This book is interesting.": "0336_this_book_is_interesting.mp3",
-"en|knowledge": "0337_knowledge.mp3",
-"en|Definition. the things a person knows": "0338_definition_the_things_a_person_knows.mp3",
-"en|Reading gives you knowledge.": "0339_reading_gives_you_knowledge.mp3",
-"en|language": "0340_language.mp3",
-"en|Definition. the words people use to speak": "0341_definition_the_words_people_use_to_speak.mp3",
-"en|Thai is my first language.": "0342_thai_is_my_first_language.mp3",
-"en|necessary": "0343_necessary.mp3",
-"en|Definition. needed, you must have it": "0344_definition_needed_you_must_have_it.mp3",
-"en|Water is necessary for life.": "0345_water_is_necessary_for_life.mp3",
-"en|neighbour": "0346_neighbour.mp3",
-"en|Definition. a person who lives next to you": "0347_definition_a_person_who_lives_next_to_yo.mp3",
-"en|Our neighbour has a dog.": "0348_our_neighbour_has_a_dog.mp3",
-"en|question": "0349_question.mp3",
-"en|Definition. something you ask": "0350_definition_something_you_ask.mp3",
-"en|May I ask a question?": "0351_may_i_ask_a_question.mp3",
-"en|receive": "0352_receive.mp3",
-"en|Definition. to get something": "0353_definition_to_get_something.mp3",
-"en|I receive a letter every week.": "0354_i_receive_a_letter_every_week.mp3",
-"en|rhythm": "0355_rhythm.mp3",
-"en|Definition. a regular pattern of beats": "0356_definition_a_regular_pattern_of_beats.mp3",
-"en|Clap to the rhythm.": "0357_clap_to_the_rhythm.mp3",
-"en|separate": "0358_separate.mp3",
-"en|Definition. to divide into parts": "0359_definition_to_divide_into_parts.mp3",
-"en|A prism can separate white light.": "0360_a_prism_can_separate_white_light.mp3",
-"en|temperature": "0361_temperature.mp3",
-"en|Definition. how hot or cold something is": "0362_definition_how_hot_or_cold_something_is.mp3",
-"en|The temperature is 30 degrees.": "0363_the_temperature_is_30_degrees.mp3",
-"en|together": "0364_together.mp3",
-"en|Definition. with each other": "0365_definition_with_each_other.mp3",
-"en|We walk to school together.": "0366_we_walk_to_school_together.mp3",
-"en|weather": "0367_weather.mp3",
-"en|Definition. if it is hot, cold, sunny or rainy": "0368_definition_if_it_is_hot_cold_sunny_or_ra.mp3",
-"en|The weather is sunny today.": "0369_the_weather_is_sunny_today.mp3",
-"en|through": "0370_through.mp3",
-"en|Definition. from one side to the other": "0371_definition_from_one_side_to_the_other.mp3",
-"en|Light passes through glass.": "0372_light_passes_through_glass.mp3",
-"en|Definition. not bent": "0373_definition_not_bent.mp3",
-"en|Draw a straight line.": "0374_draw_a_straight_line.mp3",
-"en|Definition. land with water all around": "0375_definition_land_with_water_all_around.mp3",
-"en|Samui is an island.": "0376_samui_is_an_island.mp3"
-};
-const _a = new Audio();
-_a.preload = "auto";
-function unlockSound(){ try{ _a.src = SILENT_SND; _a.play().catch(function(){}); }catch(e){} }
-function stopAll(){
-  try{ synth.cancel(); }catch(e){}
-  try{ _a.pause(); }catch(e){}
-}
-function playFile(file, my, spd){
-  return new Promise(function(res, rej){
-    if(my !== token) return res();
-    var done = false;
-    var fin = function(){ if(done) return; done = true; clearInterval(iv); _a.onended=null; _a.onerror=null; _a.onplay=null; res(); };
-    var bad = function(){ if(done) return; done = true; clearInterval(iv); _a.onended=null; _a.onerror=null; _a.onplay=null; rej(new Error("no audio")); };
-    var iv = setInterval(function(){ if(my !== token){ try{ _a.pause(); }catch(e){} fin(); } }, 120);
-    _a.onended = fin;
-    _a.onerror = bad;
-    _a.onplay  = function(){ try{ _a.playbackRate = spd; }catch(e){} };
-    try{
-      _a.src = AUDIO_BASE + file;
-      _a.playbackRate = spd;
-      var p = _a.play();
-      if(p && p.catch) p.catch(function(){ bad(); });
-    }catch(e){ bad(); }
-    setTimeout(fin, 30000);
+/* ---------- คีย์บอร์ด A-Z ของแอปเอง ---------- */
+(function buildKB(){
+  const kb=$("kb");
+  "ABCDEFG|HIJKLMN|OPQRSTU|VWXYZ".split("|").forEach(r=>{
+    const d=document.createElement("div"); d.className="row";
+    r.split("").forEach(ch=>{
+      const b=document.createElement("button"); b.type="button"; b.textContent=ch;
+      b.onclick=()=>{ if(!answered){ typed+=ch.toLowerCase(); renderTyped(); } };
+      d.appendChild(b);
+    });
+    kb.appendChild(d);
   });
+  const last=document.createElement("div"); last.className="row";
+  const mk=(label,fn)=>{const b=document.createElement("button");
+    b.type="button"; b.className="wide"; b.textContent=label; b.onclick=fn;
+    last.appendChild(b);};
+  mk("เว้นวรรค", ()=>{ if(!answered){ typed+=" "; renderTyped(); } });
+  mk("⌫ ลบ",    ()=>{ if(!answered){ typed=typed.slice(0,-1); renderTyped(); } });
+  mk("ลบทั้งหมด",()=>{ if(!answered){ typed=""; renderTyped(); } });
+  kb.appendChild(last);
+})();
+function renderTyped(){
+  const t=$("typed");
+  t.classList.toggle("on", typed.length>0);
+  t.innerHTML = typed.length
+    ? typed.replace(/ /g,"&nbsp;") + '<span class="caret"></span>'
+    : '<span class="ph">แตะตัวอักษรด้านล่างเพื่อสะกดคำ</span>';
 }
 
-function say(text, my){
-  if(my !== token || !text) return Promise.resolve();
-  var f = AUDIO_MAP["en|" + text];
-  if(f) return playFile(f, my, rate).catch(function(){ return sayTTS(text, my); });
-  return sayTTS(text, my);
-}
-
-let bank="movers", mode="type", rate=.75, cnt=20, shuf=1;
-let list=[], idx=0, score=0, wrong=[], answered=false, enVoice=null, token=0;
-
-/* ---- chips ---- */
+/* ---------- เลือกชุด ---------- */
 (function(){
   const c=$("setChips");
-  const mk=(k,label,n)=>{const b=document.createElement("button");
-    b.className="chip wide"+(k==="movers"?" on":"");b.dataset.b=k;
-    b.innerHTML=label+"<small>"+n+" คำ</small>";c.appendChild(b);};
-  Object.keys(BANKS).forEach(k=>mk(k,BANKS[k].name,BANKS[k].words.length));
-  const all=document.createElement("button");
-  all.className="chip wide";all.dataset.b="all";
-  const tot=Object.values(BANKS).reduce((s,x)=>s+x.words.length,0);
-  all.innerHTML="ทั้งหมดรวมกัน<small>"+tot+" คำ</small>";c.appendChild(all);
+  const mk=(v,label,sub,on)=>{const b=document.createElement("button");
+    b.className="chip wide"+(on?" on":"");b.dataset.s=v;
+    b.innerHTML=label+"<small>"+sub+"</small>";c.appendChild(b);};
+  mk("all","ทุกชุดรวมกัน","124 คำ",true);
+  SETS.forEach((s,i)=>mk(i, s.t, s.tag+" · "+s.items.length+" คำ",false));
 })();
 function single(box,attr,fn){
-  $(box).addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
-    [...$(box).children].forEach(x=>x.classList.remove("on"));
+  const el=$(box); if(!el)return;
+  el.addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
+    [...el.children].forEach(x=>x.classList.remove("on"));
     b.classList.add("on");fn(b.dataset[attr]);});
 }
-single("setChips","b", v=>bank=v);
+single("setChips","s",  v=>setSel=v);
 single("modeChips","mode",v=>mode=v);
 single("rateChips","rate",v=>rate=parseFloat(v));
 single("cntChips","cnt", v=>cnt=parseInt(v));
 single("shufChips","shuf",v=>shuf=parseInt(v));
+single("thChips","th",   v=>sayThai=(v==="1"));
+single("kbChips","kb",   v=>useKB=(v==="1"));
 
-/* ---- voices ---- */
-function pickVoice(){
+/* ---------- เสียง ---------- */
+let _audioOK=null;
+let noEnVoice=false;
+function updateWarn(){
+  const w=$("warn"); if(!w)return;
+  if(_audioOK===true || !noEnVoice){ w.style.display="none"; return; }
+  w.style.display="block";
+  w.textContent = (_audioOK===false)
+    ? "เครื่องนี้ไม่มีเสียงภาษาอังกฤษ และยังโหลดไฟล์เสียงไม่ได้ ลองเช็กอินเทอร์เน็ต หรือเปิดด้วย Chrome"
+    : "เครื่องนี้ไม่มีเสียงภาษาอังกฤษ แอปจะใช้ไฟล์เสียงที่อัดไว้แทน";
+}
+function pickVoices(){
   const vs=synth.getVoices()||[];
   if(!vs.length)return;
   const en=vs.filter(v=>/^en/i.test(v.lang));
-  enVoice=en.find(v=>/samantha|google us|natural|zira|aria/i.test(v.name))||en[0]||null;
-  if(!en.length){$("warn").style.display="block";
-    $("warn").textContent="เครื่องนี้ไม่มีเสียงภาษาอังกฤษ เสียงที่ได้ยินจะเพี้ยนจนสะกดตามไม่ได้ ให้เปิดด้วย Chrome หรือ Edge";}
+  const th=vs.filter(v=>/^th/i.test(v.lang));
+  thVoice=th[0]||null;
+  noEnVoice=!en.length;
+  updateWarn();
 }
-pickVoice();
-if(synth.onvoiceschanged!==undefined)synth.onvoiceschanged=pickVoice;
-function unlock(){unlockSound();try{const u=new SpeechSynthesisUtterance(" ");u.volume=0;synth.speak(u);}catch(e){}pickVoice();}
+function fillVoiceSel(){
+  const sel=$("voiceSel"); if(!sel)return;
+  const vs=(synth.getVoices()||[]).filter(v=>/^en/i.test(v.lang));
+  if(!vs.length){sel.innerHTML='<option>ไม่มีเสียงในเครื่อง — ใช้ไฟล์เสียงที่อัดไว้</option>';return;}
+  const score=v=>{let s=0;const n=(v.name||"").toLowerCase();
+    if(n.includes("google"))s+=100;
+    if(n.includes("natural")||n.includes("neural"))s+=80;
+    if(n.includes("enhanced")||n.includes("premium"))s+=60;
+    if(!v.localService)s+=50;
+    if(/en-us/i.test(v.lang))s+=20;
+    if(/en-gb/i.test(v.lang))s+=10;
+    return -s;};
+  vs.sort((a,b)=>score(a)-score(b));
+  const cur=sel.value; sel.innerHTML="";
+  vs.forEach(v=>{const o=document.createElement("option");
+    o.value=v.name;
+    o.textContent=v.name+" ("+v.lang+")"+(v.localService?"":"  ★ ออนไลน์ เสียงดีกว่า");
+    sel.appendChild(o);});
+  if(cur&&vs.some(v=>v.name===cur))sel.value=cur;
+  enVoice=vs.find(v=>v.name===sel.value)||vs[0];
+  sel.onchange=()=>{enVoice=(synth.getVoices()||[]).find(v=>v.name===sel.value)||enVoice;};
+  $("voiceTest").onclick=()=>{
+    try{synth.cancel();}catch(e){}
+    const u=new SpeechSynthesisUtterance("Harvest. H, A, R, V, E, S, T. Harvest.");
+    u.lang="en-US"; if(enVoice)u.voice=enVoice; u.rate=rate;
+    setTimeout(()=>synth.speak(u),60);
+  };
+}
+pickVoices(); fillVoiceSel();
+if(synth.onvoiceschanged!==undefined)
+  synth.onvoiceschanged=()=>{pickVoices();fillVoiceSel();};
+function unlock(){try{const u=new SpeechSynthesisUtterance(" ");u.volume=0;synth.speak(u);}catch(e){}
+  pickVoices();fillVoiceSel();}
 
-
-/* ---------- ตัวจัดการเสียง แก้อาการเสียงหยุดกลางคัน ---------- */
-let _keep=null;
+/* ---------- เล่นไฟล์เสียงก่อน ถ้าไม่มีค่อยใช้เสียงสังเคราะห์ ---------- */
+const AUDIO_BASE="audio/bee/";
+let _cur=null, _keep=null;
+(function probeAudio(){
+  try{
+    const a=new Audio(AUDIO_BASE+"apple_w.mp3");
+    a.preload="metadata";
+    a.onloadedmetadata=()=>{_audioOK=true;updateWarn();};
+    a.onerror=()=>{if(_audioOK===null){_audioOK=false;updateWarn();}};
+  }catch(e){}
+})();
 function keepAlive(on){
-  if(on){ if(_keep) return;
-    _keep=setInterval(()=>{ try{ if(synth.speaking) synth.resume(); }catch(e){} },7000);
-  }else{ clearInterval(_keep); _keep=null; }
+  if(on){ if(_keep)return;
+    _keep=setInterval(()=>{try{if(synth.speaking)synth.resume();}catch(e){}},7000);
+  }else{clearInterval(_keep);_keep=null;}
 }
-document.addEventListener("touchstart",()=>{ try{ synth.resume(); }catch(e){} },{passive:true});
-document.addEventListener("click",   ()=>{ try{ synth.resume(); }catch(e){} });
-function _utter(text,lang,voice){
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang=lang; if(voice) u.voice=voice; u.rate=rate; u.pitch=1; u.volume=1;
-  return u;
-}
-function sayTTS(text,  my){
+document.addEventListener("touchstart",()=>{try{synth.resume();}catch(e){}},{passive:true});
+document.addEventListener("click",()=>{try{synth.resume();}catch(e){}});
+function stopAudio(){try{if(_cur){_cur.pause();_cur=null;}}catch(e){}}
+function playFile(url,my){
   return new Promise(res=>{
-    if(my!==token||!text) return res();
-    let done=false, started=false, tries=0;
-    const fin=()=>{ if(!done){ done=true; res(); } };
+    if(my!==token)return res(true);
+    let done=false;
+    const fin=ok=>{if(!done){done=true;_cur=null;res(ok);}};
+    const a=new Audio(url); _cur=a; a.preload="auto";
+    a.onended=()=>fin(true); a.onerror=()=>fin(false);
+    try{a.playbackRate=Math.max(0.5,Math.min(1.4,rate/0.8));}catch(e){}
+    const p=a.play(); if(p&&p.catch)p.catch(()=>fin(false));
+    setTimeout(()=>{if(!done)fin(true);},30000);
+  });
+}
+function ttsSay(text,lang,my){
+  return new Promise(res=>{
+    if(my!==token||!text)return res();
+    let done=false,started=false,tries=0;
+    const fin=()=>{if(!done){done=true;res();}};
     const go=()=>{
-      if(done||my!==token) return;
+      if(done||my!==token)return;
       tries++;
-      try{ stopAll(); }catch(e){}
+      try{synth.cancel();}catch(e){}
       setTimeout(()=>{
-        if(done||my!==token) return;
-        const u=_utter(text, "en-US", enVoice);
-        u.onstart=()=>{ started=true; };
+        if(done||my!==token)return;
+        const u=new SpeechSynthesisUtterance(text);
+        u.lang=lang;
+        const v=(lang==="th-TH")?thVoice:enVoice;
+        if(v)u.voice=v;
+        u.rate=rate;u.pitch=1;u.volume=1;
+        u.onstart=()=>{started=true;};
         u.onend=fin;
-        u.onerror=()=>{ if(!started&&tries<3) go(); else fin(); };
-        try{ synth.speak(u); }catch(e){ fin(); }
-        // ถ้า 450ms แล้วยังไม่เริ่มพูด แปลว่าคิวค้าง ให้ลองใหม่
-        setTimeout(()=>{ if(!started&&!done&&tries<3) go(); },450);
+        u.onerror=()=>{if(!started&&tries<3)go();else fin();};
+        try{synth.speak(u);}catch(e){fin();}
+        setTimeout(()=>{if(!started&&!done&&tries<3)go();},450);
       },60);
     };
-    keepAlive(true);
-    go();
-    setTimeout(fin, 3000 + text.length*110/rate);
+    keepAlive(true); go();
+    setTimeout(fin,3000+text.length*110/rate);
   });
+}
+async function speak(text,lang,my,file){
+  if(file&&_audioOK!==false){
+    const ok=await playFile(AUDIO_BASE+file,my);
+    if(ok){if(_audioOK!==true){_audioOK=true;updateWarn();}return;}
+    if(_audioOK===null){_audioOK=false;updateWarn();}
+  }
+  return ttsSay(text,lang,my);
 }
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 
-/* ---- flow ---- */
+/* ---------- สร้างรายการ ---------- */
 function build(){
   let pool=[];
-  if(bank==="all") Object.values(BANKS).forEach(b=>pool=pool.concat(b.words));
-  else pool=BANKS[bank].words.slice();
-  // ตัดคำซ้ำ
-  const seen=new Set();
-  pool=pool.filter(w=>{const k=w[0].toLowerCase();if(seen.has(k))return false;seen.add(k);return true;});
+  if(setSel==="all") SETS.forEach(s=>s.items.forEach(it=>pool.push({...it})));
+  else SETS[+setSel].items.forEach(it=>pool.push({...it}));
   if(shuf) for(let i=pool.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[pool[i],pool[j]]=[pool[j],pool[i]];}
   list = cnt>0 ? pool.slice(0,cnt) : pool;
+}
+const F=it=>({ w:it.k+"_w.mp3",
+               d:HAS.d?it.k+"_d.mp3":null,
+               s:HAS.s?it.k+"_s.mp3":null,
+               m:HAS.m?it.k+"_m.mp3":null,
+               l:HAS.l?it.k+"_l.mp3":null });
+
+function show(ids){
+  ["numlbl","num","spk","word","mean","spellout","def","sent"].forEach(k=>
+    $(k).classList.toggle("hidden",!ids.includes(k)));
 }
 
 async function ask(){
   const my=++token;
   answered=false;
-  const it=list[idx];
+  const it=list[idx], f=F(it);
   $("num").textContent=idx+1;
   $("tick").textContent=(idx+1)+"/"+list.length;
   $("track").style.width=((idx+1)/list.length*100)+"%";
   $("sc").textContent="ถูก "+score;
-  $("hint").classList.add("hidden");$("hint").innerHTML="";
-  $("reveal").classList.add("hidden");$("spellout").classList.add("hidden");
+  $("word").textContent=it.w;
+  $("mean").textContent=it.m;
+  $("def").textContent=it.d;
+  $("sent").textContent=it.s;
+  $("spellout").textContent=it.w.toUpperCase().split("").join(" ");
   $("verdict").classList.add("hidden");
-  $("bSubmit").textContent = mode==="type" ? "ตอบ" : "ดูเฉลย";
-  if(mode==="type"){$("ans").classList.remove("hidden");$("ans").value="";$("ans").focus();}
-  else $("ans").classList.add("hidden");
-  $("phase").textContent="ฟังให้ดี";
-  await say(it[0],my); await wait(500);
-  if(my!==token)return;
-  $("phase").textContent="สะกดคำที่ได้ยิน  (ขอฟังซ้ำ ความหมาย หรือประโยคได้)";
+  $("bSubmit").textContent = (mode==="review"||mode==="answer") ? "คำต่อไป" : "ตอบ";
+  $("bSubmit").onclick = (mode==="review"||mode==="answer") ? next : submit;
+  const typing = (mode==="dictation"||mode==="meaning");
+  typed="";
+  $("ans").classList.toggle("hidden", !(typing && !useKB));
+  $("typed").classList.toggle("hidden", !(typing && useKB));
+  $("kb").classList.toggle("hidden",    !(typing && useKB));
+  if(typing){
+    if(useKB) renderTyped();
+    else { $("ans").value=""; $("ans").focus(); }
+  }
+
+  const en=(t,file)=>speak(t,"en-US",my,file);
+  const th=(t,file)=>sayThai?speak(t,"th-TH",my,file):Promise.resolve();
+  const base=["word"]; if(HAS.m) base.push("mean");
+
+  if(mode==="review"){
+    show(base);
+    $("phase").textContent="ฟังคำศัพท์";
+    await en(it.w,f.w); await wait(420);
+    await en(it.w,f.w); await wait(320);
+    if(HAS.m){ $("phase").textContent="คำแปลไทย"; await th(it.m,f.m); await wait(260); }
+    if(HAS.d){ show(base.concat(["def"])); $("phase").textContent="ความหมายภาษาอังกฤษ";
+               await en(it.d,f.d); await wait(260); }
+    if(HAS.s){ show(base.concat(HAS.d?["def","sent"]:["sent"]));
+               $("phase").textContent="ประโยคตัวอย่าง"; await en(it.s,f.s); }
+    $("phase").textContent="อ่านตาม";
+
+  }else if(mode==="dictation"){
+    show(["numlbl","num","spk"]);
+    $("phase").textContent="ตั้งใจฟัง";
+    await en(it.w,f.w); await wait(550);
+    await en(it.w,f.w);
+    $("phase").textContent="พิมพ์คำที่ได้ยิน  (ขอฟังซ้ำหรือขอคำใบ้ได้)";
+
+  }else if(mode==="meaning"){
+    show(["numlbl","num","spk"]);
+    $("phase").textContent="ฟังนิยามภาษาอังกฤษ แล้วเดาว่าเป็นคำไหน";
+    await en(it.d,f.d); await wait(400);
+    show(["numlbl","num","spk","def"]);
+    $("phase").textContent="พิมพ์คำภาษาอังกฤษที่ตรงกับคำใบ้นี้";
+
+  }else{
+    show(base);
+    $("phase").textContent="เฉลย";
+    await en(it.w,f.w); await wait(420);
+    show(base.concat(["spellout"]));
+    $("phase").textContent="สะกดทีละตัว";
+    await en(it.w.toUpperCase().split("").join(", "),f.l); await wait(400);
+    await en(it.w,f.w);
+    if(HAS.m) await th(it.m,f.m);
+    $("phase").textContent="ตรวจคำตอบของตัวเอง";
+  }
 }
 
 function submit(){
   if(answered)return;
   answered=true;
   const it=list[idx];
-  $("reveal").textContent=it[0];
-  $("spellout").textContent=it[0].toUpperCase().split("").join(" ");
-  $("reveal").classList.remove("hidden");
-  $("spellout").classList.remove("hidden");
-
-  if(mode==="type"){
-    const given=$("ans").value.trim();
-    const ok = given.toLowerCase()===it[0].toLowerCase();
-    if(ok){score++;$("verdict").textContent="✓ ถูกต้อง";$("verdict").className="verdict ok";}
-    else{wrong.push([it[0],given||"(ไม่ได้ตอบ)"]);
-         $("verdict").textContent="✗ ยังไม่ถูก";$("verdict").className="verdict bad";}
-    $("verdict").classList.remove("hidden");
-    $("ans").classList.add("hidden");
-  }else{
-    $("phase").textContent="ตรวจกับที่เขียนไว้ แล้วกดถูกหรือผิด";
-    $("verdict").innerHTML='<button class="chip" id="mOk" style="margin-right:8px">✓ เขียนถูก</button>'
-                          +'<button class="chip" id="mBad">✗ เขียนผิด</button>';
-    $("verdict").className="verdict";$("verdict").classList.remove("hidden");
-    $("mOk").onclick=()=>{score++;next();};
-    $("mBad").onclick=()=>{wrong.push([it[0],"(เขียนผิด)"]);next();};
-    return;
-  }
+  const given=(useKB ? typed : $("ans").value).trim();
+  const ok=given.toLowerCase()===it.w.toLowerCase();
+  if(ok){score++;$("verdict").textContent="✓ ถูกต้อง";$("verdict").className="verdict ok";}
+  else{wrong.push([it.w,given||"(ไม่ได้ตอบ)",it.m||it.d]);
+       $("verdict").textContent="✗ ยังไม่ถูก";$("verdict").className="verdict bad";}
+  $("verdict").classList.remove("hidden");
+  $("ans").classList.add("hidden");
+  $("typed").classList.add("hidden");
+  $("kb").classList.add("hidden");
+  const f=["word","spellout"];
+  if(HAS.m)f.push("mean"); if(HAS.d)f.push("def"); if(HAS.s)f.push("sent");
+  show(f);
+  $("phase").textContent="";
   $("sc").textContent="ถูก "+score;
   $("bSubmit").textContent="คำต่อไป";
   $("bSubmit").onclick=next;
 }
-
-function next(){
-  idx++;
-  $("bSubmit").onclick=submit;
-  if(idx>=list.length)return finish();
-  ask();
-}
-
+function next(){ stopAudio(); idx++; if(idx>=list.length)return finish(); ask(); }
 function finish(){
-  token++;stopAll();
-  $("play").classList.add("hidden");$("ask").classList.add("hidden");$("bar").classList.add("hidden");
+  token++; try{synth.cancel();}catch(e){} stopAudio(); keepAlive(false);
+  $("play").classList.add("hidden");$("ask").classList.add("hidden");
+  $("bar").classList.add("hidden");$("kb").classList.add("hidden");
   $("result").classList.remove("hidden");
-  $("final").textContent=score+" / "+list.length;
-  const p=Math.round(score/list.length*100);
-  let msg;
-  if(p===100)msg="เต็ม ไม่พลาดสักคำ พร้อมลงสนามแล้ว";
-  else if(p>=80)msg="แม่นมาก เหลือแค่เก็บคำที่พลาดอีกนิดเดียว";
-  else if(p>=60)msg="ใช้ได้ ลองซ้อมชุดเดิมซ้ำอีกรอบให้ขึ้นเกิน 80";
-  else msg="ยังต้องซ้อมอีก ลองลดเหลือ 10 คำต่อรอบ แล้วเน้นคำที่ผิด";
-  $("pct").textContent=p+"%  ·  "+msg;
+  const graded=(mode==="dictation"||mode==="meaning");
+  $("final").textContent = graded ? (score+" / "+list.length) : (list.length+" คำ");
+  if(graded){
+    const p=Math.round(score/list.length*100);
+    let msg;
+    if(p===100)msg="เต็ม ไม่พลาดสักคำ";
+    else if(p>=80)msg="แม่นมาก เหลือเก็บคำที่พลาดอีกนิดเดียว";
+    else if(p>=60)msg="ใช้ได้ ลองซ้อมชุดเดิมซ้ำให้ขึ้นเกิน 80";
+    else msg="ยังต้องซ้อมอีก ลองลดเหลือ 10 คำต่อรอบ แล้วเน้นคำที่ผิด";
+    $("pct").textContent=p+"%  ·  "+msg;
+  }else $("pct").textContent="ทบทวนครบแล้ว";
   if(wrong.length){
     $("wrongbox").classList.remove("hidden");
     $("wronglist").innerHTML=wrong.map(w=>
-      "<li><b>"+w[0]+"</b> <span class='you'>— ที่ตอบ: "+w[1]+"</span></li>").join("");
+      "<li><b>"+w[0]+"</b> <span class='you'>— ที่ตอบ: "+w[1]+" · "+w[2]+"</span></li>").join("");
   }else $("wrongbox").classList.add("hidden");
 }
 
-/* ---- buttons ---- */
 $("start").onclick=()=>{
-  unlock();build();
+  unlock(); build();
   idx=0;score=0;wrong=[];
   $("setup").classList.add("hidden");
   $("play").classList.remove("hidden");$("ask").classList.remove("hidden");$("bar").classList.remove("hidden");
   $("result").classList.add("hidden");
-  $("bSubmit").onclick=submit;
   ask();
 };
-$("bRepeat").onclick=async()=>{const my=token;await say(list[idx][0],my);};
-$("bDef").onclick=async()=>{
-  const it=list[idx];
-  $("hint").classList.remove("hidden");
-  $("hint").innerHTML="<b>ความหมาย</b> "+it[1];
-  const my=token;await say("Definition. "+it[1],my);
-};
-$("bSent").onclick=async()=>{
-  const it=list[idx];
-  // ปิดคำในประโยคไม่ให้เห็นตัวสะกด
-  const hidden=it[2].replace(new RegExp(it[0],"ig"),"_____");
-  $("hint").classList.remove("hidden");
-  $("hint").innerHTML="<b>ประโยค</b> "+(answered?it[2]:hidden);
-  const my=token;await say(it[2],my);
-};
+$("bRepeat").onclick=async()=>{const my=token;stopAudio();
+  const it=list[idx],f=F(it);
+  if(mode==="meaning") await speak(it.d,"en-US",my,f.d);
+  else await speak(it.w,"en-US",my,f.w);};
+$("bDef").onclick=async()=>{const my=token;stopAudio();
+  const it=list[idx],f=F(it);
+  $("def").classList.remove("hidden");
+  await speak(it.d,"en-US",my,f.d);};
+$("bTh").onclick=async()=>{const my=token;stopAudio();
+  const it=list[idx],f=F(it);
+  $("sent").classList.remove("hidden");
+  await speak(it.s,"en-US",my,f.s);};
 $("bSkip").onclick=()=>{
-  if(!answered){wrong.push([list[idx][0],"(ข้าม)"]);}
+  if(!answered&&(mode==="dictation"||mode==="meaning"))
+    wrong.push([list[idx].w,"(ข้าม)",list[idx].m||list[idx].d]);
   next();
 };
-$("bQuit").onclick=finish;
+$("bQuit").onclick=()=>finish();
 $("again").onclick=()=>{$("result").classList.add("hidden");$("start").click();};
 $("home").onclick=()=>{
-  token++;stopAll();
+  token++;try{synth.cancel();}catch(e){}stopAudio();keepAlive(false);
   $("result").classList.add("hidden");$("setup").classList.remove("hidden");
 };
 $("ans").addEventListener("keydown",e=>{if(e.key==="Enter")submit();});
-window.addEventListener("pagehide",()=>stopAll());
+window.addEventListener("pagehide",()=>{try{synth.cancel();}catch(e){}stopAudio();});
 </script>
 </body>
 </html>

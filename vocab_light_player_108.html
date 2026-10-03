@@ -2,929 +2,587 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#0E2039">
-<title>คำศัพท์เรื่องแสง ป.4 — 108 คำ</title>
+<meta name="theme-color" content="#12233D">
+<title>คำศัพท์เรื่องแสง — ป.4</title>
 <style>
   :root{
-    --bg:#0E2039; --panel:#17304F; --panel2:#1F3D63; --edge:#2A4A73;
-    --ink:#EEF4FB; --dim:#8AA6CA; --hi:#FFC93C; --ok:#5DD3A3; --warn:#FF8A6B;
+    --bg:#12233D; --panel:#1B3352; --panel2:#234170; --edge:#2E5080;
+    --ink:#EFF4FA; --dim:#8FA9C8; --hi:#6FD3FF; --ok:#57D6A0; --bad:#FF7B6B;
     --pad:env(safe-area-inset-bottom,0px);
   }
-  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent}
-  html,body{margin:0; height:100%; overscroll-behavior:none}
-  body{
-    background:var(--bg); color:var(--ink);
-    font-family:'Sarabun','Noto Sans Thai','Helvetica Neue',-apple-system,sans-serif;
-    -webkit-user-select:none; user-select:none;
-  }
-  .app{max-width:560px; margin:0 auto; min-height:100%; display:flex; flex-direction:column}
-  button{font-family:inherit; border:none; cursor:pointer}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%}
+  body{background:var(--bg);color:var(--ink);min-height:100%;
+    font-family:'Sarabun','Noto Sans Thai','Segoe UI','Helvetica Neue',sans-serif}
+  .app{max-width:640px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+  button{font-family:inherit;border:none;cursor:pointer}
+  .hidden{display:none!important}
 
-  /* ---------- setup ---------- */
-  .setup{padding:22px 18px calc(28px + var(--pad)); flex:1}
-  .setup h1{font-size:26px; margin:4px 0 6px; font-weight:800; line-height:1.25}
-  .setup .lead{color:var(--dim); font-size:15px; line-height:1.65; margin:0 0 22px}
-  .lbl{font-size:13px; color:var(--dim); margin:20px 0 9px; font-weight:600}
-  .chips{display:flex; flex-wrap:wrap; gap:8px}
-  .chip{
-    padding:12px 15px; border-radius:11px; font-size:14.5px;
-    background:var(--panel); color:var(--ink); border:1.5px solid var(--edge);
-  }
-  .chip.on{background:var(--hi); color:#0E2039; border-color:var(--hi); font-weight:700}
-  .chip.wide{width:100%; text-align:left}
-  .chip.wide small{display:block; font-size:12.5px; opacity:.7; margin-top:3px; font-weight:400}
-  .chip.on small{opacity:.75}
-  .go{
-    width:100%; margin-top:28px; padding:19px; font-size:19px; font-weight:800;
-    background:var(--hi); color:#0E2039; border-radius:14px;
-  }
-  .warn{
-    border-left:4px solid var(--warn); background:rgba(255,138,107,.12);
-    padding:13px 14px; border-radius:0 10px 10px 0; font-size:13.5px;
-    line-height:1.65; margin:16px 0 0;
-  }
-  details{margin-top:22px; font-size:14px; color:var(--dim)}
-  details summary{padding:12px 0; font-weight:600; color:var(--ink)}
-  details p{line-height:1.7; margin:4px 0 12px}
+  .setup{padding:22px 18px calc(30px + var(--pad));flex:1}
+  h1{font-size:25px;margin:2px 0 6px;font-weight:800;line-height:1.25}
+  .lead{color:var(--dim);font-size:14.5px;line-height:1.65;margin:0 0 6px}
+  .lbl{font-size:13px;color:var(--dim);margin:22px 0 9px;font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{padding:12px 15px;border-radius:11px;font-size:14.5px;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .chip.on{background:var(--hi);color:#12233D;border-color:var(--hi);font-weight:700}
+  .chip.wide{width:100%;text-align:left}
+  .chip.wide small{display:block;font-size:12.5px;opacity:.72;margin-top:3px;font-weight:400}
+  select.vsel{width:100%;padding:12px;border-radius:11px;font-size:15px;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge);
+    font-family:inherit;margin-bottom:8px}
+  .vtest{padding:11px 16px;border-radius:10px;font-size:13.5px;font-weight:600;
+    background:var(--panel2);color:var(--ink);border:1.5px solid var(--edge)}
+  .go{width:100%;margin-top:26px;padding:19px;font-size:19px;font-weight:800;
+    background:var(--hi);color:#12233D;border-radius:14px}
+  .note{background:rgba(255,200,69,.10);border-left:4px solid var(--hi);
+    padding:12px 14px;border-radius:0 9px 9px 0;font-size:13px;line-height:1.65;
+    margin:16px 0 4px;color:#D8E4F2}
+  details{margin-top:22px;font-size:14px;color:var(--dim)}
+  details summary{padding:12px 0;font-weight:600;color:var(--ink)}
+  details p{line-height:1.7;margin:4px 0 12px}
 
-  /* ---------- play ---------- */
-  .play{flex:1; display:flex; flex-direction:column; padding:14px 16px 0}
-  .top{display:flex; align-items:center; gap:12px; font-size:12.5px; color:var(--dim)}
-  .track{flex:1; height:5px; background:#0A182C; border-radius:4px; overflow:hidden}
-  .track i{display:block; height:100%; width:0%; background:var(--dim)}
-  .card{
-    flex:1; display:flex; flex-direction:column; align-items:center;
-    justify-content:center; text-align:center; padding:18px 4px;
-  }
-  .num{font-size:66px; font-weight:800; color:var(--hi); line-height:1;
-       font-variant-numeric:tabular-nums}
-  .numlbl{font-size:13px; color:var(--dim); margin-bottom:2px}
-  .word{font-size:40px; font-weight:800; line-height:1.15; word-break:break-word}
-  .read{font-size:20px; color:var(--hi); margin-top:10px}
-  .mean{font-size:21px; margin-top:5px}
-  .spell{font-size:19px; letter-spacing:6px; color:var(--hi); font-weight:700; margin-top:10px}
-  .sent{font-size:15.5px; color:var(--dim); margin-top:16px; line-height:1.55; padding:0 6px}
-  .phase{font-size:14.5px; color:var(--dim); margin-top:20px; min-height:1.4em}
-  .timer{
-    margin-top:14px; font-size:44px; font-weight:800; color:var(--ink);
-    font-variant-numeric:tabular-nums; line-height:1;
-  }
-  .tbar{width:72%; height:9px; margin-top:10px; background:#0A182C;
-        border-radius:6px; overflow:hidden; border:1px solid var(--edge)}
-  .tbar i{display:block; height:100%; width:0%; background:var(--hi)}
-  .hidden{display:none !important}
+  .stage{flex:1;display:flex;flex-direction:column;padding:14px 16px 0}
+  .top{display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--dim)}
+  .track{flex:1;height:5px;background:#0B1A2E;border-radius:4px;overflow:hidden}
+  .track i{display:block;height:100%;width:0%;background:var(--dim)}
+  .card{flex:1;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:12px 4px}
+  .num{font-size:50px;font-weight:800;color:var(--hi);line-height:1;
+    font-variant-numeric:tabular-nums}
+  .numlbl{font-size:13px;color:var(--dim)}
+  .speaker{font-size:58px;margin:4px 0 2px;line-height:1}
+  .word{font-size:clamp(32px,8vw,52px);font-weight:800;letter-spacing:1px;
+    word-break:break-word;line-height:1.15}
+  .mean{font-size:20px;margin-top:7px;color:var(--hi)}
+  .def{font-size:16px;color:#C8D8EC;margin-top:14px;line-height:1.6;
+    max-width:540px;padding:0 8px}
+  .sent{font-size:15.5px;color:#9FB6D2;margin-top:10px;line-height:1.6;
+    max-width:540px;padding:0 8px;font-style:italic}
+  .spellout{font-size:19px;letter-spacing:8px;color:var(--hi);font-weight:700;margin-top:10px}
+  .phase{font-size:14.5px;color:var(--dim);margin-top:14px;min-height:1.4em}
+  .verdict{font-size:21px;font-weight:800;margin-top:14px}
+  .verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)}
+  input[type=text]{width:min(420px,90vw);padding:15px;border-radius:12px;font-size:23px;
+    text-align:center;letter-spacing:2px;background:#0B1A2E;color:var(--ink);
+    border:2px solid var(--edge);margin-top:18px;font-family:inherit}
+  input[type=text]:focus{outline:none;border-color:var(--hi)}
 
-  .bar{
-    display:grid; grid-template-columns:1fr 1fr 1.4fr 1fr 1fr; gap:7px;
-    padding:11px 12px calc(14px + var(--pad)); border-top:1.5px solid var(--edge);
-    background:var(--bg); position:sticky; bottom:0;
-  }
-  .bar button{
-    padding:15px 4px; border-radius:12px; font-size:13.5px; font-weight:600;
-    background:var(--panel); color:var(--ink); border:1.5px solid var(--edge);
-  }
-  .bar button.main{background:var(--hi); color:#0E2039; font-weight:800; font-size:15px}
-  .bar button:active{background:var(--panel2)}
-  .bar button.main:active{background:#FFD666}
+  .typed{width:min(460px,92vw);min-height:64px;margin-top:16px;padding:12px 14px;
+    border-radius:12px;background:#0B1A2E;border:2px solid var(--edge);
+    font-size:26px;letter-spacing:3px;display:flex;align-items:center;
+    justify-content:center;word-break:break-word;line-height:1.3}
+  .typed.on{border-color:var(--hi)}
+  .typed .ph{color:#54708F;font-size:16px;letter-spacing:0}
+  .caret{display:inline-block;width:2px;height:27px;background:var(--hi);
+    margin-left:2px;vertical-align:-4px;animation:bl 1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+  .kb{padding:8px 10px 0}
+  .kb .row{display:flex;gap:5px;justify-content:center;margin-bottom:5px}
+  .kb button{flex:1;max-width:60px;padding:13px 0;border-radius:9px;font-size:17px;
+    font-weight:700;background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .kb button:active{background:var(--hi);color:#12233D}
+  .kb button.wide{max-width:none;flex:2.2;font-size:14px;font-weight:600}
+
+  .ask{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:10px 14px 0}
+  .ask button{padding:13px 4px;border-radius:11px;font-size:13.5px;font-weight:600;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .ask button:active{background:var(--panel2)}
+  .bar{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:8px;
+    padding:10px 14px calc(16px + var(--pad));background:var(--bg)}
+  .bar button{padding:16px 4px;border-radius:12px;font-size:15px;font-weight:700;
+    background:var(--panel);color:var(--ink);border:1.5px solid var(--edge)}
+  .bar button.main{background:var(--hi);color:#12233D;font-weight:800}
+
+  .result{padding:24px 18px calc(30px + var(--pad));flex:1}
+  .score{font-size:54px;font-weight:800;color:var(--hi);line-height:1}
+  .wrongbox{margin-top:22px;background:var(--panel);border:1.5px solid var(--edge);
+    border-radius:12px;padding:14px 16px}
+  .wrongbox h3{font-size:15px;margin:0 0 10px;color:var(--bad)}
+  .wrongbox ul{margin:0;padding-left:20px;line-height:2;font-size:16px}
+  .wrongbox .you{color:var(--dim);font-size:13.5px}
 </style>
 </head>
 <body>
 <div class="app">
 
-  <!-- SETUP -->
-  <div class="setup" id="setup">
-    <h1>คำศัพท์เรื่องแสง</h1>
-    <p class="lead">วิทยาศาสตร์ ป.4 · 108 คำ · 9 ชุด · แตะเลือกชุดและโหมด แล้วกดเริ่ม</p>
+<div class="setup" id="setup">
+  <h1>คำศัพท์เรื่องแสง</h1>
+  <p class="lead">วิทยาศาสตร์ ป.4 · 108 คำ<br>ฟังเสียง ดูคำแปล แล้วสะกดคำ พร้อมประโยคตัวอย่างจากบทเรียน</p>
 
-    <div class="lbl">ชุดคำศัพท์</div>
-    <div class="chips" id="grpChips"></div>
+  <div class="lbl">เลือกชุดคำ</div>
+  <div class="chips" id="setChips"></div>
 
-    <div class="lbl">โหมด</div>
-    <div class="chips" id="modeChips">
-      <button class="chip wide on" data-mode="review">ทบทวนคำศัพท์
-        <small>เห็นคำ คำอ่าน คำแปล พร้อมเสียง</small></button>
-      <button class="chip wide" data-mode="test">ฟังแล้วเขียน
-        <small>ซ่อนตัวสะกด ให้นักเรียนเขียนเอง</small></button>
-      <button class="chip wide" data-mode="answer">เฉลย
-        <small>สะกดทีละตัวอักษร</small></button>
-    </div>
-
-    <div class="lbl">ความเร็วเสียง</div>
-    <div class="chips" id="rateChips">
-      <button class="chip" data-rate="0.6">ช้ามาก</button>
-      <button class="chip on" data-rate="0.75">ช้า</button>
-      <button class="chip" data-rate="0.9">ปานกลาง</button>
-      <button class="chip" data-rate="1">ปกติ</button>
-    </div>
-
-    <div class="lbl">เวลาเว้นให้คิด / เขียน</div>
-    <div class="chips" id="gapChips">
-      <button class="chip" data-gap="4">4 วิ</button>
-      <button class="chip on" data-gap="8">8 วิ</button>
-      <button class="chip" data-gap="12">12 วิ</button>
-      <button class="chip" data-gap="16">16 วิ</button>
-    </div>
-
-    <div class="lbl">อ่านเพิ่มเติม</div>
-    <div class="chips" id="extraChips">
-      <button class="chip on" data-x="th">อ่านคำแปลไทย</button>
-      <button class="chip on" data-x="sent">อ่านประโยคตัวอย่าง</button>
-    </div>
-
-    <button class="go" id="start">เริ่ม</button>
-    <div class="warn" id="warn" style="display:none"></div>
-
-    <details>
-      <summary>เปิดไม่มีเสียง หรือหน้าจอดับ ทำอย่างไร</summary>
-      <p><b>ไม่มีเสียง</b> — ตรวจว่าไม่ได้เปิดโหมดปิดเสียง บน iPhone สวิตช์ข้างเครื่องต้องไม่อยู่ที่โหมดเงียบ
-      และต้องกดปุ่มเริ่มก่อนเสมอ เพราะมือถือไม่อนุญาตให้เว็บเล่นเสียงเองโดยไม่มีการแตะ</p>
-      <p><b>เสียงอ่านเพี้ยน</b> — แปลว่าเครื่องไม่มีเสียงภาษาอังกฤษ ให้ไปเพิ่มในตั้งค่าของเครื่อง
-      iPhone: ตั้งค่า &rsaquo; การช่วยการเข้าถึง &rsaquo; เนื้อหาที่พูด &rsaquo; เสียงพูด แล้วโหลดเสียง English
-      Android: ตั้งค่า &rsaquo; ระบบ &rsaquo; ภาษาและการป้อนข้อมูล &rsaquo; เอาต์พุตข้อความเป็นคำพูด</p>
-      <p><b>จอดับกลางคัน</b> — แอปจะพยายามกันจอดับให้เอง แต่บางเครื่องไม่รองรับ
-      ถ้าเจอปัญหาให้ตั้งเวลาล็อกหน้าจอเป็น 5 นาทีขึ้นไปก่อนใช้</p>
-    </details>
+  <div class="lbl">โหมดการฝึก</div>
+  <div class="chips" id="modeChips">
+    <button class="chip wide on" data-mode="review">ทบทวนคำศัพท์
+      <small>เห็นคำ คำแปลไทย และประโยคตัวอย่าง พร้อมเสียง</small></button>
+    <button class="chip wide" data-mode="dictation">ฟังคำ แล้วสะกด
+      <small>ซ่อนตัวสะกด ฟังเสียงแล้วพิมพ์คำ — ตรวจให้อัตโนมัติ</small></button>
+    <button class="chip wide" data-mode="meaning">ฟังคำแปลไทย แล้วเดาคำอังกฤษ
+      <small>อ่านคำแปลไทยให้ฟัง นักเรียนสะกดเป็นคำภาษาอังกฤษ</small></button>
+    <button class="chip wide" data-mode="answer">เฉลย
+      <small>อ่านคำและสะกดทีละตัวอักษร</small></button>
   </div>
 
-  <!-- PLAY -->
-  <div class="play hidden" id="play">
-    <div class="top">
-      <span id="tick"></span>
-      <span class="track"><i id="track"></i></span>
-      <span id="badge"></span>
-    </div>
-    <div class="card">
-      <div class="numlbl hidden" id="numlbl">คำที่</div>
-      <div class="num hidden" id="num"></div>
-      <div class="word hidden" id="word"></div>
-      <div class="read hidden" id="read"></div>
-      <div class="mean hidden" id="mean"></div>
-      <div class="spell hidden" id="spell"></div>
-      <div class="sent hidden" id="sent"></div>
-      <div class="phase" id="phase"></div>
-      <div class="timer hidden" id="secs"></div>
-      <div class="tbar hidden" id="tbar"><i id="fill"></i></div>
-    </div>
+  <div class="lbl">เสียงผู้อ่าน</div>
+  <select class="vsel" id="voiceSel"></select>
+  <button class="vtest" id="voiceTest">▶ ฟังตัวอย่าง</button>
+
+  <div class="lbl">ความเร็วเสียง</div>
+  <div class="chips" id="rateChips">
+    <button class="chip" data-rate="0.6">ช้ามาก</button>
+    <button class="chip on" data-rate="0.75">ช้า</button>
+    <button class="chip" data-rate="0.9">ปานกลาง</button>
+    <button class="chip" data-rate="1">ปกติ</button>
   </div>
 
-  <div class="bar hidden" id="bar">
-    <button id="prev">ย้อน</button>
-    <button id="repeat">ซ้ำ</button>
-    <button class="main" id="pause">หยุด</button>
-    <button id="next">ถัดไป</button>
-    <button id="quit">ออก</button>
+  <div class="lbl">จำนวนคำต่อรอบ</div>
+  <div class="chips" id="cntChips">
+    <button class="chip" data-cnt="10">10 คำ</button>
+    <button class="chip on" data-cnt="20">20 คำ</button>
+    <button class="chip" data-cnt="30">30 คำ</button>
+    <button class="chip" data-cnt="0">ทั้งชุด</button>
   </div>
+
+  <div class="lbl">ลำดับคำ</div>
+  <div class="chips" id="shufChips">
+    <button class="chip on" data-shuf="1">สุ่มลำดับ</button>
+    <button class="chip" data-shuf="0">เรียงตามชุด</button>
+  </div>
+
+  <div class="lbl">คีย์บอร์ดที่ใช้พิมพ์คำตอบ</div>
+  <div class="chips" id="kbChips">
+    <button class="chip on" data-kb="1">ในแอป — แนะนำ</button>
+    <button class="chip" data-kb="0">ของเครื่อง</button>
+  </div>
+  <div class="note" style="margin-top:10px">
+    คีย์บอร์ดของมือถือจะเดาคำและสะกดให้อัตโนมัติ ทำให้วัดผลไม่ได้จริง
+    แอปจึงมีคีย์บอร์ด A–Z ของตัวเองให้ใช้แทน ไม่มีคำแนะนำใด ๆ
+  </div>
+
+  <div class="lbl">อ่านคำแปลไทยด้วยหรือไม่</div>
+  <div class="chips" id="thChips">
+    <button class="chip on" data-th="1">อ่านคำแปลไทย</button>
+    <button class="chip" data-th="0">อ่านเฉพาะอังกฤษ</button>
+  </div>
+
+  <button class="go" id="start">เริ่มฝึก</button>
+  <div class="note" id="warn" style="display:none"></div>
+
+  <details>
+    <summary>วิธีใช้ และเรื่องเสียง</summary>
+    <p><b>โหมดฟังคำ แล้วสะกด</b> ใช้สอบเก็บคะแนนได้เลย นักเรียนจะไม่เห็นตัวสะกด
+       แต่ขอฟังซ้ำหรือขอคำใบ้ได้ตลอด เหมือนสนาม Spelling Bee จริง</p>
+    <p><b>ฟังคำแปลไทย แล้วเดาคำอังกฤษ</b> ฝึกนึกคำอังกฤษจากความหมายไทย ซึ่งเป็นทักษะที่ใช้ตอนเขียนตอบข้อสอบจริง</p>
+    <p><b>ถ้าไม่มีเสียงหรือเสียงเพี้ยน</b> เครื่องนั้นไม่มีเสียงภาษาอังกฤษติดตั้งอยู่
+       แอปจะเล่นไฟล์เสียงที่อัดไว้ในโฟลเดอร์ <code>audio/sci/</code> ก่อนเสมอ
+       ซึ่งเสียงจะเหมือนกันทุกเครื่อง ถ้าไฟล์ไหนไม่มี จึงค่อยใช้เสียงในเครื่องแทน</p>
+    <p>iPhone ต้องปลดสวิตช์เงียบข้างเครื่องก่อน และต้องกดปุ่มเริ่มทุกครั้ง
+       เพราะมือถือไม่อนุญาตให้เว็บเล่นเสียงเองโดยไม่มีการแตะ</p>
+  </details>
+</div>
+
+<div class="stage hidden" id="play">
+  <div class="top">
+    <span id="tick"></span>
+    <span class="track"><i id="track"></i></span>
+    <span id="sc"></span>
+  </div>
+  <div class="card">
+    <div class="numlbl hidden" id="numlbl">คำที่</div>
+    <div class="num hidden" id="num"></div>
+    <div class="speaker hidden" id="spk">🔊</div>
+    <div class="word hidden" id="word"></div>
+    <div class="mean hidden" id="mean"></div>
+    <div class="spellout hidden" id="spellout"></div>
+    <div class="def hidden" id="def"></div>
+    <div class="sent hidden" id="sent"></div>
+    <div class="phase" id="phase"></div>
+    <input type="text" id="ans" autocomplete="off" autocapitalize="off"
+           autocorrect="off" spellcheck="false" placeholder="พิมพ์คำที่ได้ยิน">
+    <div class="typed hidden" id="typed"></div>
+    <div class="verdict hidden" id="verdict"></div>
+  </div>
+</div>
+<div class="kb hidden" id="kb"></div>
+<div class="ask hidden" id="ask">
+  <button id="bRepeat">🔁 ฟังอีกครั้ง</button>
+  <button id="bDef">🇹🇭 คำแปลไทย</button>
+  <button id="bTh">💬 ประโยค</button>
+</div>
+<div class="bar hidden" id="bar">
+  <button class="main" id="bSubmit">ตอบ</button>
+  <button id="bSkip">ข้าม</button>
+  <button id="bQuit">ออก</button>
+</div>
+
+<div class="result hidden" id="result">
+  <div class="numlbl">คะแนน</div>
+  <div class="score" id="final"></div>
+  <div class="lead" id="pct" style="margin-top:8px"></div>
+  <div class="wrongbox hidden" id="wrongbox">
+    <h3>คำที่ต้องกลับไปทบทวน</h3>
+    <ul id="wronglist"></ul>
+  </div>
+  <button class="go" id="again">ฝึกอีกรอบ</button>
+  <button class="go" id="home" style="background:var(--panel);color:var(--ink);margin-top:10px">กลับหน้าแรก</button>
+</div>
+
 </div>
 
 <script>
-const GROUPS = [{"title":"1. แสงคืออะไร / พลังงาน","en":"What is light?","items":[{"w":"light","r":"ไลท์","m":"แสง","s":"Light is energy that we can see."},{"w":"energy","r":"เอ็น-เนอร์-จี้","m":"พลังงาน","s":"Light is a form of energy."},{"w":"source","r":"ซอร์ส","m":"แหล่งกำเนิด","s":"The Sun is a source of light."},{"w":"give out","r":"กิฟ เอาท์","m":"ปล่อยออกมา, เปล่งออกมา","s":"Fireflies can give out light."},{"w":"produce","r":"โพร-ดิวซ์","m":"ผลิต, สร้าง","s":"The moon does not produce its own light."},{"w":"form","r":"ฟอร์ม","m":"รูปแบบ","s":"Energy can change from one form to another."},{"w":"change","r":"เชนจ์","m":"เปลี่ยน","s":"Energy can change into light."},{"w":"sunlight","r":"ซัน-ไลท์","m":"แสงอาทิตย์","s":"Sunlight bounces off the Moon."},{"w":"magnifying glass","r":"แมก-นิ-ไฟ-อิง กลาส","m":"แว่นขยาย","s":"Use a magnifying glass to focus the sunlight."},{"w":"focus","r":"โฟ-คัส","m":"รวมแสง, โฟกัส","s":"Focus a dot of sunlight on the drop."},{"w":"boil","r":"บอยล์","m":"ต้ม, เดือด","s":"Use light energy to boil a water drop."},{"w":"classroom","r":"คลาส-รูม","m":"ห้องเรียน","s":"What sources of light do you use in your classroom?"}]},{"title":"2. แสงธรรมชาติ","en":"Natural light","items":[{"w":"natural light","r":"แนช-เชอ-รัล ไลท์","m":"แสงธรรมชาติ","s":"Light that comes from nature is called natural light."},{"w":"the Sun","r":"เดอะ ซัน","m":"ดวงอาทิตย์","s":"The Sun is the main source of natural light."},{"w":"star","r":"สตาร์","m":"ดาวฤกษ์","s":"Stars are sources of natural light."},{"w":"moon","r":"มูน","m":"ดวงจันทร์","s":"The moon helps us to see at night."},{"w":"moonlight","r":"มูน-ไลท์","m":"แสงจันทร์","s":"Moonlight is sunlight that bounces off the Moon."},{"w":"lightning","r":"ไลท์-นิ่ง","m":"ฟ้าแลบ, ฟ้าผ่า","s":"Lightning is a source of natural light."},{"w":"volcano","r":"วอล-เค-โน","m":"ภูเขาไฟ","s":"A volcano gives out light."},{"w":"meteor","r":"มี-ที-เออร์","m":"ดาวตก","s":"Falling meteors make light in the sky."},{"w":"forest fire","r":"ฟอ-เรสต์ ไฟ-เออร์","m":"ไฟป่า","s":"A forest fire is a natural source of light."},{"w":"northern lights","r":"นอร์-เทิร์น ไลท์ส","m":"แสงเหนือ","s":"The northern lights are very beautiful."},{"w":"firefly","r":"ไฟ-เออร์-ฟลาย","m":"หิ่งห้อย","s":"Fireflies are insects that can give out light."},{"w":"mushroom","r":"มัช-รูม","m":"เห็ด","s":"These mushrooms can produce natural light."}]},{"title":"3. แสงประดิษฐ์","en":"Artificial light","items":[{"w":"artificial light","r":"อาร์-ทิ-ฟิ-เชียล ไลท์","m":"แสงประดิษฐ์","s":"Any light that humans make is called artificial light."},{"w":"electricity","r":"อิ-เล็ค-ทริ-ซิ-ตี้","m":"ไฟฟ้า","s":"Most artificial light is made from electricity."},{"w":"light bulb","r":"ไลท์ บัลบ์","m":"หลอดไฟ","s":"We can turn a light bulb on and off."},{"w":"candle","r":"แคน-เดิล","m":"เทียน","s":"A candle is a source of artificial light."},{"w":"oil lamp","r":"ออยล์ แลมป์","m":"ตะเกียงน้ำมัน","s":"People used oil lamps long ago."},{"w":"flashlight","r":"แฟลช-ไลท์","m":"ไฟฉาย","s":"Put a flashlight 10 cm from the first card."},{"w":"streetlight","r":"สตรีท-ไลท์","m":"ไฟถนน","s":"Streetlights help us see at night."},{"w":"fireworks","r":"ไฟ-เออร์-เวิร์คส์","m":"ดอกไม้ไฟ, พลุ","s":"We can see fireworks in the night sky."},{"w":"ceiling light","r":"ซี-ลิ่ง ไลท์","m":"ไฟเพดาน","s":"Ceiling lights give out light in the room."},{"w":"control","r":"คอน-โทรล","m":"ควบคุม","s":"Humans can control artificial light."},{"w":"switch off","r":"สวิตช์ ออฟ","m":"ปิด (ไฟ)","s":"Switch off the lights in your room."},{"w":"conserve","r":"คอน-เซิร์ฟ","m":"ประหยัด, อนุรักษ์","s":"Shut off lights to conserve energy."}]},{"title":"4. สมบัติของแสง","en":"Properties of light","items":[{"w":"travel","r":"แทรฟ-เวิล","m":"เดินทาง","s":"Light travels in a straight line."},{"w":"straight line","r":"สเตรท ไลน์","m":"เส้นตรง","s":"Light only travels in a straight line."},{"w":"light beam","r":"ไลท์ บีม","m":"ลำแสง","s":"A light beam is made up of many light rays."},{"w":"light ray","r":"ไลท์ เรย์","m":"รังสีของแสง","s":"A thin line of light energy is called a light ray."},{"w":"reflect","r":"รี-เฟล็คท์","m":"สะท้อน","s":"Materials can reflect light."},{"w":"bounce","r":"บาวน์ซ์","m":"สะท้อนกลับ, กระเด้ง","s":"Light bounces off the road sign."},{"w":"absorb","r":"แอบ-ซอร์บ","m":"ดูดกลืน","s":"Materials can absorb light."},{"w":"transmit","r":"แทรนซ์-มิท","m":"ยอมให้ผ่าน, ส่งผ่าน","s":"Materials can transmit light."},{"w":"transparent","r":"แทรนซ์-แพ-เรนท์","m":"โปร่งใส","s":"Glass is transparent."},{"w":"translucent","r":"แทรนซ์-ลู-เซนท์","m":"โปร่งแสง","s":"Frosted glass is translucent."},{"w":"opaque","r":"โอ-เพค","m":"ทึบแสง","s":"A wall is opaque."},{"w":"refract","r":"รี-แฟรคท์","m":"หักเห","s":"Light can be refracted."}]},{"title":"5. เงา และการทดลอง","en":"Shadows and experiments","items":[{"w":"shadow","r":"แชด-โดว์","m":"เงา","s":"Shadows are formed when an object blocks a light beam."},{"w":"block","r":"บล็อค","m":"ขวาง, กั้น","s":"An object blocks the light."},{"w":"object","r":"ออบ-เจ็คท์","m":"วัตถุ, สิ่งของ","s":"Pick up an object and hold it above the paper."},{"w":"shape","r":"เชพ","m":"รูปร่าง","s":"Is an object's shadow always the same shape?"},{"w":"outline","r":"เอาท์-ไลน์","m":"เส้นรอบรูป","s":"Draw the outline of the shadow."},{"w":"sundial","r":"ซัน-ไดล์","m":"นาฬิกาแดด","s":"People used a sundial to tell the time."},{"w":"experiment","r":"เอ็กซ์-เพ-ริ-เมนท์","m":"การทดลอง","s":"These students are carrying out a simple experiment."},{"w":"observe","r":"ออบ-เซิร์ฟ","m":"สังเกต","s":"Observe how light travels."},{"w":"prove","r":"พรูฟ","m":"พิสูจน์","s":"The experiment proves that light travels in a straight line."},{"w":"curved","r":"เคิร์ฟด์","m":"โค้ง","s":"With the hose curved, he cannot see the light."},{"w":"darken","r":"ดาร์-เคิน","m":"ทำให้มืด","s":"Ask your teacher to darken the classroom."},{"w":"spin","r":"สปิน","m":"หมุน","s":"As Earth spins, the Sun appears to move."}]},{"title":"6. วัสดุกับแสง","en":"Materials and light","items":[{"w":"material","r":"มะ-เที-เรียล","m":"วัสดุ","s":"Materials can transmit, reflect, or absorb light."},{"w":"behave","r":"บิ-เฮฟ","m":"มีพฤติกรรม, แสดงออก","s":"Light behaves in different ways in different materials."},{"w":"pass through","r":"พาส ทรู","m":"ผ่านทะลุ","s":"Some materials let light pass right through."},{"w":"clearly","r":"เคลียร์-ลี่","m":"อย่างชัดเจน","s":"You can see clearly through transparent materials."},{"w":"air","r":"แอร์","m":"อากาศ","s":"Water and air are transparent."},{"w":"glass","r":"กลาส","m":"แก้ว, กระจก","s":"A glass of water is translucent."},{"w":"frosted glass","r":"ฟรอส-ทิด กลาส","m":"กระจกฝ้า","s":"Frosted glass is translucent."},{"w":"tracing paper","r":"เทร-ซิ่ง เพ-เพอร์","m":"กระดาษลอกลาย","s":"Tracing paper is translucent."},{"w":"wood","r":"วู้ด","m":"ไม้","s":"Wood and jeans are opaque."},{"w":"door","r":"ดอร์","m":"ประตู","s":"Which door is transparent?"},{"w":"create","r":"คริ-เอท","m":"สร้าง, ทำให้เกิด","s":"Opaque materials block all light and create shadows."},{"w":"classify","r":"แคลส-ซิ-ไฟ","m":"จำแนก, จัดกลุ่ม","s":"Classify materials as transparent, translucent, or opaque."}]},{"title":"7. การสะท้อน และ การหักเห","en":"Reflection and refraction","items":[{"w":"reflection","r":"รี-เฟล็ค-ชั่น","m":"การสะท้อน","s":"Bouncing light is called reflection."},{"w":"refraction","r":"รี-แฟรค-ชั่น","m":"การหักเห","s":"The bending of light is called refraction."},{"w":"mirror","r":"มิ-เรอร์","m":"กระจกเงา","s":"Light bounces off mirrors."},{"w":"smooth","r":"สมู้ธ","m":"เรียบ, ลื่น","s":"Light bounces off smooth surfaces just like a ball."},{"w":"surface","r":"เซอร์-เฟส","m":"พื้นผิว","s":"Light bounces off smooth surfaces."},{"w":"angle","r":"แอง-เกิล","m":"มุม","s":"Light that enters at an angle refracts."},{"w":"bend","r":"เบนด์","m":"หักงอ, ทำให้โค้ง","s":"It slows down and bends."},{"w":"bent","r":"เบนท์","m":"งอ, โค้งแล้ว","s":"Observe if the pencil seems bent."},{"w":"appear","r":"แอพ-เพียร์","m":"ปรากฏ, ดูเหมือนว่า","s":"The toothbrush appears broken."},{"w":"slowly","r":"สโลว์-ลี่","m":"อย่างช้า ๆ","s":"Light moves more slowly through water."},{"w":"aim","r":"เอม","m":"เล็ง","s":"Predict where to aim a spear."},{"w":"spear","r":"สเปียร์","m":"หอก, แทงด้วยหอก","s":"Spearing salmon is an important skill."}]},{"title":"8. สี และ สเปกตรัม","en":"Colour and spectrum","items":[{"w":"spectrum","r":"สเปค-ทรัม","m":"สเปกตรัม, แถบสี","s":"A spectrum is a band of colours."},{"w":"prism","r":"พริ-ซึ่ม","m":"ปริซึม","s":"A prism can split white light into the spectrum."},{"w":"rainbow","r":"เรน-โบว์","m":"รุ้งกินน้ำ","s":"A rainbow tells us something important about light."},{"w":"white light","r":"ไวท์ ไลท์","m":"แสงขาว","s":"What colours make up white light?"},{"w":"split","r":"สปลิท","m":"แยกออก, ผ่า","s":"Light can be split into colours."},{"w":"band","r":"แบนด์","m":"แถบ","s":"A spectrum is a band of colours."},{"w":"mix","r":"มิกซ์","m":"ผสม","s":"The colours in a spectrum mix together to make white light."},{"w":"order","r":"ออร์-เดอร์","m":"ลำดับ","s":"The colours always appear in the same order."},{"w":"bubble","r":"บับ-เบิ้ล","m":"ฟองสบู่","s":"Take light apart with a bubble."},{"w":"indigo","r":"อิน-ดิ-โก้","m":"สีคราม","s":"ROY G BIV: Red, Orange, Yellow, Green, Blue, Indigo, Violet."},{"w":"violet","r":"ไว-โอ-เลท","m":"สีม่วง","s":"The last colour of the rainbow is violet."},{"w":"crystal glass","r":"คริส-ทัล กลาส","m":"แก้วคริสตัล","s":"Light can be split if it passes through crystal glass."}]},{"title":"9. คำที่ใช้ในการทดลอง","en":"Words for experiments","items":[{"w":"predict","r":"พรี-ดิคท์","m":"ทำนาย, คาดคะเน","s":"Predict which object will produce the biggest shadow."},{"w":"conclude","r":"คอน-คลูด","m":"สรุป","s":"Conclude: What makes a shadow?"},{"w":"record","r":"รี-คอร์ด","m":"บันทึก","s":"Record the colours you see in the order they occur."},{"w":"measure","r":"เมส-เชอร์","m":"วัด","s":"Measure the height of the shadows."},{"w":"height","r":"ไฮท์","m":"ความสูง","s":"Write the height of the shadow in centimetres."},{"w":"distance","r":"ดิส-เทินซ์","m":"ระยะทาง","s":"The distance between the cup and the flashlight."},{"w":"trace","r":"เทรส","m":"ลอกลาย, วาดตามรอย","s":"Trace the shadow on the white paper."},{"w":"label","r":"เล-เบิ้ล","m":"ติดป้าย, เขียนกำกับ","s":"Label your paper."},{"w":"ruler","r":"รู-เลอร์","m":"ไม้บรรทัด","s":"Place the ruler on a table."},{"w":"partner","r":"พาร์ท-เนอร์","m":"คู่, เพื่อนร่วมงาน","s":"Explain what you see to a partner."},{"w":"cardboard","r":"คาร์ด-บอร์ด","m":"กระดาษแข็ง","s":"Cut a cardboard circle."},{"w":"scissors","r":"ซิส-เซอร์ส","m":"กรรไกร","s":"You will need a pair of scissors."}]}];
-const $ = id => document.getElementById(id);
-const synth = window.speechSynthesis;
+const SETS = [{"n":1,"t":"ชุดที่ 1","tag":"คำที่ 1–20","items":[{"w":"light","m":"แสง","d":"","s":"Light is energy that we can see.","k":"light"},{"w":"energy","m":"พลังงาน","d":"","s":"Light is a form of energy.","k":"energy"},{"w":"source","m":"แหล่งกำเนิด","d":"","s":"The Sun is a source of light.","k":"source"},{"w":"give out","m":"ปล่อยออกมา, เปล่งออกมา","d":"","s":"Fireflies can give out light.","k":"give-out"},{"w":"produce","m":"ผลิต, สร้าง","d":"","s":"The moon does not produce its own light.","k":"produce"},{"w":"form","m":"รูปแบบ","d":"","s":"Energy can change from one form to another.","k":"form"},{"w":"change","m":"เปลี่ยน","d":"","s":"Energy can change into light.","k":"change"},{"w":"sunlight","m":"แสงอาทิตย์","d":"","s":"Sunlight bounces off the Moon.","k":"sunlight"},{"w":"magnifying glass","m":"แว่นขยาย","d":"","s":"Use a magnifying glass to focus the sunlight.","k":"magnifying-glass"},{"w":"focus","m":"รวมแสง, โฟกัส","d":"","s":"Focus a dot of sunlight on the drop.","k":"focus"},{"w":"boil","m":"ต้ม, เดือด","d":"","s":"Use light energy to boil a water drop.","k":"boil"},{"w":"classroom","m":"ห้องเรียน","d":"","s":"What sources of light do you use in your classroom?","k":"classroom"},{"w":"natural light","m":"แสงธรรมชาติ","d":"","s":"Light that comes from nature is called natural light.","k":"natural-light"},{"w":"the Sun","m":"ดวงอาทิตย์","d":"","s":"The Sun is the main source of natural light.","k":"the-sun"},{"w":"star","m":"ดาวฤกษ์","d":"","s":"Stars are sources of natural light.","k":"star"},{"w":"moon","m":"ดวงจันทร์","d":"","s":"The moon helps us to see at night.","k":"moon"},{"w":"moonlight","m":"แสงจันทร์","d":"","s":"Moonlight is sunlight that bounces off the Moon.","k":"moonlight"},{"w":"lightning","m":"ฟ้าแลบ, ฟ้าผ่า","d":"","s":"Lightning is a source of natural light.","k":"lightning"},{"w":"volcano","m":"ภูเขาไฟ","d":"","s":"A volcano gives out light.","k":"volcano"},{"w":"meteor","m":"ดาวตก","d":"","s":"Falling meteors make light in the sky.","k":"meteor"}]},{"n":2,"t":"ชุดที่ 2","tag":"คำที่ 21–40","items":[{"w":"forest fire","m":"ไฟป่า","d":"","s":"A forest fire is a natural source of light.","k":"forest-fire"},{"w":"northern lights","m":"แสงเหนือ","d":"","s":"The northern lights are very beautiful.","k":"northern-lights"},{"w":"firefly","m":"หิ่งห้อย","d":"","s":"Fireflies are insects that can give out light.","k":"firefly"},{"w":"mushroom","m":"เห็ด","d":"","s":"These mushrooms can produce natural light.","k":"mushroom"},{"w":"artificial light","m":"แสงประดิษฐ์","d":"","s":"Any light that humans make is called artificial light.","k":"artificial-light"},{"w":"electricity","m":"ไฟฟ้า","d":"","s":"Most artificial light is made from electricity.","k":"electricity"},{"w":"light bulb","m":"หลอดไฟ","d":"","s":"We can turn a light bulb on and off.","k":"light-bulb"},{"w":"candle","m":"เทียน","d":"","s":"A candle is a source of artificial light.","k":"candle"},{"w":"oil lamp","m":"ตะเกียงน้ำมัน","d":"","s":"People used oil lamps long ago.","k":"oil-lamp"},{"w":"flashlight","m":"ไฟฉาย","d":"","s":"Put a flashlight 10 cm from the first card.","k":"flashlight"},{"w":"streetlight","m":"ไฟถนน","d":"","s":"Streetlights help us see at night.","k":"streetlight"},{"w":"fireworks","m":"ดอกไม้ไฟ, พลุ","d":"","s":"We can see fireworks in the night sky.","k":"fireworks"},{"w":"ceiling light","m":"ไฟเพดาน","d":"","s":"Ceiling lights give out light in the room.","k":"ceiling-light"},{"w":"control","m":"ควบคุม","d":"","s":"Humans can control artificial light.","k":"control"},{"w":"switch off","m":"ปิด (ไฟ)","d":"","s":"Switch off the lights in your room.","k":"switch-off"},{"w":"conserve","m":"ประหยัด, อนุรักษ์","d":"","s":"Shut off lights to conserve energy.","k":"conserve"},{"w":"travel","m":"เดินทาง","d":"","s":"Light travels in a straight line.","k":"travel"},{"w":"straight line","m":"เส้นตรง","d":"","s":"Light only travels in a straight line.","k":"straight-line"},{"w":"light beam","m":"ลำแสง","d":"","s":"A light beam is made up of many light rays.","k":"light-beam"},{"w":"light ray","m":"รังสีของแสง","d":"","s":"A thin line of light energy is called a light ray.","k":"light-ray"}]},{"n":3,"t":"ชุดที่ 3","tag":"คำที่ 41–60","items":[{"w":"reflect","m":"สะท้อน","d":"","s":"Materials can reflect light.","k":"reflect"},{"w":"bounce","m":"สะท้อนกลับ, กระเด้ง","d":"","s":"Light bounces off the road sign.","k":"bounce"},{"w":"absorb","m":"ดูดกลืน","d":"","s":"Materials can absorb light.","k":"absorb"},{"w":"transmit","m":"ยอมให้ผ่าน, ส่งผ่าน","d":"","s":"Materials can transmit light.","k":"transmit"},{"w":"transparent","m":"โปร่งใส","d":"","s":"Glass is transparent.","k":"transparent"},{"w":"translucent","m":"โปร่งแสง","d":"","s":"Frosted glass is translucent.","k":"translucent"},{"w":"opaque","m":"ทึบแสง","d":"","s":"A wall is opaque.","k":"opaque"},{"w":"refract","m":"หักเห","d":"","s":"Light can be refracted.","k":"refract"},{"w":"shadow","m":"เงา","d":"","s":"Shadows are formed when an object blocks a light beam.","k":"shadow"},{"w":"block","m":"ขวาง, กั้น","d":"","s":"An object blocks the light.","k":"block"},{"w":"object","m":"วัตถุ, สิ่งของ","d":"","s":"Pick up an object and hold it above the paper.","k":"object"},{"w":"shape","m":"รูปร่าง","d":"","s":"Is an object's shadow always the same shape?","k":"shape"},{"w":"outline","m":"เส้นรอบรูป","d":"","s":"Draw the outline of the shadow.","k":"outline"},{"w":"sundial","m":"นาฬิกาแดด","d":"","s":"People used a sundial to tell the time.","k":"sundial"},{"w":"experiment","m":"การทดลอง","d":"","s":"These students are carrying out a simple experiment.","k":"experiment"},{"w":"observe","m":"สังเกต","d":"","s":"Observe how light travels.","k":"observe"},{"w":"prove","m":"พิสูจน์","d":"","s":"The experiment proves that light travels in a straight line.","k":"prove"},{"w":"curved","m":"โค้ง","d":"","s":"With the hose curved, he cannot see the light.","k":"curved"},{"w":"darken","m":"ทำให้มืด","d":"","s":"Ask your teacher to darken the classroom.","k":"darken"},{"w":"spin","m":"หมุน","d":"","s":"As Earth spins, the Sun appears to move.","k":"spin"}]},{"n":4,"t":"ชุดที่ 4","tag":"คำที่ 61–80","items":[{"w":"material","m":"วัสดุ","d":"","s":"Materials can transmit, reflect, or absorb light.","k":"material"},{"w":"behave","m":"มีพฤติกรรม, แสดงออก","d":"","s":"Light behaves in different ways in different materials.","k":"behave"},{"w":"pass through","m":"ผ่านทะลุ","d":"","s":"Some materials let light pass right through.","k":"pass-through"},{"w":"clearly","m":"อย่างชัดเจน","d":"","s":"You can see clearly through transparent materials.","k":"clearly"},{"w":"air","m":"อากาศ","d":"","s":"Water and air are transparent.","k":"air"},{"w":"glass","m":"แก้ว, กระจก","d":"","s":"A glass of water is translucent.","k":"glass"},{"w":"frosted glass","m":"กระจกฝ้า","d":"","s":"Frosted glass is translucent.","k":"frosted-glass"},{"w":"tracing paper","m":"กระดาษลอกลาย","d":"","s":"Tracing paper is translucent.","k":"tracing-paper"},{"w":"wood","m":"ไม้","d":"","s":"Wood and jeans are opaque.","k":"wood"},{"w":"door","m":"ประตู","d":"","s":"Which door is transparent?","k":"door"},{"w":"create","m":"สร้าง, ทำให้เกิด","d":"","s":"Opaque materials block all light and create shadows.","k":"create"},{"w":"classify","m":"จำแนก, จัดกลุ่ม","d":"","s":"Classify materials as transparent, translucent, or opaque.","k":"classify"},{"w":"reflection","m":"การสะท้อน","d":"","s":"Bouncing light is called reflection.","k":"reflection"},{"w":"refraction","m":"การหักเห","d":"","s":"The bending of light is called refraction.","k":"refraction"},{"w":"mirror","m":"กระจกเงา","d":"","s":"Light bounces off mirrors.","k":"mirror"},{"w":"smooth","m":"เรียบ, ลื่น","d":"","s":"Light bounces off smooth surfaces just like a ball.","k":"smooth"},{"w":"surface","m":"พื้นผิว","d":"","s":"Light bounces off smooth surfaces.","k":"surface"},{"w":"angle","m":"มุม","d":"","s":"Light that enters at an angle refracts.","k":"angle"},{"w":"bend","m":"หักงอ, ทำให้โค้ง","d":"","s":"It slows down and bends.","k":"bend"},{"w":"bent","m":"งอ, โค้งแล้ว","d":"","s":"Observe if the pencil seems bent.","k":"bent"}]},{"n":5,"t":"ชุดที่ 5","tag":"คำที่ 81–100","items":[{"w":"appear","m":"ปรากฏ, ดูเหมือนว่า","d":"","s":"The toothbrush appears broken.","k":"appear"},{"w":"slowly","m":"อย่างช้า ๆ","d":"","s":"Light moves more slowly through water.","k":"slowly"},{"w":"aim","m":"เล็ง","d":"","s":"Predict where to aim a spear.","k":"aim"},{"w":"spear","m":"หอก, แทงด้วยหอก","d":"","s":"Spearing salmon is an important skill.","k":"spear"},{"w":"spectrum","m":"สเปกตรัม, แถบสี","d":"","s":"A spectrum is a band of colours.","k":"spectrum"},{"w":"prism","m":"ปริซึม","d":"","s":"A prism can split white light into the spectrum.","k":"prism"},{"w":"rainbow","m":"รุ้งกินน้ำ","d":"","s":"A rainbow tells us something important about light.","k":"rainbow"},{"w":"white light","m":"แสงขาว","d":"","s":"What colours make up white light?","k":"white-light"},{"w":"split","m":"แยกออก, ผ่า","d":"","s":"Light can be split into colours.","k":"split"},{"w":"band","m":"แถบ","d":"","s":"A spectrum is a band of colours.","k":"band"},{"w":"mix","m":"ผสม","d":"","s":"The colours in a spectrum mix together to make white light.","k":"mix"},{"w":"order","m":"ลำดับ","d":"","s":"The colours always appear in the same order.","k":"order"},{"w":"bubble","m":"ฟองสบู่","d":"","s":"Take light apart with a bubble.","k":"bubble"},{"w":"indigo","m":"สีคราม","d":"","s":"ROY G BIV: Red, Orange, Yellow, Green, Blue, Indigo, Violet.","k":"indigo"},{"w":"violet","m":"สีม่วง","d":"","s":"The last colour of the rainbow is violet.","k":"violet"},{"w":"crystal glass","m":"แก้วคริสตัล","d":"","s":"Light can be split if it passes through crystal glass.","k":"crystal-glass"},{"w":"predict","m":"ทำนาย, คาดคะเน","d":"","s":"Predict which object will produce the biggest shadow.","k":"predict"},{"w":"conclude","m":"สรุป","d":"","s":"Conclude: What makes a shadow?","k":"conclude"},{"w":"record","m":"บันทึก","d":"","s":"Record the colours you see in the order they occur.","k":"record"},{"w":"measure","m":"วัด","d":"","s":"Measure the height of the shadows.","k":"measure"}]},{"n":6,"t":"ชุดที่ 6","tag":"คำที่ 101–108","items":[{"w":"height","m":"ความสูง","d":"","s":"Write the height of the shadow in centimetres.","k":"height"},{"w":"distance","m":"ระยะทาง","d":"","s":"The distance between the cup and the flashlight.","k":"distance"},{"w":"trace","m":"ลอกลาย, วาดตามรอย","d":"","s":"Trace the shadow on the white paper.","k":"trace"},{"w":"label","m":"ติดป้าย, เขียนกำกับ","d":"","s":"Label your paper.","k":"label"},{"w":"ruler","m":"ไม้บรรทัด","d":"","s":"Place the ruler on a table.","k":"ruler"},{"w":"partner","m":"คู่, เพื่อนร่วมงาน","d":"","s":"Explain what you see to a partner.","k":"partner"},{"w":"cardboard","m":"กระดาษแข็ง","d":"","s":"Cut a cardboard circle.","k":"cardboard"},{"w":"scissors","m":"กรรไกร","d":"","s":"You will need a pair of scissors.","k":"scissors"}]}];
+const HAS = {d:false, m:true, s:true, l:true};
 
-/* ============ ตัวเล่นไฟล์เสียง mp3 (เติมเข้ามาใหม่) ============
-   เล่นไฟล์จากโฟลเดอร์ audio/sci/ ถ้าไม่พบไฟล์จะถอยไปใช้เสียงในเครื่องแบบเดิม */
-const AUDIO_BASE = "audio/sci/";
-const SILENT_SND = "data:audio/wav;base64,UklGRqQHAABXQVZFZm10IBAAAAABAAEAQB8AAIA+AAACABAAZGF0YYAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-const AUDIO_MAP = {
-"en|light": "0001_light.mp3",
-"en|Light is energy that we can see.": "0002_light_is_energy_that_we_can_see.mp3",
-"en|L, I, G, H, T": "0003_l_i_g_h_t.mp3",
-"th|แสง": "0004_th.mp3",
-"en|energy": "0005_energy.mp3",
-"en|Light is a form of energy.": "0006_light_is_a_form_of_energy.mp3",
-"en|E, N, E, R, G, Y": "0007_e_n_e_r_g_y.mp3",
-"th|พลังงาน": "0008_th.mp3",
-"en|source": "0009_source.mp3",
-"en|The Sun is a source of light.": "0010_the_sun_is_a_source_of_light.mp3",
-"en|S, O, U, R, C, E": "0011_s_o_u_r_c_e.mp3",
-"th|แหล่งกำเนิด": "0012_th.mp3",
-"en|give out": "0013_give_out.mp3",
-"en|Fireflies can give out light.": "0014_fireflies_can_give_out_light.mp3",
-"en|G, I, V, E,  , O, U, T": "0015_g_i_v_e_o_u_t.mp3",
-"th|ปล่อยออกมา, เปล่งออกมา": "0016_th.mp3",
-"en|produce": "0017_produce.mp3",
-"en|The moon does not produce its own light.": "0018_the_moon_does_not_produce_its_own_light.mp3",
-"en|P, R, O, D, U, C, E": "0019_p_r_o_d_u_c_e.mp3",
-"th|ผลิต, สร้าง": "0020_th.mp3",
-"en|form": "0021_form.mp3",
-"en|Energy can change from one form to another.": "0022_energy_can_change_from_one_form_to_anoth.mp3",
-"en|F, O, R, M": "0023_f_o_r_m.mp3",
-"th|รูปแบบ": "0024_th.mp3",
-"en|change": "0025_change.mp3",
-"en|Energy can change into light.": "0026_energy_can_change_into_light.mp3",
-"en|C, H, A, N, G, E": "0027_c_h_a_n_g_e.mp3",
-"th|เปลี่ยน": "0028_th.mp3",
-"en|sunlight": "0029_sunlight.mp3",
-"en|Sunlight bounces off the Moon.": "0030_sunlight_bounces_off_the_moon.mp3",
-"en|S, U, N, L, I, G, H, T": "0031_s_u_n_l_i_g_h_t.mp3",
-"th|แสงอาทิตย์": "0032_th.mp3",
-"en|magnifying glass": "0033_magnifying_glass.mp3",
-"en|Use a magnifying glass to focus the sunlight.": "0034_use_a_magnifying_glass_to_focus_the_sunl.mp3",
-"en|M, A, G, N, I, F, Y, I, N, G,  , G, L, A, S, S": "0035_m_a_g_n_i_f_y_i_n_g_g_l_a_s_s.mp3",
-"th|แว่นขยาย": "0036_th.mp3",
-"en|focus": "0037_focus.mp3",
-"en|Focus a dot of sunlight on the drop.": "0038_focus_a_dot_of_sunlight_on_the_drop.mp3",
-"en|F, O, C, U, S": "0039_f_o_c_u_s.mp3",
-"th|รวมแสง, โฟกัส": "0040_th.mp3",
-"en|boil": "0041_boil.mp3",
-"en|Use light energy to boil a water drop.": "0042_use_light_energy_to_boil_a_water_drop.mp3",
-"en|B, O, I, L": "0043_b_o_i_l.mp3",
-"th|ต้ม, เดือด": "0044_th.mp3",
-"en|classroom": "0045_classroom.mp3",
-"en|What sources of light do you use in your classroom?": "0046_what_sources_of_light_do_you_use_in_your.mp3",
-"en|C, L, A, S, S, R, O, O, M": "0047_c_l_a_s_s_r_o_o_m.mp3",
-"th|ห้องเรียน": "0048_th.mp3",
-"en|natural light": "0049_natural_light.mp3",
-"en|Light that comes from nature is called natural light.": "0050_light_that_comes_from_nature_is_called_n.mp3",
-"en|N, A, T, U, R, A, L,  , L, I, G, H, T": "0051_n_a_t_u_r_a_l_l_i_g_h_t.mp3",
-"th|แสงธรรมชาติ": "0052_th.mp3",
-"en|the Sun": "0053_the_sun.mp3",
-"en|The Sun is the main source of natural light.": "0054_the_sun_is_the_main_source_of_natural_li.mp3",
-"en|T, H, E,  , S, U, N": "0055_t_h_e_s_u_n.mp3",
-"th|ดวงอาทิตย์": "0056_th.mp3",
-"en|star": "0057_star.mp3",
-"en|Stars are sources of natural light.": "0058_stars_are_sources_of_natural_light.mp3",
-"en|S, T, A, R": "0059_s_t_a_r.mp3",
-"th|ดาวฤกษ์": "0060_th.mp3",
-"en|moon": "0061_moon.mp3",
-"en|The moon helps us to see at night.": "0062_the_moon_helps_us_to_see_at_night.mp3",
-"en|M, O, O, N": "0063_m_o_o_n.mp3",
-"th|ดวงจันทร์": "0064_th.mp3",
-"en|moonlight": "0065_moonlight.mp3",
-"en|Moonlight is sunlight that bounces off the Moon.": "0066_moonlight_is_sunlight_that_bounces_off_t.mp3",
-"en|M, O, O, N, L, I, G, H, T": "0067_m_o_o_n_l_i_g_h_t.mp3",
-"th|แสงจันทร์": "0068_th.mp3",
-"en|lightning": "0069_lightning.mp3",
-"en|Lightning is a source of natural light.": "0070_lightning_is_a_source_of_natural_light.mp3",
-"en|L, I, G, H, T, N, I, N, G": "0071_l_i_g_h_t_n_i_n_g.mp3",
-"th|ฟ้าแลบ, ฟ้าผ่า": "0072_th.mp3",
-"en|volcano": "0073_volcano.mp3",
-"en|A volcano gives out light.": "0074_a_volcano_gives_out_light.mp3",
-"en|V, O, L, C, A, N, O": "0075_v_o_l_c_a_n_o.mp3",
-"th|ภูเขาไฟ": "0076_th.mp3",
-"en|meteor": "0077_meteor.mp3",
-"en|Falling meteors make light in the sky.": "0078_falling_meteors_make_light_in_the_sky.mp3",
-"en|M, E, T, E, O, R": "0079_m_e_t_e_o_r.mp3",
-"th|ดาวตก": "0080_th.mp3",
-"en|forest fire": "0081_forest_fire.mp3",
-"en|A forest fire is a natural source of light.": "0082_a_forest_fire_is_a_natural_source_of_lig.mp3",
-"en|F, O, R, E, S, T,  , F, I, R, E": "0083_f_o_r_e_s_t_f_i_r_e.mp3",
-"th|ไฟป่า": "0084_th.mp3",
-"en|northern lights": "0085_northern_lights.mp3",
-"en|The northern lights are very beautiful.": "0086_the_northern_lights_are_very_beautiful.mp3",
-"en|N, O, R, T, H, E, R, N,  , L, I, G, H, T, S": "0087_n_o_r_t_h_e_r_n_l_i_g_h_t_s.mp3",
-"th|แสงเหนือ": "0088_th.mp3",
-"en|firefly": "0089_firefly.mp3",
-"en|Fireflies are insects that can give out light.": "0090_fireflies_are_insects_that_can_give_out.mp3",
-"en|F, I, R, E, F, L, Y": "0091_f_i_r_e_f_l_y.mp3",
-"th|หิ่งห้อย": "0092_th.mp3",
-"en|mushroom": "0093_mushroom.mp3",
-"en|These mushrooms can produce natural light.": "0094_these_mushrooms_can_produce_natural_ligh.mp3",
-"en|M, U, S, H, R, O, O, M": "0095_m_u_s_h_r_o_o_m.mp3",
-"th|เห็ด": "0096_th.mp3",
-"en|artificial light": "0097_artificial_light.mp3",
-"en|Any light that humans make is called artificial light.": "0098_any_light_that_humans_make_is_called_art.mp3",
-"en|A, R, T, I, F, I, C, I, A, L,  , L, I, G, H, T": "0099_a_r_t_i_f_i_c_i_a_l_l_i_g_h_t.mp3",
-"th|แสงประดิษฐ์": "0100_th.mp3",
-"en|electricity": "0101_electricity.mp3",
-"en|Most artificial light is made from electricity.": "0102_most_artificial_light_is_made_from_elect.mp3",
-"en|E, L, E, C, T, R, I, C, I, T, Y": "0103_e_l_e_c_t_r_i_c_i_t_y.mp3",
-"th|ไฟฟ้า": "0104_th.mp3",
-"en|light bulb": "0105_light_bulb.mp3",
-"en|We can turn a light bulb on and off.": "0106_we_can_turn_a_light_bulb_on_and_off.mp3",
-"en|L, I, G, H, T,  , B, U, L, B": "0107_l_i_g_h_t_b_u_l_b.mp3",
-"th|หลอดไฟ": "0108_th.mp3",
-"en|candle": "0109_candle.mp3",
-"en|A candle is a source of artificial light.": "0110_a_candle_is_a_source_of_artificial_light.mp3",
-"en|C, A, N, D, L, E": "0111_c_a_n_d_l_e.mp3",
-"th|เทียน": "0112_th.mp3",
-"en|oil lamp": "0113_oil_lamp.mp3",
-"en|People used oil lamps long ago.": "0114_people_used_oil_lamps_long_ago.mp3",
-"en|O, I, L,  , L, A, M, P": "0115_o_i_l_l_a_m_p.mp3",
-"th|ตะเกียงน้ำมัน": "0116_th.mp3",
-"en|flashlight": "0117_flashlight.mp3",
-"en|Put a flashlight 10 cm from the first card.": "0118_put_a_flashlight_10_cm_from_the_first_ca.mp3",
-"en|F, L, A, S, H, L, I, G, H, T": "0119_f_l_a_s_h_l_i_g_h_t.mp3",
-"th|ไฟฉาย": "0120_th.mp3",
-"en|streetlight": "0121_streetlight.mp3",
-"en|Streetlights help us see at night.": "0122_streetlights_help_us_see_at_night.mp3",
-"en|S, T, R, E, E, T, L, I, G, H, T": "0123_s_t_r_e_e_t_l_i_g_h_t.mp3",
-"th|ไฟถนน": "0124_th.mp3",
-"en|fireworks": "0125_fireworks.mp3",
-"en|We can see fireworks in the night sky.": "0126_we_can_see_fireworks_in_the_night_sky.mp3",
-"en|F, I, R, E, W, O, R, K, S": "0127_f_i_r_e_w_o_r_k_s.mp3",
-"th|ดอกไม้ไฟ, พลุ": "0128_th.mp3",
-"en|ceiling light": "0129_ceiling_light.mp3",
-"en|Ceiling lights give out light in the room.": "0130_ceiling_lights_give_out_light_in_the_roo.mp3",
-"en|C, E, I, L, I, N, G,  , L, I, G, H, T": "0131_c_e_i_l_i_n_g_l_i_g_h_t.mp3",
-"th|ไฟเพดาน": "0132_th.mp3",
-"en|control": "0133_control.mp3",
-"en|Humans can control artificial light.": "0134_humans_can_control_artificial_light.mp3",
-"en|C, O, N, T, R, O, L": "0135_c_o_n_t_r_o_l.mp3",
-"th|ควบคุม": "0136_th.mp3",
-"en|switch off": "0137_switch_off.mp3",
-"en|Switch off the lights in your room.": "0138_switch_off_the_lights_in_your_room.mp3",
-"en|S, W, I, T, C, H,  , O, F, F": "0139_s_w_i_t_c_h_o_f_f.mp3",
-"th|ปิด (ไฟ)": "0140_th.mp3",
-"en|conserve": "0141_conserve.mp3",
-"en|Shut off lights to conserve energy.": "0142_shut_off_lights_to_conserve_energy.mp3",
-"en|C, O, N, S, E, R, V, E": "0143_c_o_n_s_e_r_v_e.mp3",
-"th|ประหยัด, อนุรักษ์": "0144_th.mp3",
-"en|travel": "0145_travel.mp3",
-"en|Light travels in a straight line.": "0146_light_travels_in_a_straight_line.mp3",
-"en|T, R, A, V, E, L": "0147_t_r_a_v_e_l.mp3",
-"th|เดินทาง": "0148_th.mp3",
-"en|straight line": "0149_straight_line.mp3",
-"en|Light only travels in a straight line.": "0150_light_only_travels_in_a_straight_line.mp3",
-"en|S, T, R, A, I, G, H, T,  , L, I, N, E": "0151_s_t_r_a_i_g_h_t_l_i_n_e.mp3",
-"th|เส้นตรง": "0152_th.mp3",
-"en|light beam": "0153_light_beam.mp3",
-"en|A light beam is made up of many light rays.": "0154_a_light_beam_is_made_up_of_many_light_ra.mp3",
-"en|L, I, G, H, T,  , B, E, A, M": "0155_l_i_g_h_t_b_e_a_m.mp3",
-"th|ลำแสง": "0156_th.mp3",
-"en|light ray": "0157_light_ray.mp3",
-"en|A thin line of light energy is called a light ray.": "0158_a_thin_line_of_light_energy_is_called_a.mp3",
-"en|L, I, G, H, T,  , R, A, Y": "0159_l_i_g_h_t_r_a_y.mp3",
-"th|รังสีของแสง": "0160_th.mp3",
-"en|reflect": "0161_reflect.mp3",
-"en|Materials can reflect light.": "0162_materials_can_reflect_light.mp3",
-"en|R, E, F, L, E, C, T": "0163_r_e_f_l_e_c_t.mp3",
-"th|สะท้อน": "0164_th.mp3",
-"en|bounce": "0165_bounce.mp3",
-"en|Light bounces off the road sign.": "0166_light_bounces_off_the_road_sign.mp3",
-"en|B, O, U, N, C, E": "0167_b_o_u_n_c_e.mp3",
-"th|สะท้อนกลับ, กระเด้ง": "0168_th.mp3",
-"en|absorb": "0169_absorb.mp3",
-"en|Materials can absorb light.": "0170_materials_can_absorb_light.mp3",
-"en|A, B, S, O, R, B": "0171_a_b_s_o_r_b.mp3",
-"th|ดูดกลืน": "0172_th.mp3",
-"en|transmit": "0173_transmit.mp3",
-"en|Materials can transmit light.": "0174_materials_can_transmit_light.mp3",
-"en|T, R, A, N, S, M, I, T": "0175_t_r_a_n_s_m_i_t.mp3",
-"th|ยอมให้ผ่าน, ส่งผ่าน": "0176_th.mp3",
-"en|transparent": "0177_transparent.mp3",
-"en|Glass is transparent.": "0178_glass_is_transparent.mp3",
-"en|T, R, A, N, S, P, A, R, E, N, T": "0179_t_r_a_n_s_p_a_r_e_n_t.mp3",
-"th|โปร่งใส": "0180_th.mp3",
-"en|translucent": "0181_translucent.mp3",
-"en|Frosted glass is translucent.": "0182_frosted_glass_is_translucent.mp3",
-"en|T, R, A, N, S, L, U, C, E, N, T": "0183_t_r_a_n_s_l_u_c_e_n_t.mp3",
-"th|โปร่งแสง": "0184_th.mp3",
-"en|opaque": "0185_opaque.mp3",
-"en|A wall is opaque.": "0186_a_wall_is_opaque.mp3",
-"en|O, P, A, Q, U, E": "0187_o_p_a_q_u_e.mp3",
-"th|ทึบแสง": "0188_th.mp3",
-"en|refract": "0189_refract.mp3",
-"en|Light can be refracted.": "0190_light_can_be_refracted.mp3",
-"en|R, E, F, R, A, C, T": "0191_r_e_f_r_a_c_t.mp3",
-"th|หักเห": "0192_th.mp3",
-"en|shadow": "0193_shadow.mp3",
-"en|Shadows are formed when an object blocks a light beam.": "0194_shadows_are_formed_when_an_object_blocks.mp3",
-"en|S, H, A, D, O, W": "0195_s_h_a_d_o_w.mp3",
-"th|เงา": "0196_th.mp3",
-"en|block": "0197_block.mp3",
-"en|An object blocks the light.": "0198_an_object_blocks_the_light.mp3",
-"en|B, L, O, C, K": "0199_b_l_o_c_k.mp3",
-"th|ขวาง, กั้น": "0200_th.mp3",
-"en|object": "0201_object.mp3",
-"en|Pick up an object and hold it above the paper.": "0202_pick_up_an_object_and_hold_it_above_the.mp3",
-"en|O, B, J, E, C, T": "0203_o_b_j_e_c_t.mp3",
-"th|วัตถุ, สิ่งของ": "0204_th.mp3",
-"en|shape": "0205_shape.mp3",
-"en|Is an object's shadow always the same shape?": "0206_is_an_objects_shadow_always_the_same_sha.mp3",
-"en|S, H, A, P, E": "0207_s_h_a_p_e.mp3",
-"th|รูปร่าง": "0208_th.mp3",
-"en|outline": "0209_outline.mp3",
-"en|Draw the outline of the shadow.": "0210_draw_the_outline_of_the_shadow.mp3",
-"en|O, U, T, L, I, N, E": "0211_o_u_t_l_i_n_e.mp3",
-"th|เส้นรอบรูป": "0212_th.mp3",
-"en|sundial": "0213_sundial.mp3",
-"en|People used a sundial to tell the time.": "0214_people_used_a_sundial_to_tell_the_time.mp3",
-"en|S, U, N, D, I, A, L": "0215_s_u_n_d_i_a_l.mp3",
-"th|นาฬิกาแดด": "0216_th.mp3",
-"en|experiment": "0217_experiment.mp3",
-"en|These students are carrying out a simple experiment.": "0218_these_students_are_carrying_out_a_simple.mp3",
-"en|E, X, P, E, R, I, M, E, N, T": "0219_e_x_p_e_r_i_m_e_n_t.mp3",
-"th|การทดลอง": "0220_th.mp3",
-"en|observe": "0221_observe.mp3",
-"en|Observe how light travels.": "0222_observe_how_light_travels.mp3",
-"en|O, B, S, E, R, V, E": "0223_o_b_s_e_r_v_e.mp3",
-"th|สังเกต": "0224_th.mp3",
-"en|prove": "0225_prove.mp3",
-"en|The experiment proves that light travels in a straight line.": "0226_the_experiment_proves_that_light_travels.mp3",
-"en|P, R, O, V, E": "0227_p_r_o_v_e.mp3",
-"th|พิสูจน์": "0228_th.mp3",
-"en|curved": "0229_curved.mp3",
-"en|With the hose curved, he cannot see the light.": "0230_with_the_hose_curved_he_cannot_see_the_l.mp3",
-"en|C, U, R, V, E, D": "0231_c_u_r_v_e_d.mp3",
-"th|โค้ง": "0232_th.mp3",
-"en|darken": "0233_darken.mp3",
-"en|Ask your teacher to darken the classroom.": "0234_ask_your_teacher_to_darken_the_classroom.mp3",
-"en|D, A, R, K, E, N": "0235_d_a_r_k_e_n.mp3",
-"th|ทำให้มืด": "0236_th.mp3",
-"en|spin": "0237_spin.mp3",
-"en|As Earth spins, the Sun appears to move.": "0238_as_earth_spins_the_sun_appears_to_move.mp3",
-"en|S, P, I, N": "0239_s_p_i_n.mp3",
-"th|หมุน": "0240_th.mp3",
-"en|material": "0241_material.mp3",
-"en|Materials can transmit, reflect, or absorb light.": "0242_materials_can_transmit_reflect_or_absorb.mp3",
-"en|M, A, T, E, R, I, A, L": "0243_m_a_t_e_r_i_a_l.mp3",
-"th|วัสดุ": "0244_th.mp3",
-"en|behave": "0245_behave.mp3",
-"en|Light behaves in different ways in different materials.": "0246_light_behaves_in_different_ways_in_diffe.mp3",
-"en|B, E, H, A, V, E": "0247_b_e_h_a_v_e.mp3",
-"th|มีพฤติกรรม, แสดงออก": "0248_th.mp3",
-"en|pass through": "0249_pass_through.mp3",
-"en|Some materials let light pass right through.": "0250_some_materials_let_light_pass_right_thro.mp3",
-"en|P, A, S, S,  , T, H, R, O, U, G, H": "0251_p_a_s_s_t_h_r_o_u_g_h.mp3",
-"th|ผ่านทะลุ": "0252_th.mp3",
-"en|clearly": "0253_clearly.mp3",
-"en|You can see clearly through transparent materials.": "0254_you_can_see_clearly_through_transparent.mp3",
-"en|C, L, E, A, R, L, Y": "0255_c_l_e_a_r_l_y.mp3",
-"th|อย่างชัดเจน": "0256_th.mp3",
-"en|air": "0257_air.mp3",
-"en|Water and air are transparent.": "0258_water_and_air_are_transparent.mp3",
-"en|A, I, R": "0259_a_i_r.mp3",
-"th|อากาศ": "0260_th.mp3",
-"en|glass": "0261_glass.mp3",
-"en|A glass of water is translucent.": "0262_a_glass_of_water_is_translucent.mp3",
-"en|G, L, A, S, S": "0263_g_l_a_s_s.mp3",
-"th|แก้ว, กระจก": "0264_th.mp3",
-"en|frosted glass": "0265_frosted_glass.mp3",
-"en|F, R, O, S, T, E, D,  , G, L, A, S, S": "0266_f_r_o_s_t_e_d_g_l_a_s_s.mp3",
-"th|กระจกฝ้า": "0267_th.mp3",
-"en|tracing paper": "0268_tracing_paper.mp3",
-"en|Tracing paper is translucent.": "0269_tracing_paper_is_translucent.mp3",
-"en|T, R, A, C, I, N, G,  , P, A, P, E, R": "0270_t_r_a_c_i_n_g_p_a_p_e_r.mp3",
-"th|กระดาษลอกลาย": "0271_th.mp3",
-"en|wood": "0272_wood.mp3",
-"en|Wood and jeans are opaque.": "0273_wood_and_jeans_are_opaque.mp3",
-"en|W, O, O, D": "0274_w_o_o_d.mp3",
-"th|ไม้": "0275_th.mp3",
-"en|door": "0276_door.mp3",
-"en|Which door is transparent?": "0277_which_door_is_transparent.mp3",
-"en|D, O, O, R": "0278_d_o_o_r.mp3",
-"th|ประตู": "0279_th.mp3",
-"en|create": "0280_create.mp3",
-"en|Opaque materials block all light and create shadows.": "0281_opaque_materials_block_all_light_and_cre.mp3",
-"en|C, R, E, A, T, E": "0282_c_r_e_a_t_e.mp3",
-"th|สร้าง, ทำให้เกิด": "0283_th.mp3",
-"en|classify": "0284_classify.mp3",
-"en|Classify materials as transparent, translucent, or opaque.": "0285_classify_materials_as_transparent_transl.mp3",
-"en|C, L, A, S, S, I, F, Y": "0286_c_l_a_s_s_i_f_y.mp3",
-"th|จำแนก, จัดกลุ่ม": "0287_th.mp3",
-"en|reflection": "0288_reflection.mp3",
-"en|Bouncing light is called reflection.": "0289_bouncing_light_is_called_reflection.mp3",
-"en|R, E, F, L, E, C, T, I, O, N": "0290_r_e_f_l_e_c_t_i_o_n.mp3",
-"th|การสะท้อน": "0291_th.mp3",
-"en|refraction": "0292_refraction.mp3",
-"en|The bending of light is called refraction.": "0293_the_bending_of_light_is_called_refractio.mp3",
-"en|R, E, F, R, A, C, T, I, O, N": "0294_r_e_f_r_a_c_t_i_o_n.mp3",
-"th|การหักเห": "0295_th.mp3",
-"en|mirror": "0296_mirror.mp3",
-"en|Light bounces off mirrors.": "0297_light_bounces_off_mirrors.mp3",
-"en|M, I, R, R, O, R": "0298_m_i_r_r_o_r.mp3",
-"th|กระจกเงา": "0299_th.mp3",
-"en|smooth": "0300_smooth.mp3",
-"en|Light bounces off smooth surfaces just like a ball.": "0301_light_bounces_off_smooth_surfaces_just_l.mp3",
-"en|S, M, O, O, T, H": "0302_s_m_o_o_t_h.mp3",
-"th|เรียบ, ลื่น": "0303_th.mp3",
-"en|surface": "0304_surface.mp3",
-"en|Light bounces off smooth surfaces.": "0305_light_bounces_off_smooth_surfaces.mp3",
-"en|S, U, R, F, A, C, E": "0306_s_u_r_f_a_c_e.mp3",
-"th|พื้นผิว": "0307_th.mp3",
-"en|angle": "0308_angle.mp3",
-"en|Light that enters at an angle refracts.": "0309_light_that_enters_at_an_angle_refracts.mp3",
-"en|A, N, G, L, E": "0310_a_n_g_l_e.mp3",
-"th|มุม": "0311_th.mp3",
-"en|bend": "0312_bend.mp3",
-"en|It slows down and bends.": "0313_it_slows_down_and_bends.mp3",
-"en|B, E, N, D": "0314_b_e_n_d.mp3",
-"th|หักงอ, ทำให้โค้ง": "0315_th.mp3",
-"en|bent": "0316_bent.mp3",
-"en|Observe if the pencil seems bent.": "0317_observe_if_the_pencil_seems_bent.mp3",
-"en|B, E, N, T": "0318_b_e_n_t.mp3",
-"th|งอ, โค้งแล้ว": "0319_th.mp3",
-"en|appear": "0320_appear.mp3",
-"en|The toothbrush appears broken.": "0321_the_toothbrush_appears_broken.mp3",
-"en|A, P, P, E, A, R": "0322_a_p_p_e_a_r.mp3",
-"th|ปรากฏ, ดูเหมือนว่า": "0323_th.mp3",
-"en|slowly": "0324_slowly.mp3",
-"en|Light moves more slowly through water.": "0325_light_moves_more_slowly_through_water.mp3",
-"en|S, L, O, W, L, Y": "0326_s_l_o_w_l_y.mp3",
-"th|อย่างช้า ๆ": "0327_th.mp3",
-"en|aim": "0328_aim.mp3",
-"en|Predict where to aim a spear.": "0329_predict_where_to_aim_a_spear.mp3",
-"en|A, I, M": "0330_a_i_m.mp3",
-"th|เล็ง": "0331_th.mp3",
-"en|spear": "0332_spear.mp3",
-"en|Spearing salmon is an important skill.": "0333_spearing_salmon_is_an_important_skill.mp3",
-"en|S, P, E, A, R": "0334_s_p_e_a_r.mp3",
-"th|หอก, แทงด้วยหอก": "0335_th.mp3",
-"en|spectrum": "0336_spectrum.mp3",
-"en|A spectrum is a band of colours.": "0337_a_spectrum_is_a_band_of_colours.mp3",
-"en|S, P, E, C, T, R, U, M": "0338_s_p_e_c_t_r_u_m.mp3",
-"th|สเปกตรัม, แถบสี": "0339_th.mp3",
-"en|prism": "0340_prism.mp3",
-"en|A prism can split white light into the spectrum.": "0341_a_prism_can_split_white_light_into_the_s.mp3",
-"en|P, R, I, S, M": "0342_p_r_i_s_m.mp3",
-"th|ปริซึม": "0343_th.mp3",
-"en|rainbow": "0344_rainbow.mp3",
-"en|A rainbow tells us something important about light.": "0345_a_rainbow_tells_us_something_important_a.mp3",
-"en|R, A, I, N, B, O, W": "0346_r_a_i_n_b_o_w.mp3",
-"th|รุ้งกินน้ำ": "0347_th.mp3",
-"en|white light": "0348_white_light.mp3",
-"en|What colours make up white light?": "0349_what_colours_make_up_white_light.mp3",
-"en|W, H, I, T, E,  , L, I, G, H, T": "0350_w_h_i_t_e_l_i_g_h_t.mp3",
-"th|แสงขาว": "0351_th.mp3",
-"en|split": "0352_split.mp3",
-"en|Light can be split into colours.": "0353_light_can_be_split_into_colours.mp3",
-"en|S, P, L, I, T": "0354_s_p_l_i_t.mp3",
-"th|แยกออก, ผ่า": "0355_th.mp3",
-"en|band": "0356_band.mp3",
-"en|B, A, N, D": "0357_b_a_n_d.mp3",
-"th|แถบ": "0358_th.mp3",
-"en|mix": "0359_mix.mp3",
-"en|The colours in a spectrum mix together to make white light.": "0360_the_colours_in_a_spectrum_mix_together_t.mp3",
-"en|M, I, X": "0361_m_i_x.mp3",
-"th|ผสม": "0362_th.mp3",
-"en|order": "0363_order.mp3",
-"en|The colours always appear in the same order.": "0364_the_colours_always_appear_in_the_same_or.mp3",
-"en|O, R, D, E, R": "0365_o_r_d_e_r.mp3",
-"th|ลำดับ": "0366_th.mp3",
-"en|bubble": "0367_bubble.mp3",
-"en|Take light apart with a bubble.": "0368_take_light_apart_with_a_bubble.mp3",
-"en|B, U, B, B, L, E": "0369_b_u_b_b_l_e.mp3",
-"th|ฟองสบู่": "0370_th.mp3",
-"en|indigo": "0371_indigo.mp3",
-"en|ROY G BIV: Red, Orange, Yellow, Green, Blue, Indigo, Violet.": "0372_roy_g_biv_red_orange_yellow_green_blue_i.mp3",
-"en|I, N, D, I, G, O": "0373_i_n_d_i_g_o.mp3",
-"th|สีคราม": "0374_th.mp3",
-"en|violet": "0375_violet.mp3",
-"en|The last colour of the rainbow is violet.": "0376_the_last_colour_of_the_rainbow_is_violet.mp3",
-"en|V, I, O, L, E, T": "0377_v_i_o_l_e_t.mp3",
-"th|สีม่วง": "0378_th.mp3",
-"en|crystal glass": "0379_crystal_glass.mp3",
-"en|Light can be split if it passes through crystal glass.": "0380_light_can_be_split_if_it_passes_through.mp3",
-"en|C, R, Y, S, T, A, L,  , G, L, A, S, S": "0381_c_r_y_s_t_a_l_g_l_a_s_s.mp3",
-"th|แก้วคริสตัล": "0382_th.mp3",
-"en|predict": "0383_predict.mp3",
-"en|Predict which object will produce the biggest shadow.": "0384_predict_which_object_will_produce_the_bi.mp3",
-"en|P, R, E, D, I, C, T": "0385_p_r_e_d_i_c_t.mp3",
-"th|ทำนาย, คาดคะเน": "0386_th.mp3",
-"en|conclude": "0387_conclude.mp3",
-"en|Conclude: What makes a shadow?": "0388_conclude_what_makes_a_shadow.mp3",
-"en|C, O, N, C, L, U, D, E": "0389_c_o_n_c_l_u_d_e.mp3",
-"th|สรุป": "0390_th.mp3",
-"en|record": "0391_record.mp3",
-"en|Record the colours you see in the order they occur.": "0392_record_the_colours_you_see_in_the_order.mp3",
-"en|R, E, C, O, R, D": "0393_r_e_c_o_r_d.mp3",
-"th|บันทึก": "0394_th.mp3",
-"en|measure": "0395_measure.mp3",
-"en|Measure the height of the shadows.": "0396_measure_the_height_of_the_shadows.mp3",
-"en|M, E, A, S, U, R, E": "0397_m_e_a_s_u_r_e.mp3",
-"th|วัด": "0398_th.mp3",
-"en|height": "0399_height.mp3",
-"en|Write the height of the shadow in centimetres.": "0400_write_the_height_of_the_shadow_in_centim.mp3",
-"en|H, E, I, G, H, T": "0401_h_e_i_g_h_t.mp3",
-"th|ความสูง": "0402_th.mp3",
-"en|distance": "0403_distance.mp3",
-"en|The distance between the cup and the flashlight.": "0404_the_distance_between_the_cup_and_the_fla.mp3",
-"en|D, I, S, T, A, N, C, E": "0405_d_i_s_t_a_n_c_e.mp3",
-"th|ระยะทาง": "0406_th.mp3",
-"en|trace": "0407_trace.mp3",
-"en|Trace the shadow on the white paper.": "0408_trace_the_shadow_on_the_white_paper.mp3",
-"en|T, R, A, C, E": "0409_t_r_a_c_e.mp3",
-"th|ลอกลาย, วาดตามรอย": "0410_th.mp3",
-"en|label": "0411_label.mp3",
-"en|Label your paper.": "0412_label_your_paper.mp3",
-"en|L, A, B, E, L": "0413_l_a_b_e_l.mp3",
-"th|ติดป้าย, เขียนกำกับ": "0414_th.mp3",
-"en|ruler": "0415_ruler.mp3",
-"en|Place the ruler on a table.": "0416_place_the_ruler_on_a_table.mp3",
-"en|R, U, L, E, R": "0417_r_u_l_e_r.mp3",
-"th|ไม้บรรทัด": "0418_th.mp3",
-"en|partner": "0419_partner.mp3",
-"en|Explain what you see to a partner.": "0420_explain_what_you_see_to_a_partner.mp3",
-"en|P, A, R, T, N, E, R": "0421_p_a_r_t_n_e_r.mp3",
-"th|คู่, เพื่อนร่วมงาน": "0422_th.mp3",
-"en|cardboard": "0423_cardboard.mp3",
-"en|Cut a cardboard circle.": "0424_cut_a_cardboard_circle.mp3",
-"en|C, A, R, D, B, O, A, R, D": "0425_c_a_r_d_b_o_a_r_d.mp3",
-"th|กระดาษแข็ง": "0426_th.mp3",
-"en|scissors": "0427_scissors.mp3",
-"en|You will need a pair of scissors.": "0428_you_will_need_a_pair_of_scissors.mp3",
-"en|S, C, I, S, S, O, R, S": "0429_s_c_i_s_s_o_r_s.mp3",
-"th|กรรไกร": "0430_th.mp3",
-"th|เก่งมากค่ะ จบชุดคำศัพท์แล้ว": "0431_th.mp3"
-};
-const _a = new Audio();
-_a.preload = "auto";
-function unlockSound(){ try{ _a.src = SILENT_SND; _a.play().catch(function(){}); }catch(e){} }
-function stopAll(){
-  try{ synth.cancel(); }catch(e){}
-  try{ _a.pause(); }catch(e){}
-}
-function playFile(file, my, spd){
-  return new Promise(function(res, rej){
-    if(my !== token) return res();
-    var done = false;
-    var fin = function(){ if(done) return; done = true; clearInterval(iv); _a.onended=null; _a.onerror=null; _a.onplay=null; res(); };
-    var bad = function(){ if(done) return; done = true; clearInterval(iv); _a.onended=null; _a.onerror=null; _a.onplay=null; rej(new Error("no audio")); };
-    var iv = setInterval(function(){ if(my !== token){ try{ _a.pause(); }catch(e){} fin(); } }, 120);
-    _a.onended = fin;
-    _a.onerror = bad;
-    _a.onplay  = function(){ try{ _a.playbackRate = spd; }catch(e){} };
-    try{
-      _a.src = AUDIO_BASE + file;
-      _a.playbackRate = spd;
-      var p = _a.play();
-      if(p && p.catch) p.catch(function(){ bad(); });
-    }catch(e){ bad(); }
-    setTimeout(fin, 30000);
+const $=id=>document.getElementById(id);
+const synth=window.speechSynthesis;
+let setSel="all", mode="review", rate=.75, cnt=20, shuf=1, sayThai=true, useKB=true;
+let list=[], idx=0, score=0, wrong=[], answered=false, enVoice=null, thVoice=null, token=0;
+let typed="";
+
+/* ---------- คีย์บอร์ด A-Z ของแอปเอง ---------- */
+(function buildKB(){
+  const kb=$("kb");
+  "ABCDEFG|HIJKLMN|OPQRSTU|VWXYZ".split("|").forEach(r=>{
+    const d=document.createElement("div"); d.className="row";
+    r.split("").forEach(ch=>{
+      const b=document.createElement("button"); b.type="button"; b.textContent=ch;
+      b.onclick=()=>{ if(!answered){ typed+=ch.toLowerCase(); renderTyped(); } };
+      d.appendChild(b);
+    });
+    kb.appendChild(d);
   });
-}
-
-function speak(text, lang, my){
-  if(my !== token || !text) return Promise.resolve();
-  var f = AUDIO_MAP[(lang === "th-TH" ? "th|" : "en|") + text];
-  if(f) return playFile(f, my, rate).catch(function(){ return speakTTS(text, lang, my); });
-  return speakTTS(text, lang, my);
-}
-
-
-let grpSel = "all", mode = "review", rate = .75, gapSec = 8;
-let sayThai = true, saySent = true;
-let list = [], idx = 0, paused = false, token = 0, wake = null;
-let enVoice = null, thVoice = null;
-
-/* ---------- chips ---------- */
-(function(){
-  const c = $("grpChips");
-  const mk = (v, t) => {
-    const b = document.createElement("button");
-    b.className = "chip wide" + (v === "all" ? " on" : "");
-    b.dataset.g = v; b.textContent = t; c.appendChild(b);
-  };
-  mk("all", "ทั้งหมด 108 คำ");
-  GROUPS.forEach((g, i) => mk(i, g.title + " · " + g.items.length + " คำ"));
+  const last=document.createElement("div"); last.className="row";
+  const mk=(label,fn)=>{const b=document.createElement("button");
+    b.type="button"; b.className="wide"; b.textContent=label; b.onclick=fn;
+    last.appendChild(b);};
+  mk("เว้นวรรค", ()=>{ if(!answered){ typed+=" "; renderTyped(); } });
+  mk("⌫ ลบ",    ()=>{ if(!answered){ typed=typed.slice(0,-1); renderTyped(); } });
+  mk("ลบทั้งหมด",()=>{ if(!answered){ typed=""; renderTyped(); } });
+  kb.appendChild(last);
 })();
+function renderTyped(){
+  const t=$("typed");
+  t.classList.toggle("on", typed.length>0);
+  t.innerHTML = typed.length
+    ? typed.replace(/ /g,"&nbsp;") + '<span class="caret"></span>'
+    : '<span class="ph">แตะตัวอักษรด้านล่างเพื่อสะกดคำ</span>';
+}
 
-function single(box, attr, fn){
-  $(box).addEventListener("click", e => {
-    const b = e.target.closest(".chip"); if(!b) return;
-    [...$(box).children].forEach(x => x.classList.remove("on"));
-    b.classList.add("on"); fn(b.dataset[attr]);
+/* ---------- เลือกชุด ---------- */
+(function(){
+  const c=$("setChips");
+  const mk=(v,label,sub,on)=>{const b=document.createElement("button");
+    b.className="chip wide"+(on?" on":"");b.dataset.s=v;
+    b.innerHTML=label+"<small>"+sub+"</small>";c.appendChild(b);};
+  mk("all","ทุกชุดรวมกัน","108 คำ",true);
+  SETS.forEach((s,i)=>mk(i, s.t, s.tag+" · "+s.items.length+" คำ",false));
+})();
+function single(box,attr,fn){
+  const el=$(box); if(!el)return;
+  el.addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;
+    [...el.children].forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");fn(b.dataset[attr]);});
+}
+single("setChips","s",  v=>setSel=v);
+single("modeChips","mode",v=>mode=v);
+single("rateChips","rate",v=>rate=parseFloat(v));
+single("cntChips","cnt", v=>cnt=parseInt(v));
+single("shufChips","shuf",v=>shuf=parseInt(v));
+single("thChips","th",   v=>sayThai=(v==="1"));
+single("kbChips","kb",   v=>useKB=(v==="1"));
+
+/* ---------- เสียง ---------- */
+let _audioOK=null;
+let noEnVoice=false;
+function updateWarn(){
+  const w=$("warn"); if(!w)return;
+  if(_audioOK===true || !noEnVoice){ w.style.display="none"; return; }
+  w.style.display="block";
+  w.textContent = (_audioOK===false)
+    ? "เครื่องนี้ไม่มีเสียงภาษาอังกฤษ และยังโหลดไฟล์เสียงไม่ได้ ลองเช็กอินเทอร์เน็ต หรือเปิดด้วย Chrome"
+    : "เครื่องนี้ไม่มีเสียงภาษาอังกฤษ แอปจะใช้ไฟล์เสียงที่อัดไว้แทน";
+}
+function pickVoices(){
+  const vs=synth.getVoices()||[];
+  if(!vs.length)return;
+  const en=vs.filter(v=>/^en/i.test(v.lang));
+  const th=vs.filter(v=>/^th/i.test(v.lang));
+  thVoice=th[0]||null;
+  noEnVoice=!en.length;
+  updateWarn();
+}
+function fillVoiceSel(){
+  const sel=$("voiceSel"); if(!sel)return;
+  const vs=(synth.getVoices()||[]).filter(v=>/^en/i.test(v.lang));
+  if(!vs.length){sel.innerHTML='<option>ไม่มีเสียงในเครื่อง — ใช้ไฟล์เสียงที่อัดไว้</option>';return;}
+  const score=v=>{let s=0;const n=(v.name||"").toLowerCase();
+    if(n.includes("google"))s+=100;
+    if(n.includes("natural")||n.includes("neural"))s+=80;
+    if(n.includes("enhanced")||n.includes("premium"))s+=60;
+    if(!v.localService)s+=50;
+    if(/en-us/i.test(v.lang))s+=20;
+    if(/en-gb/i.test(v.lang))s+=10;
+    return -s;};
+  vs.sort((a,b)=>score(a)-score(b));
+  const cur=sel.value; sel.innerHTML="";
+  vs.forEach(v=>{const o=document.createElement("option");
+    o.value=v.name;
+    o.textContent=v.name+" ("+v.lang+")"+(v.localService?"":"  ★ ออนไลน์ เสียงดีกว่า");
+    sel.appendChild(o);});
+  if(cur&&vs.some(v=>v.name===cur))sel.value=cur;
+  enVoice=vs.find(v=>v.name===sel.value)||vs[0];
+  sel.onchange=()=>{enVoice=(synth.getVoices()||[]).find(v=>v.name===sel.value)||enVoice;};
+  $("voiceTest").onclick=()=>{
+    try{synth.cancel();}catch(e){}
+    const u=new SpeechSynthesisUtterance("Harvest. H, A, R, V, E, S, T. Harvest.");
+    u.lang="en-US"; if(enVoice)u.voice=enVoice; u.rate=rate;
+    setTimeout(()=>synth.speak(u),60);
+  };
+}
+pickVoices(); fillVoiceSel();
+if(synth.onvoiceschanged!==undefined)
+  synth.onvoiceschanged=()=>{pickVoices();fillVoiceSel();};
+function unlock(){try{const u=new SpeechSynthesisUtterance(" ");u.volume=0;synth.speak(u);}catch(e){}
+  pickVoices();fillVoiceSel();}
+
+/* ---------- เล่นไฟล์เสียงก่อน ถ้าไม่มีค่อยใช้เสียงสังเคราะห์ ---------- */
+const AUDIO_BASE="audio/sci/";
+let _cur=null, _keep=null;
+(function probeAudio(){
+  try{
+    const a=new Audio(AUDIO_BASE+"light_w.mp3");
+    a.preload="metadata";
+    a.onloadedmetadata=()=>{_audioOK=true;updateWarn();};
+    a.onerror=()=>{if(_audioOK===null){_audioOK=false;updateWarn();}};
+  }catch(e){}
+})();
+function keepAlive(on){
+  if(on){ if(_keep)return;
+    _keep=setInterval(()=>{try{if(synth.speaking)synth.resume();}catch(e){}},7000);
+  }else{clearInterval(_keep);_keep=null;}
+}
+document.addEventListener("touchstart",()=>{try{synth.resume();}catch(e){}},{passive:true});
+document.addEventListener("click",()=>{try{synth.resume();}catch(e){}});
+function stopAudio(){try{if(_cur){_cur.pause();_cur=null;}}catch(e){}}
+function playFile(url,my){
+  return new Promise(res=>{
+    if(my!==token)return res(true);
+    let done=false;
+    const fin=ok=>{if(!done){done=true;_cur=null;res(ok);}};
+    const a=new Audio(url); _cur=a; a.preload="auto";
+    a.onended=()=>fin(true); a.onerror=()=>fin(false);
+    try{a.playbackRate=Math.max(0.5,Math.min(1.4,rate/0.8));}catch(e){}
+    const p=a.play(); if(p&&p.catch)p.catch(()=>fin(false));
+    setTimeout(()=>{if(!done)fin(true);},30000);
   });
 }
-single("grpChips",  "g",    v => grpSel = v);
-single("modeChips", "mode", v => mode = v);
-single("rateChips", "rate", v => rate = parseFloat(v));
-single("gapChips",  "gap",  v => gapSec = parseInt(v));
-$("extraChips").addEventListener("click", e => {
-  const b = e.target.closest(".chip"); if(!b) return;
-  b.classList.toggle("on");
-  const on = b.classList.contains("on");
-  if(b.dataset.x === "th") sayThai = on; else saySent = on;
-});
-
-/* ---------- voices ---------- */
-function pickVoices(){
-  const vs = synth.getVoices() || [];
-  if(!vs.length) return;
-  const en = vs.filter(v => /^en/i.test(v.lang));
-  const th = vs.filter(v => /^th/i.test(v.lang));
-  enVoice = en.find(v => /samantha|google us|natural|zira/i.test(v.name)) || en[0] || null;
-  thVoice = th[0] || null;
-  if(!en.length){
-    $("warn").style.display = "block";
-    $("warn").textContent = "เครื่องนี้ยังไม่มีเสียงภาษาอังกฤษ เสียงที่ได้ยินอาจเพี้ยน "
-      + "ดูวิธีเพิ่มเสียงที่หัวข้อด้านล่างก่อนใช้สอนจริง";
-  }
-}
-pickVoices();
-if(synth.onvoiceschanged !== undefined) synth.onvoiceschanged = pickVoices;
-
-/* iOS/Android: เสียงจะเล่นได้ก็ต่อเมื่อถูกปลดล็อกจากการแตะของผู้ใช้ */
-function unlockAudio(){
-  unlockSound();
-  try{
-    const u = new SpeechSynthesisUtterance(" ");
-    u.volume = 0; u.rate = 1;
-    synth.speak(u);
-  }catch(e){}
-  pickVoices();
-}
-
-async function keepAwake(){
-  try{ if("wakeLock" in navigator) wake = await navigator.wakeLock.request("screen"); }catch(e){}
-}
-document.addEventListener("visibilitychange", () => {
-  if(document.visibilityState === "visible" && !$("play").classList.contains("hidden")) keepAwake();
-});
-
-/* ---------- speech ---------- */
-
-/* ---------- ตัวจัดการเสียง แก้อาการเสียงหยุดกลางคัน ---------- */
-let _keep=null;
-function keepAlive(on){
-  if(on){ if(_keep) return;
-    _keep=setInterval(()=>{ try{ if(synth.speaking) synth.resume(); }catch(e){} },7000);
-  }else{ clearInterval(_keep); _keep=null; }
-}
-document.addEventListener("touchstart",()=>{ try{ synth.resume(); }catch(e){} },{passive:true});
-document.addEventListener("click",   ()=>{ try{ synth.resume(); }catch(e){} });
-function _utter(text,lang,voice){
-  const u=new SpeechSynthesisUtterance(text);
-  u.lang=lang; if(voice) u.voice=voice; u.rate=rate; u.pitch=1; u.volume=1;
-  return u;
-}
-function speakTTS(text, lang, my){
+function ttsSay(text,lang,my){
   return new Promise(res=>{
-    if(my!==token||!text) return res();
-    let done=false, started=false, tries=0;
-    const fin=()=>{ if(!done){ done=true; res(); } };
+    if(my!==token||!text)return res();
+    let done=false,started=false,tries=0;
+    const fin=()=>{if(!done){done=true;res();}};
     const go=()=>{
-      if(done||my!==token) return;
+      if(done||my!==token)return;
       tries++;
-      try{ stopAll(); }catch(e){}
+      try{synth.cancel();}catch(e){}
       setTimeout(()=>{
-        if(done||my!==token) return;
-        const u=_utter(text, lang, (lang==="th-TH"?thVoice:enVoice));
-        u.onstart=()=>{ started=true; };
+        if(done||my!==token)return;
+        const u=new SpeechSynthesisUtterance(text);
+        u.lang=lang;
+        const v=(lang==="th-TH")?thVoice:enVoice;
+        if(v)u.voice=v;
+        u.rate=rate;u.pitch=1;u.volume=1;
+        u.onstart=()=>{started=true;};
         u.onend=fin;
-        u.onerror=()=>{ if(!started&&tries<3) go(); else fin(); };
-        try{ synth.speak(u); }catch(e){ fin(); }
-        // ถ้า 450ms แล้วยังไม่เริ่มพูด แปลว่าคิวค้าง ให้ลองใหม่
-        setTimeout(()=>{ if(!started&&!done&&tries<3) go(); },450);
+        u.onerror=()=>{if(!started&&tries<3)go();else fin();};
+        try{synth.speak(u);}catch(e){fin();}
+        setTimeout(()=>{if(!started&&!done&&tries<3)go();},450);
       },60);
     };
-    keepAlive(true);
-    go();
-    setTimeout(fin, 3000 + text.length*110/rate);
+    keepAlive(true); go();
+    setTimeout(fin,3000+text.length*110/rate);
   });
 }
-const en = (t, my) => speak(t, "en-US", my);
-const th = (t, my) => sayThai ? speak(t, "th-TH", my) : Promise.resolve();
+async function speak(text,lang,my,file){
+  if(file&&_audioOK!==false){
+    const ok=await playFile(AUDIO_BASE+file,my);
+    if(ok){if(_audioOK!==true){_audioOK=true;updateWarn();}return;}
+    if(_audioOK===null){_audioOK=false;updateWarn();}
+  }
+  return ttsSay(text,lang,my);
+}
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
 
-function wait(ms, my){
-  return new Promise(res => {
-    const t0 = Date.now();
-    (function loop(){
-      if(my !== token) return res();
-      if(paused) return setTimeout(loop, 130);
-      if(Date.now() - t0 >= ms) return res();
-      setTimeout(loop, 90);
-    })();
-  });
+/* ---------- สร้างรายการ ---------- */
+function build(){
+  let pool=[];
+  if(setSel==="all") SETS.forEach(s=>s.items.forEach(it=>pool.push({...it})));
+  else SETS[+setSel].items.forEach(it=>pool.push({...it}));
+  if(shuf) for(let i=pool.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[pool[i],pool[j]]=[pool[j],pool[i]];}
+  list = cnt>0 ? pool.slice(0,cnt) : pool;
 }
-async function hold(my){ while(paused && my === token) await new Promise(r => setTimeout(r, 130)); }
+const F=it=>({ w:it.k+"_w.mp3",
+               d:HAS.d?it.k+"_d.mp3":null,
+               s:HAS.s?it.k+"_s.mp3":null,
+               m:HAS.m?it.k+"_m.mp3":null,
+               l:HAS.l?it.k+"_l.mp3":null });
 
-function countdown(sec, my){
-  return new Promise(res => {
-    $("secs").classList.remove("hidden"); $("tbar").classList.remove("hidden");
-    const total = sec * 1000; let el = 0, last = Date.now();
-    (function loop(){
-      if(my !== token){ hideTimer(); return res(); }
-      const now = Date.now();
-      if(!paused) el += now - last;
-      last = now;
-      const left = Math.max(0, total - el);
-      $("fill").style.width = (el / total * 100).toFixed(1) + "%";
-      $("secs").textContent = Math.ceil(left / 1000);
-      if(left <= 0){ hideTimer(); return res(); }
-      requestAnimationFrame(loop);
-    })();
-  });
-}
-function hideTimer(){
-  $("secs").classList.add("hidden"); $("tbar").classList.add("hidden");
-  $("fill").style.width = "0%";
-}
 function show(ids){
-  ["numlbl","num","word","read","mean","spell","sent"].forEach(k =>
-    $(k).classList.toggle("hidden", !ids.includes(k)));
+  ["numlbl","num","spk","word","mean","spellout","def","sent"].forEach(k=>
+    $(k).classList.toggle("hidden",!ids.includes(k)));
 }
 
-/* ---------- one word ---------- */
-async function runItem(it, my){
-  $("num").textContent = idx + 1;
-  $("tick").textContent = (idx + 1) + "/" + list.length;
-  $("track").style.width = ((idx + 1) / list.length * 100) + "%";
-  $("word").textContent = it.w;
-  $("read").textContent = it.r;
-  $("mean").textContent = it.m;
-  $("spell").textContent = it.w.toUpperCase().split("").join(" ");
-  $("sent").textContent = it.s;
+async function ask(){
+  const my=++token;
+  answered=false;
+  const it=list[idx], f=F(it);
+  $("num").textContent=idx+1;
+  $("tick").textContent=(idx+1)+"/"+list.length;
+  $("track").style.width=((idx+1)/list.length*100)+"%";
+  $("sc").textContent="ถูก "+score;
+  $("word").textContent=it.w;
+  $("mean").textContent=it.m;
+  $("def").textContent=it.d;
+  $("sent").textContent=it.s;
+  $("spellout").textContent=it.w.toUpperCase().split("").join(" ");
+  $("verdict").classList.add("hidden");
+  $("bSubmit").textContent = (mode==="review"||mode==="answer") ? "คำต่อไป" : "ตอบ";
+  $("bSubmit").onclick = (mode==="review"||mode==="answer") ? next : submit;
+  const typing = (mode==="dictation"||mode==="meaning");
+  typed="";
+  $("ans").classList.toggle("hidden", !(typing && !useKB));
+  $("typed").classList.toggle("hidden", !(typing && useKB));
+  $("kb").classList.toggle("hidden",    !(typing && useKB));
+  if(typing){
+    if(useKB) renderTyped();
+    else { $("ans").value=""; $("ans").focus(); }
+  }
 
-  if(mode === "review"){
-    show(["word","read","mean"]);
-    $("phase").textContent = "ฟังคำศัพท์";
-    await en(it.w, my); await wait(450, my); await hold(my);
-    await en(it.w, my); await wait(350, my); await hold(my);
-    $("phase").textContent = "ความหมาย";
-    await th(it.m, my);
-    if(saySent){
-      show(["word","read","mean","sent"]);
-      $("phase").textContent = "ประโยคจากบทเรียน";
-      await wait(350, my); await hold(my);
-      await en(it.s, my);
-    }
-    $("phase").textContent = "อ่านตาม";
-    await countdown(Math.max(3, Math.round(gapSec / 2)), my);
+  const en=(t,file)=>speak(t,"en-US",my,file);
+  const th=(t,file)=>sayThai?speak(t,"th-TH",my,file):Promise.resolve();
+  const base=["word"]; if(HAS.m) base.push("mean");
 
-  } else if(mode === "test"){
-    show(["numlbl","num"]);
-    $("phase").textContent = "ตั้งใจฟัง";
-    await en(it.w, my); await wait(650, my); await hold(my);
-    if(saySent){
-      $("phase").textContent = "ประโยคตัวอย่าง";
-      await en(it.s, my); await wait(650, my); await hold(my);
-    }
-    $("phase").textContent = "ฟังอีกครั้ง";
-    await en(it.w, my); await wait(350, my); await hold(my);
-    $("phase").textContent = "เขียนคำตอบ";
-    await countdown(gapSec, my);
+  if(mode==="review"){
+    show(base);
+    $("phase").textContent="ฟังคำศัพท์";
+    await en(it.w,f.w); await wait(420);
+    await en(it.w,f.w); await wait(320);
+    if(HAS.m){ $("phase").textContent="คำแปลไทย"; await th(it.m,f.m); await wait(260); }
+    if(HAS.d){ show(base.concat(["def"])); $("phase").textContent="ความหมายภาษาอังกฤษ";
+               await en(it.d,f.d); await wait(260); }
+    if(HAS.s){ show(base.concat(HAS.d?["def","sent"]:["sent"]));
+               $("phase").textContent="ประโยคตัวอย่าง"; await en(it.s,f.s); }
+    $("phase").textContent="อ่านตาม";
 
-  } else {
-    show(["word","read","mean"]);
-    $("phase").textContent = "เฉลย";
-    await en(it.w, my); await wait(450, my); await hold(my);
-    show(["word","spell","read","mean"]);
-    $("phase").textContent = "สะกดทีละตัว";
-    await en(it.w.toUpperCase().split("").join(", "), my); await wait(450, my); await hold(my);
-    await en(it.w, my);
-    await th(it.m, my);
-    $("phase").textContent = "ตรวจคำตอบของตัวเอง";
-    await countdown(Math.max(3, Math.round(gapSec / 2)), my);
+  }else if(mode==="dictation"){
+    show(["numlbl","num","spk"]);
+    $("phase").textContent="ตั้งใจฟัง";
+    await en(it.w,f.w); await wait(550);
+    await en(it.w,f.w);
+    $("phase").textContent="พิมพ์คำที่ได้ยิน  (ขอฟังซ้ำหรือขอคำใบ้ได้)";
+
+  }else if(mode==="meaning"){
+    show(["numlbl","num","spk"]);
+    $("phase").textContent="ฟังคำแปลไทย แล้วเดาว่าเป็นคำอังกฤษคำไหน";
+    await th(it.m,f.m); await wait(400);
+    show(["numlbl","num","spk","mean"]);
+    $("phase").textContent="พิมพ์คำภาษาอังกฤษที่ตรงกับคำใบ้นี้";
+
+  }else{
+    show(base);
+    $("phase").textContent="เฉลย";
+    await en(it.w,f.w); await wait(420);
+    show(base.concat(["spellout"]));
+    $("phase").textContent="สะกดทีละตัว";
+    await en(it.w.toUpperCase().split("").join(", "),f.l); await wait(400);
+    await en(it.w,f.w);
+    if(HAS.m) await th(it.m,f.m);
+    $("phase").textContent="ตรวจคำตอบของตัวเอง";
   }
 }
 
-async function runAll(from){
-  const my = ++token;
-  stopAll();
-  idx = from;
-  while(idx < list.length){
-    if(my !== token) return;
-    await hold(my);
-    await runItem(list[idx], my);
-    if(my !== token) return;
-    idx++;
-  }
-  show([]); hideTimer();
-  $("tick").textContent = ""; $("track").style.width = "100%";
-  $("phase").textContent = "จบชุดนี้แล้ว เก่งมาก";
-  await th("เก่งมากค่ะ จบชุดคำศัพท์แล้ว", my);
+function submit(){
+  if(answered)return;
+  answered=true;
+  const it=list[idx];
+  const given=(useKB ? typed : $("ans").value).trim();
+  const ok=given.toLowerCase()===it.w.toLowerCase();
+  if(ok){score++;$("verdict").textContent="✓ ถูกต้อง";$("verdict").className="verdict ok";}
+  else{wrong.push([it.w,given||"(ไม่ได้ตอบ)",it.m||it.d]);
+       $("verdict").textContent="✗ ยังไม่ถูก";$("verdict").className="verdict bad";}
+  $("verdict").classList.remove("hidden");
+  $("ans").classList.add("hidden");
+  $("typed").classList.add("hidden");
+  $("kb").classList.add("hidden");
+  const f=["word","spellout"];
+  if(HAS.m)f.push("mean"); if(HAS.d)f.push("def"); if(HAS.s)f.push("sent");
+  show(f);
+  $("phase").textContent="";
+  $("sc").textContent="ถูก "+score;
+  $("bSubmit").textContent="คำต่อไป";
+  $("bSubmit").onclick=next;
+}
+function next(){ stopAudio(); idx++; if(idx>=list.length)return finish(); ask(); }
+function finish(){
+  token++; try{synth.cancel();}catch(e){} stopAudio(); keepAlive(false);
+  $("play").classList.add("hidden");$("ask").classList.add("hidden");
+  $("bar").classList.add("hidden");$("kb").classList.add("hidden");
+  $("result").classList.remove("hidden");
+  const graded=(mode==="dictation"||mode==="meaning");
+  $("final").textContent = graded ? (score+" / "+list.length) : (list.length+" คำ");
+  if(graded){
+    const p=Math.round(score/list.length*100);
+    let msg;
+    if(p===100)msg="เต็ม ไม่พลาดสักคำ";
+    else if(p>=80)msg="แม่นมาก เหลือเก็บคำที่พลาดอีกนิดเดียว";
+    else if(p>=60)msg="ใช้ได้ ลองซ้อมชุดเดิมซ้ำให้ขึ้นเกิน 80";
+    else msg="ยังต้องซ้อมอีก ลองลดเหลือ 10 คำต่อรอบ แล้วเน้นคำที่ผิด";
+    $("pct").textContent=p+"%  ·  "+msg;
+  }else $("pct").textContent="ทบทวนครบแล้ว";
+  if(wrong.length){
+    $("wrongbox").classList.remove("hidden");
+    $("wronglist").innerHTML=wrong.map(w=>
+      "<li><b>"+w[0]+"</b> <span class='you'>— ที่ตอบ: "+w[1]+" · "+w[2]+"</span></li>").join("");
+  }else $("wrongbox").classList.add("hidden");
 }
 
-/* ---------- controls ---------- */
-$("start").addEventListener("click", () => {
-  unlockAudio();
-  keepAwake();
-  list = grpSel === "all" ? GROUPS.flatMap(g => g.items) : GROUPS[+grpSel].items;
-  $("badge").textContent = {review:"ทบทวน", test:"ฟัง-เขียน", answer:"เฉลย"}[mode];
+$("start").onclick=()=>{
+  unlock(); build();
+  idx=0;score=0;wrong=[];
   $("setup").classList.add("hidden");
-  $("play").classList.remove("hidden");
-  $("bar").classList.remove("hidden");
-  paused = false; $("pause").textContent = "หยุด";
-  runAll(0);
-});
-const reset = () => { paused = false; $("pause").textContent = "หยุด"; };
-$("pause").addEventListener("click", () => {
-  paused = !paused;
-  $("pause").textContent = paused ? "เล่นต่อ" : "หยุด";
-  if(paused) stopAll();          // iOS pause() ไม่เสถียร ใช้ cancel แทน
-  else runAll(idx);                   // เล่นต่อโดยเริ่มคำเดิมใหม่
-});
-$("repeat").addEventListener("click", () => { reset(); runAll(idx); });
-$("next").addEventListener("click",   () => { reset(); runAll(Math.min(list.length - 1, idx + 1)); });
-$("prev").addEventListener("click",   () => { reset(); runAll(Math.max(0, idx - 1)); });
-$("quit").addEventListener("click",   () => {
-  token++; stopAll(); paused = false; hideTimer();
-  if(wake){ try{ wake.release(); }catch(e){} wake = null; }
-  $("setup").classList.remove("hidden");
-  $("play").classList.add("hidden");
-  $("bar").classList.add("hidden");
-});
-
-/* ปัดซ้าย-ขวาเพื่อเปลี่ยนคำ */
-let sx = 0, sy = 0;
-$("play").addEventListener("touchstart", e => {
-  sx = e.changedTouches[0].clientX; sy = e.changedTouches[0].clientY;
-}, {passive:true});
-$("play").addEventListener("touchend", e => {
-  const dx = e.changedTouches[0].clientX - sx;
-  const dy = e.changedTouches[0].clientY - sy;
-  if(Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.8){
-    (dx < 0 ? $("next") : $("prev")).click();
-  }
-}, {passive:true});
-
-window.addEventListener("pagehide", () => stopAll());
+  $("play").classList.remove("hidden");$("ask").classList.remove("hidden");$("bar").classList.remove("hidden");
+  $("result").classList.add("hidden");
+  ask();
+};
+$("bRepeat").onclick=async()=>{const my=token;stopAudio();
+  const it=list[idx],f=F(it);
+  if(mode==="meaning") await speak(it.m,"th-TH",my,f.m);
+  else await speak(it.w,"en-US",my,f.w);};
+$("bDef").onclick=async()=>{const my=token;stopAudio();
+  const it=list[idx],f=F(it);
+  $("mean").classList.remove("hidden");
+  await speak(it.m,"th-TH",my,f.m);};
+$("bTh").onclick=async()=>{const my=token;stopAudio();
+  const it=list[idx],f=F(it);
+  $("sent").classList.remove("hidden");
+  await speak(it.s,"en-US",my,f.s);};
+$("bSkip").onclick=()=>{
+  if(!answered&&(mode==="dictation"||mode==="meaning"))
+    wrong.push([list[idx].w,"(ข้าม)",list[idx].m||list[idx].d]);
+  next();
+};
+$("bQuit").onclick=()=>finish();
+$("again").onclick=()=>{$("result").classList.add("hidden");$("start").click();};
+$("home").onclick=()=>{
+  token++;try{synth.cancel();}catch(e){}stopAudio();keepAlive(false);
+  $("result").classList.add("hidden");$("setup").classList.remove("hidden");
+};
+$("ans").addEventListener("keydown",e=>{if(e.key==="Enter")submit();});
+window.addEventListener("pagehide",()=>{try{synth.cancel();}catch(e){}stopAudio();});
 </script>
 </body>
 </html>
